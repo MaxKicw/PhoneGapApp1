@@ -1,0 +1,27 @@
+{
+  "name": "cordova-plugin-device-gyroscope",
+  "version": "0.2.2",
+  "description": "Cordova plugin to access the device gyroscope. ",
+  "cordova": {
+    "id": "cordova-plugin-device-gyroscope",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fuegowolf/cordova-plugin-device-gyroscope.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Alexis Tacnet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fuegowolf/cordova-plugin-device-gyroscope/issues"
+  },
+  "homepage": "https://github.com/fuegowolf/cordova-plugin-device-gyroscope"
+}

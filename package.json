@@ -1,0 +1,24 @@
+{
+  "name": "TestApplicationNumber1",
+  "version": "1.0.0",
+  "description": "A PhoneGap Hello World template",
+  "main": "index.js",
+  "dependencies": {
+    "cordova-plugin-device-gyroscope": "^0.2.2",
+    "cordova-plugin-gyroscope": "^0.1.4",
+    "cordova-plugin-lightsensor": "^1.0.0",
+    "cordova-plugin-proximity": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "maxkicw <m142679@googlemail.com>",
+  "license": "MIT",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-device-gyroscope": {}
+    }
+  }
+}

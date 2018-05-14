@@ -1,0 +1,55 @@
+{
+  "_from": "cordova-plugin-gyroscope@0.1.4",
+  "_id": "cordova-plugin-gyroscope@0.1.4",
+  "_inBundle": false,
+  "_integrity": "sha1-1OQ+fI54qLTZCQRgvme1FhgWglk=",
+  "_location": "/cordova-plugin-gyroscope",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "cordova-plugin-gyroscope@0.1.4",
+    "name": "cordova-plugin-gyroscope",
+    "escapedName": "cordova-plugin-gyroscope",
+    "rawSpec": "0.1.4",
+    "saveSpec": null,
+    "fetchSpec": "0.1.4"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-gyroscope/-/cordova-plugin-gyroscope-0.1.4.tgz",
+  "_shasum": "d4e43e7c8e78a8b4d9090460be67b51618168259",
+  "_spec": "cordova-plugin-gyroscope@0.1.4",
+  "_where": "/Users/maxkicw/Documents/01_phonegap/TestApplicationNumber1",
+  "author": {
+    "name": "Jason Yang"
+  },
+  "bugs": {
+    "url": "https://github.com/NeoLSN/cordova-plugin-gyroscope/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-gyroscope",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "Cordova Device Gyroscope Plugin",
+  "homepage": "https://github.com/NeoLSN/cordova-plugin-gyroscope#readme",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "license": "BSD",
+  "name": "cordova-plugin-gyroscope",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeoLSN/cordova-plugin-gyroscope.git"
+  },
+  "version": "0.1.4"
+}
