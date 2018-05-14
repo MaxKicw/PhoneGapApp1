@@ -100,7 +100,7 @@ function positionSuccess(position){
 
 function gyroscopeSuccess(acceleration) {
 	    console.log("-----GYRO-----");
-		alert("----GYRO-----");
+		alert(acceleration);
         var node = document.createElement('div');
         document.getElementById('4').innerHTML = '';
         node.innerHTML = '<p>X-Achse :</p>'+speed.x+'<p>Y-Achse :</p>'+speed.y+'<p>Z-Achse :</p>'+speed.z+'<p>Time :</p>'+speed.timestamp;
