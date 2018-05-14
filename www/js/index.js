@@ -102,7 +102,7 @@ function gyroscopeSuccess(acceleration) {
 	    console.log("-----GYRO-----");
 		alert(JSON.stringify(acceleration));
         var node = document.createElement('div');
-      	node.innerHTML = "GyroFunktion";
+      	node.innerHTML = "<p>X-Achse: </p>"+acceleration.x+"<p><Y-Achse: </p>"+acceleration.y+"<p><Z-Achse: </p>"+acceleration.z;
 		document.getElementById('4').appendChild(node);
 };
 function gyroscopeError(msg) {
