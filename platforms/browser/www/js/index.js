@@ -39,9 +39,9 @@ var app = {
     	var options = {frequency: 1000};
    		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		navigator.geolocation.getCurrentPosition(positionSuccess);
-		navigator.gyroscope.getCurrentGyroscope(gyroscopeSuccess, gyroscopeError, options);
-		navigator.proximity.getProximityState(proximitySuccess, proximityError, options);
+		
 		fetchNetworkConnectionInfo();
+		console.log("GG"+navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError));
 
     },
     // Update DOM on a Received Event
@@ -100,9 +100,9 @@ function positionSuccess(position){
 
 function gyroscopeSuccess(acceleration) {
 	    console.log("-----GYRO-----");
-		document.getElementById('4').innerHTML = '';
+		alert(acceleration);
         var node = document.createElement('div');
-      	node.innerHTML = "<p>X-Achse: </p>"+acceleration.x+"<p><Y-Achse: </p>"+acceleration.y+"<p><Z-Achse: </p>"+acceleration.z;
+      	node.innerHTML = "GyroFunktion";
 		document.getElementById('4').appendChild(node);
 };
 function gyroscopeError(msg) {
@@ -113,14 +113,3 @@ function gyroscopeError(msg) {
         node.innerHTML = "Error"+msg.info+"MSG"+msg.message;
         document.getElementById('4').appendChild(node);
 };
-
-//-----------------------Proximity Sensor---------------------------------//
-function proximitySuccess(proximity){
-	document.getElementById('5').innerHTML = '';
-	var node = document.createElement('div');
-	if(proximity === true){
-		node.innerHTML = "<p>Der Abstandsensor ist bedeckt!";
-	}else{
-		node.innerHTML = "<p>Der Abstandssensor ist nicht bedeckt!";
-	}
-}

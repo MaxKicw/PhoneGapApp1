@@ -39,9 +39,9 @@ var app = {
     	var options = {frequency: 1000};
    		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		navigator.geolocation.getCurrentPosition(positionSuccess);
-		navigator.gyroscope.getCurrentGyroscope(gyroscopeSuccess, gyroscopeError, options);
-		navigator.proximity.getProximityState(proximitySuccess, proximityError, options);
+		navigator.proximity.getProximityState(proximitySuccess, onError, options);
 		fetchNetworkConnectionInfo();
+		console.log("GG"+navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options));
 
     },
     // Update DOM on a Received Event
