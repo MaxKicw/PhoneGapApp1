@@ -118,7 +118,6 @@ function gyroscopeError(msg) {
 };
 //-------------Proximity------------------------//
 function proximitySuccess(state){
-		document.getElementById('5').innerHTML = '';
         var node = document.createElement('div');
       	node.innerHTML = "<p>Success: "+state;
 		document.getElementById('5').appendChild(node);
