@@ -119,8 +119,8 @@ function proximitySuccess(proximity){
 	document.getElementById('5').innerHTML = '';
 	var node = document.createElement('div');
 	if(proximity === true){
-		node.innerHTML = "<p>Der Abstandsensor ist bedeckt!";
+		node.innerHTML = "<p>Der Abstandsensor ist bedeckt!"
 	}else{
-		node.innerHTML = "<p>Der Abstandssensor ist nicht bedeckt!";
+		node.innerHTML = "<p>Der Abstandssensor ist nicht bedeckt!"
 	}
 }
