@@ -40,6 +40,7 @@ var app = {
    		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
+		navigator.proximity.enableSensor();
 		setInterval(function(){
 			navigator.proximity.getProximityState(proximitySuccess);
 		}, 1000);
