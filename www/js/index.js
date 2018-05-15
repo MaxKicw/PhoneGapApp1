@@ -40,6 +40,7 @@ var app = {
    		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
+		navigator.proximity.getProximityState(proximitySuccess);
 		fetchNetworkConnectionInfo();
 		
 
@@ -96,7 +97,7 @@ function positionSuccess(position){
     document.getElementById('3').appendChild(node);
 };
 
-//---------Gyroscope--------(Currently not working)--------------------------//
+//---------Gyroscope----------------------------------//
 
 function gyroscopeSuccess(acceleration) {
 	    console.log("-----GYRO-----");
@@ -113,3 +114,10 @@ function gyroscopeError(msg) {
         node.innerHTML = "Error"+msg.info+"MSG"+msg.message;
         document.getElementById('4').appendChild(node);
 };
+//-------------Proximity------------------------//
+function proximitySuccess(state){
+		document.getElementById('5').innerHTML = '';
+        var node = document.createElement('div');
+      	node.innerHTML = "<p>Success:	"+state;
+		document.getElementById('5').appendChild(node);
+}
