@@ -39,9 +39,9 @@ var app = {
     	var options = {frequency: 1000};
    		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		navigator.geolocation.getCurrentPosition(positionSuccess);
-		navigator.proximity.getProximityState(proximitySuccess, onError, options);
+		//navigator.proximity.getProximityState(proximitySuccess, onError, options);//
 		fetchNetworkConnectionInfo();
-		console.log("GG"+navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options));
+		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options));
 
     },
     // Update DOM on a Received Event
@@ -115,12 +115,3 @@ function gyroscopeError(msg) {
 };
 
 //-----------------------Proximity Sensor---------------------------------//
-function proximitySuccess(proximity){
-	document.getElementById('5').innerHTML = '';
-	var node = document.createElement('div');
-	if(proximity === true){
-		node.innerHTML = "<p>Der Abstandsensor ist bedeckt!";
-	}else{
-		node.innerHTML = "<p>Der Abstandssensor ist nicht bedeckt!";
-	}
-}
