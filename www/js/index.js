@@ -115,9 +115,9 @@ function gyroscopeError(msg) {
         document.getElementById('4').appendChild(node);
 };
 //-------------Proximity------------------------//
-/*function proximitySuccess(state){
+function proximitySuccess(state){
 		document.getElementById('5').innerHTML = '';
         var node = document.createElement('div');
-      	node.innerHTML = "<p>Success:	"+state;
+      	node.innerHTML = "<p>Success!";
 		document.getElementById('5').appendChild(node);
-};*/
+};
