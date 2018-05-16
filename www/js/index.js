@@ -123,16 +123,3 @@ function proximitySuccess(state){
       	node.innerHTML = "<p>Success: "+state;
 		document.getElementById('5').appendChild(node);
 };
-//------------PUSH--------------------------//
-var push = PushNotification.init({
-      android: {},
-      browser: {
-        pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-      },
-      ios: {
-	alert: "true",
-	badge: true,
-	sound: 'false'
-      },
-      windows: {}
-});
