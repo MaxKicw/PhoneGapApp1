@@ -46,6 +46,47 @@ var app = {
             window.plugin.lightsensor.getReading(lightSuccess);
 		}, 1000);
 		fetchNetworkConnectionInfo();
+		//Pushnotification---Code---Below---------------//
+         app.push = PushNotification.init({
+            "android": {
+                "senderID": "AIzaSyC8e-2FooDXSvaxW2nDxhP9qJfX-mEZMQk"
+            },
+            "ios": {
+                "sound": true,
+                "vibration": true,
+                "badge": true
+            },
+            "windows": {}
+        });
+
+         app.push.on('registration', function(data) {
+             console.log("registration event: " + data.registrationId);
+             document.getElementById("regId").innerHTML = data.registrationId;
+             var oldRegId = localStorage.getItem('registrationId');
+             if (oldRegId !== data.registrationId) {
+                 // Save new registration ID
+                 localStorage.setItem('registrationId', data.registrationId);
+                 // Post registrationId to your app server as the value has changed
+             }
+         });
+
+         app.push.on('error', function(e) {
+             console.log("push error = " + e.message);
+         });
+
+         },
+            // Update DOM on a Received Event
+            receivedEvent: function(id) {
+                var parentElement = document.getElementById(id);
+                var listeningElement = parentElement.querySelector('.listening');
+                var receivedElement = parentElement.querySelector('.received');
+
+                listeningElement.setAttribute('style', 'display:none;');
+                receivedElement.setAttribute('style', 'display:block;');
+
+                console.log('Received Event: ' + id);
+            }
+        };
 //------------Daten des Beschleunigungssensors--------------------//
 
 function accelerometerSuccess(acceleration) {
