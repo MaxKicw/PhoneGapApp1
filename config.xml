@@ -13,6 +13,7 @@
 	<plugin spec="https://github.com/awoken-well/cordova-plugin-proximity.git" source="git" />
 	<plugin spec="https://github.com/DeshanKTD/cordova-plugin-lightsensor" source="git" />
 	<plugin spec="https://github.com/fechanique/cordova-plugin-fcm" source="git" />
+	<plugin spec="https://github.com/chemerisuk/cordova-support-google-services" source="git" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
@@ -44,10 +45,13 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
-        <resource-file src="google-services.json" target="/app/google-services.json" />
+        <resource-file src="google-services.json" target="google-services.json" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+    </platform>
+    <platform name="windows">
+    
     </platform>
 </widget>
