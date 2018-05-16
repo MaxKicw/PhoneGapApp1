@@ -135,9 +135,9 @@ function lightSuccess(reading){
 	      // Output: {"intensity": 25}
 };
 //-----------------Push-------------------------//
-function recieveToken(token){
+/*function recieveToken(token){
 		document.getElementById('7').innerHTML = '';
         var node = document.createElement('div');
       	node.innerHTML = "<p>Success: "+token;
 		document.getElementById('7').appendChild(node);
-}
+};+/
