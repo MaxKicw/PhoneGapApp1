@@ -127,8 +127,9 @@ function proximitySuccess(state){
 };
 //---------------Light-------------------------//
 function lightSuccess(reading){
-        document.getElementById('6').innerHTML = "LightSuccess!";
-	      /*console.log(JSON.stringify(reading)); 
-	      alert(JSON.stringify(reading));*/
+        document.getElementById('6').innerHTML = '';
+        var node = document.createElement('div');
+      	node.innerHTML = "<p>Success: "+JSON.stringify(reading);
+		document.getElementById('6').appendChild(node);
 	      // Output: {"intensity": 25}
 };
