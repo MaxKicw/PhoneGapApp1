@@ -46,6 +46,7 @@ var app = {
             window.plugin.lightsensor.getReading(lightSuccess);
 		}, 1000);
 		fetchNetworkConnectionInfo();
+        // The Code for the pushnotifications follows below //
 		
 
     },
