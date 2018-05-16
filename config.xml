@@ -12,7 +12,7 @@
     <preference name="android-minSdkVersion" value="14" />
 	<plugin spec="https://github.com/awoken-well/cordova-plugin-proximity.git" source="git" />
 	<plugin spec="https://github.com/DeshanKTD/cordova-plugin-lightsensor" source="git" />
-	<plugin name="phonegap-plugin-push" source="npm" spec="2.2.2"/>
+	<plugin spec="https://github.com/fechanique/cordova-plugin-fcm" source="git" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
