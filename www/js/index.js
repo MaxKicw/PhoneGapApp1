@@ -43,6 +43,7 @@ var app = {
 		navigator.proximity.enableSensor();
 		setInterval(function(){
 			navigator.proximity.getProximityState(proximitySuccess);
+            window.plugin.lightsensor.getReading(lightSuccess);
 		}, 1000);
 		fetchNetworkConnectionInfo();
 		
@@ -119,7 +120,17 @@ function gyroscopeError(msg) {
 };
 //-------------Proximity------------------------//
 function proximitySuccess(state){
+        document.getElementById('5').innerHTML = "";
         var node = document.createElement('div');
       	node.innerHTML = "<p>Success: "+state;
 		document.getElementById('5').appendChild(node);
 };
+//---------------Light-------------------------//
+function lightSuccess(reading){
+	      console.log(JSON.stringify(reading)); 
+	      alert(JSON.stringify(reading));
+	      // Output: {"intensity": 25}
+	    }, 
+	    function error(message){
+	     console.log(message);
+	    }
