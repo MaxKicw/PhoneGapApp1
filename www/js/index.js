@@ -41,6 +41,7 @@ var app = {
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
 		navigator.proximity.enableSensor();
+		FCMPlugin.onTokenRefresh(recieveToken);
 		setInterval(function(){
 			navigator.proximity.getProximityState(proximitySuccess);
             window.plugin.lightsensor.getReading(lightSuccess);
@@ -133,3 +134,10 @@ function lightSuccess(reading){
 		document.getElementById('6').appendChild(node);
 	      // Output: {"intensity": 25}
 };
+//-----------------Push-------------------------//
+function recieveToken(token){
+		document.getElementById('7').innerHTML = '';
+        var node = document.createElement('div');
+      	node.innerHTML = "<p>Success: "+token;
+		document.getElementById('7').appendChild(node);
+}
