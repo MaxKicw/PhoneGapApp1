@@ -12,8 +12,11 @@
     <preference name="android-minSdkVersion" value="14" />
 	<plugin spec="https://github.com/awoken-well/cordova-plugin-proximity.git" source="git" />
 	<plugin spec="https://github.com/DeshanKTD/cordova-plugin-lightsensor" source="git" />
+<<<<<<< HEAD
 	<plugin spec="https://github.com/fechanique/cordova-plugin-fcm" source="git" />
 	<plugin spec="https://github.com/arnesson/cordova-plugin-firebase" source="git" />
+=======
+>>>>>>> 42981fb79c983c1a577315f3802c0e916bfe7ce9
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
@@ -31,6 +34,7 @@
     <plugin name="cordova-plugin-inappbrowser" source="npm" spec="~1.3.0" />
     <plugin name="cordova-plugin-media" source="npm" spec="~2.2.0" />
     <plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0" />
+    <plugin name="cordova-plugin-firebase" source="npm" spec="~1.0.5" />
     <plugin name="cordova-plugin-splashscreen" source="npm" spec="~3.2.1" />
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />

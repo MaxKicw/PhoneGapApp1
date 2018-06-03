@@ -41,13 +41,18 @@ var app = {
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
 		navigator.proximity.enableSensor();
-		FCMPlugin.onTokenRefresh(recieveToken);
 		setInterval(function(){
 			navigator.proximity.getProximityState(proximitySuccess);
             window.plugin.lightsensor.getReading(lightSuccess);
 		}, 1000);
 		fetchNetworkConnectionInfo();
-		
+		// Push-Code //
+        window.FirebasePlugin.getToken(function(token) {
+            // save this server-side and use it to push notifications to this device
+            alert("Der Token ist: "+token);
+            }, function(error) {
+            alert(error);
+            });
 
     },
     // Update DOM on a Received Event
@@ -135,9 +140,3 @@ function lightSuccess(reading){
 	      // Output: {"intensity": 25}
 };
 //-----------------Push-------------------------//
-function recieveToken(token){
-		document.getElementById('7').innerHTML = '';
-        var node = document.createElement('div');
-      	node.innerHTML = "<p>Success: "+token;
-		document.getElementById('7').appendChild(node);
-}
