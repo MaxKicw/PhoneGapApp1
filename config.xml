@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.hsrm.pushnotification" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>HSRM Push</name>
     <description>
         Eine App zur Forschung
@@ -13,6 +13,7 @@
 	<plugin spec="https://github.com/awoken-well/cordova-plugin-proximity.git" source="git" />
 	<plugin spec="https://github.com/DeshanKTD/cordova-plugin-lightsensor" source="git" />
 	<plugin spec="https://github.com/fechanique/cordova-plugin-fcm" source="git" />
+	<plugin spec="https://github.com/arnesson/cordova-plugin-firebase" source="git" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
