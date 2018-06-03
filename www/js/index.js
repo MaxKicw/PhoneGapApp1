@@ -46,14 +46,6 @@ var app = {
             window.plugin.lightsensor.getReading(lightSuccess);
 		}, 1000);
 		fetchNetworkConnectionInfo();
-		// Push-Code //
-        window.FirebasePlugin.getToken(function(token) {
-            // save this server-side and use it to push notifications to this device
-            alert("Der Token ist: "+token);
-            }, function(error) {
-            alert(error);
-            });
-
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
