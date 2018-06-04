@@ -38,9 +38,18 @@ var app = {
 		navigator.vibrate(300);
     	var options = {frequency: 1000};
    		/*navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
-		*/
+		*/	
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
-		/*navigator.geolocation.getCurrentPosition(positionSuccess);
+
+		// Only with First time registration
+		window.plugins.PushbotsPlugin.on("registered", 		function(token){
+		console.log("Registration Id:" + token);
+		});
+
+//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
+window.plugins.PushbotsPlugin.on("user:ids", function(data){
+	console.log("user:ids" + JSON.stringify(data));
+});/*navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
 		navigator.proximity.enableSensor();
 		setInterval(function(){
