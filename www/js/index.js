@@ -59,7 +59,6 @@ var app = {
             window.plugin.lightsensor.getReading(lightSuccess);
 		}, 1000);
 		fetchNetworkConnectionInfo();
-		*/
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -145,4 +144,3 @@ function lightSuccess(reading){
 		document.getElementById('6').appendChild(node);
 	      // Output: {"intensity": 25}
 };
-//-----------------Push-------------------------//
