@@ -37,9 +37,10 @@ var app = {
         console.log("----Device-Ready----");
 		navigator.vibrate(300);
     	var options = {frequency: 1000};
-   		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
+   		/*navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
+		*/
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
-		navigator.geolocation.getCurrentPosition(positionSuccess);
+		/*navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
 		navigator.proximity.enableSensor();
 		setInterval(function(){
@@ -47,6 +48,7 @@ var app = {
             window.plugin.lightsensor.getReading(lightSuccess);
 		}, 1000);
 		fetchNetworkConnectionInfo();
+		*/
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
