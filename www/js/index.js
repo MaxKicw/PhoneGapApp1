@@ -38,7 +38,7 @@ var app = {
 		navigator.vibrate(300);
     	var options = {frequency: 1000};
    		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
-		window.plugins.PushbotsPlugin.initialize("5b14de171db2dc64631146b0", {"android":{"sender_id":"687741121085"}});
+		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
 		navigator.proximity.enableSensor();
