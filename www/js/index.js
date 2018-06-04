@@ -37,8 +37,7 @@ var app = {
         console.log("----Device-Ready----");
 		navigator.vibrate(300);
     	var options = {frequency: 1000};
-   		/*navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
-		*/	
+   		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 
 		// Only with First time registration
