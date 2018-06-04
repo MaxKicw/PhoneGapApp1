@@ -132,3 +132,4 @@ function lightSuccess(reading){
 	      // Output: {"intensity": 25}
 };
 //-----------------Push-------------------------//
+window.plugins.PushbotsPlugin.initialize("5b14db361db2dc644f4814cf", {"android":{"sender_id":"687741121085"}});
