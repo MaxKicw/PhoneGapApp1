@@ -49,8 +49,14 @@ var app = {
 		
 		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
 		console.log("user:ids" + JSON.stringify(data));
-		alert('HI');
 		});
+		
+		//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
+		
+		window.plugins.PushbotsPlugin.on("notification:received", function(data){
+    		alert('hi');
+		});
+		
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
 		navigator.proximity.enableSensor();
