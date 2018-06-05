@@ -150,3 +150,15 @@ function lightSuccess(reading){
 		document.getElementById('6').appendChild(node);
 	      // Output: {"intensity": 25}
 };
+//----------------Antwortfunktion----------------//
+function answer(choice){
+	if(choice == "yes"){
+		document.getElementById('popup').classList.remove('active');
+		alert("Du hast JA gesagt!");
+		
+	}else{
+		document.getElementById('popup').classList.remove('active');
+		alert("Du hast NEIN gesagt!");
+		
+	}
+}
