@@ -54,7 +54,7 @@ var app = {
 		//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 		
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
-    		document.getElementById('menu').style.backgroundColor = "green";
+  			document.getElementById('popup').classList.add('active');
 		});
 		
 		navigator.geolocation.getCurrentPosition(positionSuccess);

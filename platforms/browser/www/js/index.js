@@ -38,11 +38,33 @@ var app = {
 		navigator.vibrate(300);
     	var options = {frequency: 1000};
    		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
-		navigator.geolocation.getCurrentPosition(positionSuccess);
-		
-		fetchNetworkConnectionInfo();
-		console.log("GG"+navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError));
+		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 
+		// Only with First time registration
+		window.plugins.PushbotsPlugin.on("registered", 		function(token){
+		console.log("Registration Id:" + token);
+		});
+
+		//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
+		
+		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
+		console.log("user:ids" + JSON.stringify(data));
+		});
+		
+		//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
+		
+		window.plugins.PushbotsPlugin.on("notification:received", function(data){
+  			document.getElementById('popup').classList.add('active');
+		});
+		
+		navigator.geolocation.getCurrentPosition(positionSuccess);
+		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
+		navigator.proximity.enableSensor();
+		setInterval(function(){
+			navigator.proximity.getProximityState(proximitySuccess);
+            window.plugin.lightsensor.getReading(lightSuccess);
+		}, 1000);
+		fetchNetworkConnectionInfo();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -96,13 +118,13 @@ function positionSuccess(position){
     document.getElementById('3').appendChild(node);
 };
 
-//---------Gyroscope--------(Currently not working)--------------------------//
+//---------Gyroscope----------------------------------//
 
 function gyroscopeSuccess(acceleration) {
 	    console.log("-----GYRO-----");
-		alert(acceleration);
+		document.getElementById('4').innerHTML = '';
         var node = document.createElement('div');
-      	node.innerHTML = "GyroFunktion";
+      	node.innerHTML = "<p>X-Achse: </p>"+acceleration.x+"<p><Y-Achse: </p>"+acceleration.y+"<p><Z-Achse: </p>"+acceleration.z;
 		document.getElementById('4').appendChild(node);
 };
 function gyroscopeError(msg) {
@@ -112,4 +134,19 @@ function gyroscopeError(msg) {
         document.getElementById('4').innerHTML = '';
         node.innerHTML = "Error"+msg.info+"MSG"+msg.message;
         document.getElementById('4').appendChild(node);
+};
+//-------------Proximity------------------------//
+function proximitySuccess(state){
+        document.getElementById('5').innerHTML = '';
+        var node = document.createElement('div');
+      	node.innerHTML = "<p>Success: "+state;
+		document.getElementById('5').appendChild(node);
+};
+//---------------Light-------------------------//
+function lightSuccess(reading){
+        document.getElementById('6').innerHTML = '';
+        var node = document.createElement('div');
+      	node.innerHTML = "<p>Success: "+JSON.stringify(reading);
+		document.getElementById('6').appendChild(node);
+	      // Output: {"intensity": 25}
 };
