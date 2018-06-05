@@ -49,6 +49,7 @@ var app = {
 		
 		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
 		console.log("user:ids" + JSON.stringify(data));
+		alert('HI');
 		});
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
