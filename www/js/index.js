@@ -183,7 +183,7 @@ function answer(choice){
 function sendToServer(answer){
 	var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
 	$.ajax({
-		url: 'https://1a201f97.ngrok.io/response',
+		url: ' https://869e84fe.ngrok.io/response',
 		type: 'GET',
 		contentType: 'application/json',
 		data: JSON.stringify(data),
