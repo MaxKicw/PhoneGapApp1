@@ -16,6 +16,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
+		
+window.plugins.PushbotsPlugin.on("notification:received", function(data){
+  		document.getElementById('popup').classList.add('active');
+});
 var app = {
     // Application Constructor
     initialize: function() {
@@ -53,11 +58,6 @@ var app = {
 		console.log("user:ids" + JSON.stringify(data));
 		});
 		
-		//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
-		
-		window.plugins.PushbotsPlugin.on("notification:received", function(data){
-  			document.getElementById('popup').classList.add('active');
-		});
 		// Geolocation/Gyroscope/Abstandssensor/Lichtsensor
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
