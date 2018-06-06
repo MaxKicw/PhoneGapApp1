@@ -81,14 +81,19 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+//Globale Variablen
+var prox;//für Abstandssensor
+var acc;//Beschleunigungssensor 
+var gps;//GPS-Sensor
+var light;//Lichtsensor
+var gyro;//Gyroscope
+var net;//Netzwerkverbindung
+var platform = device.platform;
+var uuid = device.uuid;
+var operatingSystem = device.version;
+var manufacturer = device.manufacturer;
+var serial = device.serial;
 //------------Daten des Beschleunigungssensors--------------------//
-var prox;
-var acc; 
-var gps;
-var light;
-var gyro;
-var net;
-
 function accelerometerSuccess(acceleration) {
 		acc = acceleration;
         var node = document.createElement('div');
@@ -99,6 +104,7 @@ function accelerometerSuccess(acceleration) {
 function onError(error){
         console.log("---Error--"+error.code+"---MSG---"+error.message);
 };
+//----------------Geräteinformationen------------------------//
 
 //------------Art der Netzwerkverbindung--------------------//
 
@@ -181,7 +187,7 @@ function answer(choice){
 //Quellen: https://stackoverflow.com/questions/10005939/how-do-i-consume-the-json-post-data-in-an-express-application
 //
 function sendToServer(answer){
-	var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
+	var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,platform:platform,uuid:uuid,operatingSystem: operatingSystem, manufacturer:manufacturer, serial:serial};
 	$.ajax({
 		url: ' https://869e84fe.ngrok.io/response',
 		type: 'GET',
