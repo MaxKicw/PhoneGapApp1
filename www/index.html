@@ -41,7 +41,6 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <title>Hello World</title>
 </head>
-
 <body>
         <div class="menu" id="menu">
             <div class="logo"></div>
@@ -53,10 +52,10 @@
         <div class="inhalt">
 			<div class="popup" id="popup">
 				<p class="frage">Passt dir die Nachricht gerade?</p>
-				<div class="btn" id="ja" onclick="answer(yes)">
+				<div class="btn" id="ja" onclick="answer('ja')" value="ja">
 					<p>Ja</p>
 				</div>
-				<div class="btn" id="nein">
+				<div class="btn" id="nein" onclick="answer('nein')" value="nein">
 					<p>Nein</p>
 				</div>
 			</div>

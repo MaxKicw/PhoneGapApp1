@@ -152,13 +152,14 @@ function lightSuccess(reading){
 };
 //----------------Antwortfunktion----------------//
 function answer(choice){
-	if(choice == "yes"){
+	console.log("Answer");
+	console.log(choice);
+	if(choice == "ja"){
 		document.getElementById('popup').classList.remove('active');
 		alert("Du hast JA gesagt!");
 		
 	}else{
 		document.getElementById('popup').classList.remove('active');
-		alert("Du hast NEIN gesagt!");
-		
+		alert("Du hast NEIN gesagt!");		
 	}
-}
+};
