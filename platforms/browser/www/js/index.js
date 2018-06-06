@@ -33,14 +33,16 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+		//For JSON Call
+		
+		//
        	app.receivedEvent('deviceready');
-        console.log("----Device-Ready----");
-		navigator.vibrate(300);
     	var options = {frequency: 1000};
-   		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
+   		//Accelerometer call
+		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 
-		// Only with First time registration
+		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
 		console.log("Registration Id:" + token);
 		});
@@ -56,7 +58,7 @@ var app = {
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
   			document.getElementById('popup').classList.add('active');
 		});
-		
+		// Geolocation/Gyroscope/Abstandssensor/Lichtsensor
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
 		navigator.proximity.enableSensor();
@@ -64,6 +66,7 @@ var app = {
 			navigator.proximity.getProximityState(proximitySuccess);
             window.plugin.lightsensor.getReading(lightSuccess);
 		}, 1000);
+		//Netzwerkverbindung
 		fetchNetworkConnectionInfo();
     },
     // Update DOM on a Received Event
@@ -79,8 +82,15 @@ var app = {
     }
 };
 //------------Daten des Beschleunigungssensors--------------------//
+var prox;
+var acc; 
+var gps;
+var light;
+var gyro;
+var net;
 
 function accelerometerSuccess(acceleration) {
+		acc = acceleration;
         var node = document.createElement('div');
         document.getElementById('1').innerHTML = '';
         node.innerHTML = '<p>X-Achse :</p>'+acceleration.x+'<p>Y-Achse :</p>'+acceleration.y+'<p>Z-Achse :</p>'+acceleration.z+'<p>Time :</p>'+acceleration.timestamp;
@@ -96,6 +106,7 @@ function fetchNetworkConnectionInfo(){
 	console.log("-----Netzwerk-----");
 	navigator.vibrate(300);
     var networkType = navigator.network.connection.type;
+	net = networkType;
     var networkTypes = {};
     networkTypes[Connection.NONE] = "Keine Netzwerkverbindung";
     networkTypes[Connection.UNKNOWN] = "Unbekannte Netzwerkverbindung";
@@ -113,6 +124,7 @@ function fetchNetworkConnectionInfo(){
 function positionSuccess(position){
 	navigator.vibrate(300);
     console.log("-----Location-----");
+	gps = position;
     var node = document.createElement('div');
     node.innerHTML = '<p>Latitude : </p>'+ position.coords.latitude+'<p>Longitude :</p>'+position.coords.longitude+'<p>Höhe :</p>'+position.coords.altitude;
     document.getElementById('3').appendChild(node);
@@ -122,6 +134,7 @@ function positionSuccess(position){
 
 function gyroscopeSuccess(acceleration) {
 	    console.log("-----GYRO-----");
+		gyro = acceleration;
 		document.getElementById('4').innerHTML = '';
         var node = document.createElement('div');
       	node.innerHTML = "<p>X-Achse: </p>"+acceleration.x+"<p><Y-Achse: </p>"+acceleration.y+"<p><Z-Achse: </p>"+acceleration.z;
@@ -144,6 +157,7 @@ function proximitySuccess(state){
 };
 //---------------Light-------------------------//
 function lightSuccess(reading){
+		light = reading;
         document.getElementById('6').innerHTML = '';
         var node = document.createElement('div');
       	node.innerHTML = "<p>Success: "+JSON.stringify(reading);
@@ -156,10 +170,23 @@ function answer(choice){
 	console.log(choice);
 	if(choice == "ja"){
 		document.getElementById('popup').classList.remove('active');
-		alert("Du hast JA gesagt!");
+		sendToServer('Ja');
 		
 	}else{
 		document.getElementById('popup').classList.remove('active');
-		alert("Du hast NEIN gesagt!");		
+		sendToServer('Nein');	
 	}
+};
+//---------------JSON-Call------------------------//
+//Quellen: https://stackoverflow.com/questions/10005939/how-do-i-consume-the-json-post-data-in-an-express-application
+//
+function sendToServer(answer){
+	var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
+	$.ajax({
+		url: 'https://1a201f97.ngrok.io/response',
+		type: 'GET',
+		contentType: 'application/json',
+		data: JSON.stringify(data),
+		dataType:'json'
+	});
 };
