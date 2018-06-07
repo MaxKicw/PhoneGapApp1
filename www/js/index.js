@@ -189,7 +189,7 @@ function answer(choice){
 function sendToServer(answer){
 	var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,platform:platform,uuid:uuid,operatingSystem: operatingSystem, manufacturer:manufacturer, serial:serial};
 	$.ajax({
-		url: ' https://869e84fe.ngrok.io/response',
+		url: 'https://122e7f1a.ngrok.io/response',
 		type: 'GET',
 		contentType: 'application/json',
 		data: JSON.stringify(data),
