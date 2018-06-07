@@ -88,11 +88,8 @@ var gps;//GPS-Sensor
 var light;//Lichtsensor
 var gyro;//Gyroscope
 var net;//Netzwerkverbindung
-var platform = device.platform;
-var uuid = device.uuid;
-var operatingSystem = device.version;
-var manufacturer = device.manufacturer;
-var serial = device.serial;
+var didClickIt = false;//For ServerURL
+var serverURL;//ServerURL
 //------------Daten des Beschleunigungssensors--------------------//
 function accelerometerSuccess(acceleration) {
 		acc = acceleration;
@@ -187,12 +184,27 @@ function answer(choice){
 //Quellen: https://stackoverflow.com/questions/10005939/how-do-i-consume-the-json-post-data-in-an-express-application
 //
 function sendToServer(answer){
-	var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,platform:platform,uuid:uuid,operatingSystem: operatingSystem, manufacturer:manufacturer, serial:serial};
+	var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
 	$.ajax({
-		url: 'https://122e7f1a.ngrok.io/response',
+		url: serverURL,
 		type: 'GET',
 		contentType: 'application/json',
 		data: JSON.stringify(data),
 		dataType:'json'
 	});
 };
+//---------------URL-Setup----------------------//
+//Quelle: https://stackoverflow.com/questions/15305527/javascript-user-input-through-html-input-tag-to-set-a-javascript-variable
+document.getElementById("send").addEventListener("click",function(){
+        // same as onclick, keeps the JS and HTML separate
+        didClickIt = true;
+});
+setInterval(function(){
+            // this is the closest you get to an infinite loop in JavaScript
+            if( didClickIt ) {
+                didClickIt = false;
+                // document.write causes silly problems, do this instead (or better yet, use a library like jQuery to do this stuff for you)
+                serverURL=document.getElementById("url").value+'/response';
+				console.log(serverURL);
+            }
+        },500);

@@ -81,14 +81,16 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+//Globale Variablen
+var prox;//für Abstandssensor
+var acc;//Beschleunigungssensor 
+var gps;//GPS-Sensor
+var light;//Lichtsensor
+var gyro;//Gyroscope
+var net;//Netzwerkverbindung
+var didClickIt = false;//For ServerURL
+var serverURL;//ServerURL
 //------------Daten des Beschleunigungssensors--------------------//
-var prox;
-var acc; 
-var gps;
-var light;
-var gyro;
-var net;
-
 function accelerometerSuccess(acceleration) {
 		acc = acceleration;
         var node = document.createElement('div');
@@ -99,6 +101,7 @@ function accelerometerSuccess(acceleration) {
 function onError(error){
         console.log("---Error--"+error.code+"---MSG---"+error.message);
 };
+//----------------Geräteinformationen------------------------//
 
 //------------Art der Netzwerkverbindung--------------------//
 
@@ -183,10 +186,25 @@ function answer(choice){
 function sendToServer(answer){
 	var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
 	$.ajax({
-		url: 'https://1a201f97.ngrok.io/response',
+		url: serverURL,
 		type: 'GET',
 		contentType: 'application/json',
 		data: JSON.stringify(data),
 		dataType:'json'
 	});
 };
+//---------------URL-Setup----------------------//
+//Quelle: https://stackoverflow.com/questions/15305527/javascript-user-input-through-html-input-tag-to-set-a-javascript-variable
+document.getElementById("send").addEventListener("click",function(){
+        // same as onclick, keeps the JS and HTML separate
+        didClickIt = true;
+});
+setInterval(function(){
+            // this is the closest you get to an infinite loop in JavaScript
+            if( didClickIt ) {
+                didClickIt = false;
+                // document.write causes silly problems, do this instead (or better yet, use a library like jQuery to do this stuff for you)
+                serverURL=document.getElementById("url").value+'/response';
+				console.log(serverURL);
+            }
+        },500);
