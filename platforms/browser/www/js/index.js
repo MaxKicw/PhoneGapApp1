@@ -205,6 +205,6 @@ setInterval(function(){
                 didClickIt = false;
                 // document.write causes silly problems, do this instead (or better yet, use a library like jQuery to do this stuff for you)
                 serverURL=document.getElementById("url").value+'/response';
-				console.log(serverURL);
+				alert('Die aktuelle Server-URL lautet: '+serverURL);
             }
         },500);
