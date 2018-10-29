@@ -56,18 +56,6 @@ var app = {
 		//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 		
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
-			function sendToServer(){
-				var data = {hi:"HI"};
-				$.ajax({
-					url: serverURL,
-					type: 'GET',
-					contentType: 'application/json',
-					data: JSON.stringify(data),
-					dataType:'json'
-				});
-			};
-			sendToServer();
-			alert(data);
   			document.getElementById('popup').classList.add('active');
 		});
 		// Geolocation/Gyroscope/Abstandssensor/Lichtsensor
