@@ -38,17 +38,21 @@ var app = {
 		//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 		
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
-			function sendShit(){
-				var data = {hi:"Hi"};
-				$.ajax({
-					url: 'https://calm-wildwood-42488.herokuapp.com/response',
-					type: 'POST',
-					contentType: 'application/json',
-					data: JSON.stringify(data),
-					dataType:'json'
-				});
-			};
-			sendShit();
+		
+			function sendFetch(){
+				fetchAll();
+				var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
+				fetch('https://calm-wildwood-42488.herokuapp.com/response', {
+					method: 'POST',
+					body: JSON.stringify(data), // data can be `string` or {object}!
+					headers:{
+					  'Content-Type': 'application/json'
+					}
+				  }).then(res => res.json())
+				  .then(response => console.log('Success:', JSON.stringify(response)))
+				  .catch(error => console.error('Error:', error));
+			}
+			sendFetch();
 
   			document.getElementById('popup').classList.add('active');
 		});
@@ -178,14 +182,16 @@ function answer(choice){
 //Quellen: https://stackoverflow.com/questions/10005939/how-do-i-consume-the-json-post-data-in-an-express-application
 //
 function sendToServer(answer){
-	var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
-	$.ajax({
-		url: 'https://calm-wildwood-42488.herokuapp.com/response',
-		type: 'POST',
-		contentType: 'application/json',
-		data: JSON.stringify(data),
-		dataType:'json'
-	});
+		var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
+		fetch('https://calm-wildwood-42488.herokuapp.com/response', {
+			method: 'POST',
+			body: JSON.stringify(data), // data can be `string` or {object}!
+			headers:{
+			  'Content-Type': 'application/json'
+			}
+		  }).then(res => res.json())
+		  .then(response => console.log('Success:', JSON.stringify(response)))
+		  .catch(error => console.error('Error:', error));
 };
 //---------------URL-Setup----------------------//
 //Quelle: https://stackoverflow.com/questions/15305527/javascript-user-input-through-html-input-tag-to-set-a-javascript-variable
@@ -194,87 +200,6 @@ document.getElementById("send").addEventListener("click",function(){
         didClickIt = true;
 });
 
- apiCall = (url,method,body) => {
-    let that = this;
-    let token = localStorage.getItem("token");
-    var type = url.split("/",2);
-    type = type.splice(1);
-    let fetchBody;
-    switch(type[0]){
-      case 'get-all-data':
-      case "get-data":
-      case "delete":
-        fetchBody=undefined;
-        break;
-      case "insert":
-        console.log(body);
-        let content = body.split(",",1);
-        let author = body.split(",")[1];
-        fetchBody={"content":content,"author":author};
-        break;
-      case "signup":
-        let mail = body.split(",",1);
-        let password = body.split(",")[1];
-        fetchBody={"mail":mail,"password":password}
-        break;
-      case "login":
-        let accountmail = body.split(",",1);
-        let accountpassword = body.split(",")[1];
-        fetchBody={"mail":accountmail,"password":accountpassword}
-        break;
-      case "protected":
-        fetchBody={"name":body};
-        break;      
-      default:
-      console.log("Nix davon");
-        break;
-    }
-    console.log("API-Call with type of "+type+" to "+url+",with method of "+method+" and this body: "+fetchBody);
-    return fetch(new Request('http://localhost:5000'+url,{
-      method: method,
-      headers: new Headers({
-        "Content-Type":"application/json",
-        "Access-Control-Allow-Methods":"GET, POST, OPTIONS, PUT, PATCH, DELETE",
-        "Access-Control-Allow-Origin":"http://localhost:3000",
-        "Authorization":"Bearer "+token,
-      }),
-      body: JSON.stringify(fetchBody)
-    }))
-    .then(function(res){
-      return res.json()
-    })
-    .then(function(res){
-      switch(type[0]){
-        case "get-all-data":
-          console.log('Ein GET_ALL_DATA');
-          that.props.onGiveAllData(res);
-          break;
-        case "insert":
-          that.props.onClearInputField();
-          that.update();
-          break;
-        case "delete":
-          that.update();
-          break;
-        case "signup":
-          alert(res.message);
-          break;
-        case "login":
-          alert(res.message);
-          localStorage.setItem("token",res.token);
-          that.props.onSaveToken(res.token,res.username);
-          if(res.status === 200){
-            that.update();
-          }
-          break;
-        case "protected":
-          alert(res.message);
-          console.log(res.data)
-          break;
-        default:
-          console.log("err");
-          break;
-      }
-     
-    })  
-  };
+fetchAll = () => {
+	console.log("Fetch all");
+}
