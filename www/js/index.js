@@ -43,7 +43,7 @@ var app = {
 				fetchAll();
 				fetch(serverURL, {
 					method: 'POST',
-					body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,uuid:id_uuid}), // data can be `string` or {object}!
+					body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox}), // data can be `string` or {object}!
 					headers:{
 					  'Content-Type': 'application/json'
 					}
@@ -80,7 +80,6 @@ var app = {
 };
 //Globale Variablen
 var prox;//für Abstandssensor
-var id_uuid = device.uuid;
 var acc;//Beschleunigungssensor 
 var gps;//GPS-Sensor
 var light;//Lichtsensor
@@ -125,7 +124,7 @@ function fetchNetworkConnectionInfo(){
 function positionSuccess(position){
 	navigator.vibrate(300);
     console.log("-----Location-----");
-	gps = position;
+	gps = position.coords;
     var node = document.createElement('div');
     node.innerHTML = '<p>Latitude : </p>'+ position.coords.latitude+'<p>Longitude :</p>'+position.coords.longitude+'<p>Höhe :</p>'+position.coords.altitude;
     document.getElementById('3').appendChild(node);
@@ -184,7 +183,7 @@ function answer(choice){
 function sendToServer(answer){
 		fetch(serverURL, {
 			method: 'POST',
-			body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,uuid:id_uuid}), // data can be `string` or {object}!
+			body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox}), // data can be `string` or {object}!
 			headers:{
 			  'Content-Type': 'application/json'
 			}
