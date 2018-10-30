@@ -41,10 +41,9 @@ var app = {
 		
 			function sendFetch(){
 				fetchAll();
-				var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
 				fetch(serverURL, {
 					method: 'POST',
-					body: JSON.stringify(data), // data can be `string` or {object}!
+					body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox}), // data can be `string` or {object}!
 					headers:{
 					  'Content-Type': 'application/json'
 					}
@@ -182,10 +181,9 @@ function answer(choice){
 //Quellen: https://stackoverflow.com/questions/10005939/how-do-i-consume-the-json-post-data-in-an-express-application
 //
 function sendToServer(answer){
-		var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
 		fetch(serverURL, {
 			method: 'POST',
-			body: JSON.stringify(data), // data can be `string` or {object}!
+			body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox}), // data can be `string` or {object}!
 			headers:{
 			  'Content-Type': 'application/json'
 			}
