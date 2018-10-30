@@ -43,7 +43,7 @@ var app = {
 				fetchAll();
 				fetch(serverURL, {
 					method: 'POST',
-					body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,uuid:uuid}), // data can be `string` or {object}!
+					body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox}), // data can be `string` or {object}!
 					headers:{
 					  'Content-Type': 'application/json'
 					}
@@ -87,7 +87,6 @@ var gyro;//Gyroscope
 var net;//Netzwerkverbindung
 var didClickIt = false;//For ServerURL
 var serverURL = 'https://calm-wildwood-42488.herokuapp.com/response';//ServerURL
-var uuid = device.uuid;
 //------------Daten des Beschleunigungssensors--------------------//
 function accelerometerSuccess(acceleration) {
 		acc = acceleration;
@@ -184,7 +183,7 @@ function answer(choice){
 function sendToServer(answer){
 		fetch(serverURL, {
 			method: 'POST',
-			body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,uuid:uuid}), // data can be `string` or {object}!
+			body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox}), // data can be `string` or {object}!
 			headers:{
 			  'Content-Type': 'application/json'
 			}
