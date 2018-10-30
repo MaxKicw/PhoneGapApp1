@@ -59,7 +59,7 @@ var app = {
 			function sendShit(){
 				var data = {hi:"Hi"};
 				$.ajax({
-					url: serverURL,
+					url: 'https://calm-wildwood-42488.herokuapp.com/response',
 					type: 'GET',
 					contentType: 'application/json',
 					data: JSON.stringify(data),
@@ -198,7 +198,7 @@ function answer(choice){
 function sendToServer(answer){
 	var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
 	$.ajax({
-		url: serverURL,
+		url: 'https://calm-wildwood-42488.herokuapp.com/response',
 		type: 'GET',
 		contentType: 'application/json',
 		data: JSON.stringify(data),
@@ -211,12 +211,3 @@ document.getElementById("send").addEventListener("click",function(){
         // same as onclick, keeps the JS and HTML separate
         didClickIt = true;
 });
-setInterval(function(){
-            // this is the closest you get to an infinite loop in JavaScript
-            if( didClickIt ) {
-                didClickIt = false;
-                // document.write causes silly problems, do this instead (or better yet, use a library like jQuery to do this stuff for you)
-                serverURL='https://calm-wildwood-42488.herokuapp.com/response';
-				alert('Die aktuelle Server-URL lautet: '+serverURL);
-            }
-        },500);
