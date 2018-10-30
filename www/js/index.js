@@ -42,7 +42,7 @@ var app = {
 			function sendFetch(){
 				fetchAll();
 				var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
-				fetch('https://calm-wildwood-42488.herokuapp.com/response', {
+				fetch(serverURL, {
 					method: 'POST',
 					body: JSON.stringify(data), // data can be `string` or {object}!
 					headers:{
@@ -87,7 +87,7 @@ var light;//Lichtsensor
 var gyro;//Gyroscope
 var net;//Netzwerkverbindung
 var didClickIt = false;//For ServerURL
-var serverURL;//ServerURL
+var serverURL = 'https://calm-wildwood-42488.herokuapp.com/response';//ServerURL
 //------------Daten des Beschleunigungssensors--------------------//
 function accelerometerSuccess(acceleration) {
 		acc = acceleration;
@@ -183,7 +183,7 @@ function answer(choice){
 //
 function sendToServer(answer){
 		var data = {answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox};
-		fetch('https://calm-wildwood-42488.herokuapp.com/response', {
+		fetch(serverURL, {
 			method: 'POST',
 			body: JSON.stringify(data), // data can be `string` or {object}!
 			headers:{
@@ -196,9 +196,18 @@ function sendToServer(answer){
 //---------------URL-Setup----------------------//
 //Quelle: https://stackoverflow.com/questions/15305527/javascript-user-input-through-html-input-tag-to-set-a-javascript-variable
 document.getElementById("send").addEventListener("click",function(){
-        // same as onclick, keeps the JS and HTML separate
-        didClickIt = true;
+	// same as onclick, keeps the JS and HTML separate
+	didClickIt = true;
 });
+setInterval(function(){
+		// this is the closest you get to an infinite loop in JavaScript
+		if( didClickIt ) {
+			didClickIt = false;
+			// document.write causes silly problems, do this instead (or better yet, use a library like jQuery to do this stuff for you)
+			serverURL=document.getElementById("url").value+'/response';
+			console.log(serverURL);
+		}
+	},500);
 
 fetchAll = () => {
 	console.log("Fetch all");
