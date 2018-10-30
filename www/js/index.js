@@ -216,7 +216,7 @@ setInterval(function(){
             if( didClickIt ) {
                 didClickIt = false;
                 // document.write causes silly problems, do this instead (or better yet, use a library like jQuery to do this stuff for you)
-                serverURL=document.getElementById("url").value+'/response';
+                serverURL='https://calm-wildwood-42488.herokuapp.com/response';
 				alert('Die aktuelle Server-URL lautet: '+serverURL);
             }
         },500);
