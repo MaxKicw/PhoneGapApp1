@@ -43,7 +43,7 @@ var app = {
 				fetchAll();
 				fetch(serverURL, {
 					method: 'POST',
-					body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox}), // data can be `string` or {object}!
+					body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,uuid:id_uuid}), // data can be `string` or {object}!
 					headers:{
 					  'Content-Type': 'application/json'
 					}
@@ -80,6 +80,7 @@ var app = {
 };
 //Globale Variablen
 var prox;//für Abstandssensor
+var id_uuid = device.uuid;
 var acc;//Beschleunigungssensor 
 var gps;//GPS-Sensor
 var light;//Lichtsensor
@@ -183,7 +184,7 @@ function answer(choice){
 function sendToServer(answer){
 		fetch(serverURL, {
 			method: 'POST',
-			body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox}), // data can be `string` or {object}!
+			body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,uuid:id_uuid}), // data can be `string` or {object}!
 			headers:{
 			  'Content-Type': 'application/json'
 			}
