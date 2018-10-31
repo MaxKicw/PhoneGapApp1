@@ -122,7 +122,6 @@ function fetchNetworkConnectionInfo(){
 //---------GPS-Location----------------------------------//
 
 function positionSuccess(position){
-	navigator.vibrate(300);
     console.log("-----Location-----");
 	gps = position.coords;
     var node = document.createElement('div');
