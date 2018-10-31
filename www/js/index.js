@@ -92,7 +92,7 @@ function accelerometerSuccess(acceleration) {
 		acc = acceleration;
         var node = document.createElement('div');
         document.getElementById('1').innerHTML = '';
-        node.innerHTML = '<p>X-Achse :</p>'+acceleration.x+'<p>Y-Achse :</p>'+acceleration.y+'<p>Z-Achse :</p>'+acceleration.z+'<p>Time :</p>'+acceleration.timestamp;
+        node.innerHTML = '<p>Beschleunigungssensor:<br>X-Achse :</p>'+acceleration.x+'<p>Y-Achse :</p>'+acceleration.y+'<p>Z-Achse :</p>'+acceleration.z+'<p>Time :</p>'+acceleration.timestamp;
         document.getElementById('1').appendChild(node);
 };
 function onError(error){
@@ -125,7 +125,7 @@ function positionSuccess(position){
     console.log("-----Location-----");
 	gps = position.coords;
     var node = document.createElement('div');
-    node.innerHTML = '<p>Latitude : </p>'+ position.coords.latitude+'<p>Longitude :</p>'+position.coords.longitude+'<p>Höhe :</p>'+position.coords.altitude;
+    node.innerHTML = '<p>GPS:<br>Latitude : </p>'+ position.coords.latitude+'<p>Longitude :</p>'+position.coords.longitude+'<p>Höhe :</p>'+position.coords.altitude;
     document.getElementById('3').appendChild(node);
 };
 
@@ -136,7 +136,7 @@ function gyroscopeSuccess(acceleration) {
 		gyro = acceleration;
 		document.getElementById('4').innerHTML = '';
         var node = document.createElement('div');
-      	node.innerHTML = "<p>X-Achse: </p>"+acceleration.x+"<p><Y-Achse: </p>"+acceleration.y+"<p><Z-Achse: </p>"+acceleration.z;
+      	node.innerHTML = "<p>Gyroskop:<br>X-Achse: </p>"+acceleration.x+"<p><Y-Achse: </p>"+acceleration.y+"<p><Z-Achse: </p>"+acceleration.z;
 		document.getElementById('4').appendChild(node);
 };
 function gyroscopeError(msg) {
@@ -151,7 +151,7 @@ function gyroscopeError(msg) {
 function proximitySuccess(state){
         document.getElementById('5').innerHTML = '';
         var node = document.createElement('div');
-      	node.innerHTML = "<p>Success: "+state;
+      	node.innerHTML = "<p>Abstandssensor/Ohrmuschel:<br>Success: "+state;
 		document.getElementById('5').appendChild(node);
 };
 //---------------Light-------------------------//
@@ -159,7 +159,7 @@ function lightSuccess(reading){
 		light = reading;
         document.getElementById('6').innerHTML = '';
         var node = document.createElement('div');
-      	node.innerHTML = "<p>Success: "+JSON.stringify(reading);
+      	node.innerHTML = "<p>Helligkeitssenor:<br>Success: "+JSON.stringify(reading);
 		document.getElementById('6').appendChild(node);
 	      // Output: {"intensity": 25}
 };
