@@ -60,11 +60,9 @@ var app = {
 		navigator.proximity.enableSensor();
 		navigator.ActivityRecognition.Connect(ActivityStarted, ActivityError);
 		// Mit API für Activity Recognition Verbinden
-		window.plugins.
 		setInterval(function(){
 			navigator.proximity.getProximityState(proximitySuccess);
 			window.plugin.lightsensor.getReading(lightSuccess);
-			window.plu
 		}, 1000);
 		//Netzwerkverbindung
 		fetchNetworkConnectionInfo();
