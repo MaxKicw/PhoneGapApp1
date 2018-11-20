@@ -54,7 +54,7 @@ var app = {
 		//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 		
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
-		
+			alert("Push erhalten");
 			function sendFetch(){
 				fetchAll();
 				fetch(serverURL, {
