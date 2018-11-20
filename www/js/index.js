@@ -80,7 +80,6 @@ var app = {
 			navigator.proximity.getProximityState(proximitySuccess);
 			window.plugin.lightsensor.getReading(lightSuccess);
 			bgLocationServices.registerForActivityUpdates(function(activities) {
-				alert("We got an activity update" + JSON.stringify(activities));
 				currentAcitvity = [];
 				currentAcitvity.push(activities)
 		   }, function(err) {
