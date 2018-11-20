@@ -23,6 +23,7 @@ var app = {
    		//Accelerometer call
 		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
+		window.plugin.ActivityRecognition.StartActivityUpdates(ActivityStarted);
 
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
@@ -61,7 +62,8 @@ var app = {
 		navigator.proximity.enableSensor();
 		setInterval(function(){
 			navigator.proximity.getProximityState(proximitySuccess);
-            window.plugin.lightsensor.getReading(lightSuccess);
+			window.plugin.lightsensor.getReading(lightSuccess);
+			window.plugin.ActivityRecognition.GetActivity(ActivitySuccess);
 		}, 1000);
 		//Netzwerkverbindung
 		fetchNetworkConnectionInfo();
@@ -163,6 +165,13 @@ function lightSuccess(reading){
 		document.getElementById('6').appendChild(node);
 	      // Output: {"intensity": 25}
 };
+//---------------Activitiy-----------------------//
+function ActivityStarted(){
+	alert("Start des ActivityTrackings");
+}
+function ActivitySuccess(activity){
+	alert(JSON.stringify(activity));
+}
 //----------------Antwortfunktion----------------//
 function answer(choice){
 	console.log("Answer");
