@@ -38,6 +38,7 @@ var app = {
 			fastestInterval: 5000 // <-- (Milliseconds) Fastest interval your app / server can handle updates
 			
 	   });
+	   bgLocationServices.start();
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
 		console.log("Registration Id:" + token);
@@ -231,3 +232,4 @@ setInterval(function(){
 fetchAll = () => {
 	console.log("Fetch all");
 }
+
