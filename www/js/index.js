@@ -23,7 +23,6 @@ var app = {
    		//Accelerometer call
 		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
-		window.plugin.ActivityRecognition.StartActivityUpdates(ActivityStarted);
 
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
