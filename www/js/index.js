@@ -62,7 +62,7 @@ var app = {
 		setInterval(function(){
 			navigator.proximity.getProximityState(proximitySuccess);
 			window.plugin.lightsensor.getReading(lightSuccess);
-			window.plugin.ActivityRecognition.GetActivity(ActivitySuccess);
+			window.plugin.ActivityRecognition.GetActivity();
 		}, 1000);
 		//Netzwerkverbindung
 		fetchNetworkConnectionInfo();
