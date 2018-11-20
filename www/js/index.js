@@ -23,6 +23,21 @@ var app = {
    		//Accelerometer call
 		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
+		var bgLocationServices =  window.plugins.backgroundLocationServices;
+		bgLocationServices.configure({
+			//Both
+			desiredAccuracy: 20, // Desired Accuracy of the location updates (lower means more accurate but more battery consumption)
+			distanceFilter: 5, // (Meters) How far you must move from the last point to trigger a location update
+			debug: true, // <-- Enable to show visual indications when you receive a background location update
+			interval: 9000, // (Milliseconds) Requested Interval in between location updates.
+			useActivityDetection: true, // Uses Activitiy detection to shut off gps when you are still (Greatly enhances Battery Life)
+			
+			//Android Only
+			notificationTitle: 'BG Plugin', // customize the title of the notification
+			notificationText: 'Tracking', //customize the text of the notification
+			fastestInterval: 5000 // <-- (Milliseconds) Fastest interval your app / server can handle updates
+			
+	   });
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
 		console.log("Registration Id:" + token);
@@ -58,11 +73,15 @@ var app = {
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
 		navigator.proximity.enableSensor();
-		window.plugins.ActivityRecognition.Connect(ActivitySuccess);
 		// Mit API für Activity Recognition Verbinden
 		setInterval(function(){
 			navigator.proximity.getProximityState(proximitySuccess);
 			window.plugin.lightsensor.getReading(lightSuccess);
+			bgLocationServices.registerForActivityUpdates(function(activities) {
+				console.log("We got an activity update" + activities);
+		   }, function(err) {
+				console.log("Error: Something went wrong", err);
+		   });
 		}, 1000);
 		//Netzwerkverbindung
 		fetchNetworkConnectionInfo();
@@ -133,7 +152,6 @@ function positionSuccess(position){
 //---------Gyroscope----------------------------------//
 
 function gyroscopeSuccess(acceleration) {
-		alert("GYRo");
 	    console.log("-----GYRO-----");
 		gyro = acceleration;
 		document.getElementById('4').innerHTML = '';
@@ -166,15 +184,7 @@ function lightSuccess(reading){
 	      // Output: {"intensity": 25}
 };
 //---------------Activitiy-----------------------//
-function ActivityStarted(success){
-	alert("start");
-}
-function ActivityError(error){
-	alert("Error");
-}
-function ActivitySuccess(activity){
-	alert("Get");
-}
+
 //----------------Antwortfunktion----------------//
 function answer(choice){
 	console.log("Answer");
