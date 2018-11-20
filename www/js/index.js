@@ -58,12 +58,12 @@ var app = {
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
 		navigator.proximity.enableSensor();
-		navigator.ActivityRecognition.Connect(ActivityStarted, ActivityError);
+		window.plugin.ActivityRecognition.Connect(ActivityStarted, ActivityError);
 		// Mit API für Activity Recognition Verbinden
 		setInterval(function(){
 			navigator.proximity.getProximityState(proximitySuccess);
 			window.plugin.lightsensor.getReading(lightSuccess);
-			navigator.ActivityRecognition.GetActivity(ActivitySuccess)
+			window.plugin.ActivityRecognition.GetActivity(ActivitySuccess)
 		}, 1000);
 		//Netzwerkverbindung
 		fetchNetworkConnectionInfo();
