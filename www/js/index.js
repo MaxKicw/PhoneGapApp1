@@ -78,9 +78,9 @@ var app = {
 			navigator.proximity.getProximityState(proximitySuccess);
 			window.plugin.lightsensor.getReading(lightSuccess);
 			bgLocationServices.registerForActivityUpdates(function(activities) {
-				console.log("We got an activity update" + activities);
+				alert("We got an activity update" + activities);
 		   }, function(err) {
-				console.log("Error: Something went wrong", err);
+				alert("Error: Something went wrong", err);
 		   });
 		}, 1000);
 		//Netzwerkverbindung
