@@ -133,6 +133,7 @@ function positionSuccess(position){
 //---------Gyroscope----------------------------------//
 
 function gyroscopeSuccess(acceleration) {
+		alert("GYRo");
 	    console.log("-----GYRO-----");
 		gyro = acceleration;
 		document.getElementById('4').innerHTML = '';
