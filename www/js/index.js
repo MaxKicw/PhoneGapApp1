@@ -167,13 +167,13 @@ function lightSuccess(reading){
 };
 //---------------Activitiy-----------------------//
 function ActivityStarted(success){
-	alert("Start des ActivityTrackings: "+success);
+	alert("start");
 }
 function ActivityError(error){
-	alert("Error des ActivityTrackings: "+error);
+	alert("Error");
 }
 function ActivitySuccess(activity){
-	alert(JSON.stringify(activity));
+	alert("Get");
 }
 //----------------Antwortfunktion----------------//
 function answer(choice){
