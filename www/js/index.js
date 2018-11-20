@@ -58,7 +58,7 @@ var app = {
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
 		navigator.proximity.enableSensor();
-		navigator.ActivityRecognition.Connect(ActivityStarted);
+		navigator.ActivityRecognition.Connect(ActivityStarted, ActivityError);
 		// Mit API für Activity Recognition Verbinden
 		window.plugins.
 		setInterval(function(){
@@ -169,6 +169,9 @@ function lightSuccess(reading){
 //---------------Activitiy-----------------------//
 function ActivityStarted(success){
 	alert("Start des ActivityTrackings: "+success);
+}
+function ActivityError(error){
+	alert("Error des ActivityTrackings: "+error);
 }
 function ActivitySuccess(activity){
 	alert(JSON.stringify(activity));
