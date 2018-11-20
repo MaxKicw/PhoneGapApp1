@@ -58,6 +58,7 @@ var app = {
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
 		navigator.proximity.enableSensor();
+		window.plugins.ActivityRecognition.Connect(ActivitySuccess);
 		// Mit API für Activity Recognition Verbinden
 		setInterval(function(){
 			navigator.proximity.getProximityState(proximitySuccess);
