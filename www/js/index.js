@@ -19,7 +19,8 @@ var app = {
 		
 		//
        	app.receivedEvent('deviceready');
-    	var options = {frequency: 1000};
+		var options = {frequency: 1000};
+		let currentAcitvity = [];
    		//Accelerometer call
 		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
@@ -58,7 +59,7 @@ var app = {
 				fetchAll();
 				fetch(serverURL, {
 					method: 'POST',
-					body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox}), // data can be `string` or {object}!
+					body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,activities:activities}), // data can be `string` or {object}!
 					headers:{
 					  'Content-Type': 'application/json'
 					}
@@ -80,6 +81,8 @@ var app = {
 			window.plugin.lightsensor.getReading(lightSuccess);
 			bgLocationServices.registerForActivityUpdates(function(activities) {
 				alert("We got an activity update" + JSON.stringify(activities));
+				currentAcitvity = [];
+				currentAcitvity.push(activities)
 		   }, function(err) {
 				alert("Error: Something went wrong", JSON.stringify(err));
 		   });
@@ -205,7 +208,7 @@ function answer(choice){
 function sendToServer(answer){
 		fetch(serverURL, {
 			method: 'POST',
-			body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox}), // data can be `string` or {object}!
+			body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,activities:activities}), // data can be `string` or {object}!
 			headers:{
 			  'Content-Type': 'application/json'
 			}
