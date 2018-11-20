@@ -23,8 +23,6 @@ var app = {
    		//Accelerometer call
 		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
-		// Mit API für Activity Recognition Verbinden
-		window.plugins.ActivityRecognition.Connect(ActivityStarted);
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
 		console.log("Registration Id:" + token);
@@ -60,9 +58,13 @@ var app = {
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
 		navigator.proximity.enableSensor();
+		navigator.ActivityRecognition.Connect(ActivityStarted);
+		// Mit API für Activity Recognition Verbinden
+		window.plugins.
 		setInterval(function(){
 			navigator.proximity.getProximityState(proximitySuccess);
 			window.plugin.lightsensor.getReading(lightSuccess);
+			window.plu
 		}, 1000);
 		//Netzwerkverbindung
 		fetchNetworkConnectionInfo();
