@@ -59,6 +59,7 @@ var app = {
 			bgLocationServices.registerForActivityUpdates(function(activities) {
 				currentAcitvity = [];
 				currentAcitvity.push(activities)
+				document.getElementById('activity').innerHTML = "<p>"+currentAcitvity[0]+"</p>";
 		   }, function(err) {
 				alert("Error: Something went wrong", JSON.stringify(err));
 		   });
