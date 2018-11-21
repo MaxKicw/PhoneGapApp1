@@ -19,7 +19,7 @@ var app = {
 		
 		//
        	app.receivedEvent('deviceready');
-		let currentAcitvity = [];
+		let currentAcitvity;
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
@@ -35,7 +35,8 @@ var app = {
 			//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 			
 			window.plugins.PushbotsPlugin.on("notification:received", function(data){
-				recievedPush(currentAcitvity[0]);
+				alert("Works");
+				alert(JSON.stringify(currentAcitvity));
 			});
 		// Setup Activity Recognition Plugin
 		var bgLocationServices =  window.plugins.backgroundLocationServices;
@@ -57,21 +58,13 @@ var app = {
 		// Wird alle 1000ms ausgeführt / Welche Aktivität machst du?
 		setInterval(function(){
 			bgLocationServices.registerForActivityUpdates(function(activities) {
-				currentAcitvity = [];
-				currentAcitvity.push(activities)
+				currentAcitvity = activities
 				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
-				alert(activities);
+				alert(JSON.stringify(currentAcitvity));
 		   }, function(err) {
 				alert("Error: Something went wrong", JSON.stringify(err));
 		   });
 		}, 1000);
-		
-		recivedPush = (activity) => {
-			// let activityOnPush = JSON.stringify(activity);
-			// document.getElementById("onpush").innerHTML = '<p>Activity on Push: '+activityOnPush+'</p>'
-			alert("Works");
-			alert(JSON.stringify(activity));
-		}
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
