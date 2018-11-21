@@ -47,6 +47,12 @@
 <body>
         <div class="inhalt">
             <p>Sehr geehrter Tester, vielen Dank für Ihre Teilnahme. Bitte lassen Sie für den Test diese App immer laufen! Egal ob Hintergrund/Vordergrund. Wenn du nichtmehr an dem Test teilnehmen willst, schließe diese App. Vielen Dank!</p>
+            <div class="abfrage">
+                    <button type="button" onclick="abfrageDone('Passt')">War gerade gut erreichbar, Nachricht gleich geöffnet</button>
+                    <button type="button" onclick="abfrageDone('Handy nicht bei Hand')">Später geöffnet weil das Smartphone nicht in der Hand</button>
+                    <button type="button" onclick="abfrageDone('Unpassend')">Später geöffnet weil es gerade unpassend war</button>
+                    <button type="button" onclick="abfrageDone('Nicht gesehen')">Später geöffnet weil Nachricht vorhin gesehen</button>
+            </div>
 			<div class="popup" id="popup">
 				<p id="frage"></p>
 				<div class="btn" id="ja" onclick="answer('ja')" value="ja">
