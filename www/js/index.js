@@ -111,6 +111,8 @@ function answer(choice){
 function acitvityCorrection(rightActivity){
 		app.userActivity = rightActivity;
 		alert("Erhaltene Informationen: "+app.abfrageAnswer+", "+app.pushActivity+", "+app.rightActivity+", "+app.timestamp);
+		document.getElementById('popup').classList.remove('active');
+		document.getElementById('whichone').classList.remove('active');
 		// sendToServer(rightActivity);
 }
 //---------------JSON-Call------------------------//
