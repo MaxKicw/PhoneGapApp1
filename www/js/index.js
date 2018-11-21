@@ -13,14 +13,12 @@ var app = {
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
+	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		//For JSON Call
 		
 		//
        	app.receivedEvent('deviceready');
-		let currentAcitvity;
-		let pushActivity;
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
@@ -41,6 +39,7 @@ var app = {
 			pushActivity = currentAcitvity;
 			const date = moment().format("DD MM YY ");
 			const time = moment().format("HH mm ss");
+			timestamp = moment().format("DD MM YY HH mm ss");
 			document.getElementById('abfrage').classList.add('active');
 			document.getElementById('frage').innerText = 'Wir haben dir am '+date+' um '+time+' Uhr eine Push-Notification gesendet! Warst du zu diesem Zeitpunkt wirklich '+JSON.stringify(currentAcitvity)+'?';
 		});
@@ -85,10 +84,15 @@ var app = {
     }
 };
 var serverURL = 'https://calm-wildwood-42488.herokuapp.com/response';//ServerURL
+let abfrageAnswer;
+let pushActivity;
+let userActivity;
+let timestamp;
 
 //----------------Antwortfunktionen----------------//
 function abfrageAnswer(answer){
-	alert(answer);
+	abfrageAnswer = answer;
+	alert(abfrageAnswer);
 	document.getElementById('popup').classList.add('active');
 	document.getElementById('abfrage').classList.remove('active');
 }
@@ -97,13 +101,15 @@ function answer(choice){
 	if(choice == "ja"){
 		document.getElementById('popup').classList.remove('active');
 		// sendToServer();
-		alert("Done")
+		alert("Erhaltene Informationen: "+abfrageAnswer+", "+pushActivity+", "+rightActivity+", "+timestamp);
 	}else{
 		document.getElementById('whichone').classList.add('active');
+		alert("More");
 	}
 };
 function acitvityCorrection(rightActivity){
-		alert(rightActivity);
+		userActivity = rightActivity;
+		alert("Erhaltene Informationen: "+abfrageAnswer+", "+pushActivity+", "+rightActivity+", "+timestamp);
 		// sendToServer(rightActivity);
 }
 //---------------JSON-Call------------------------//
