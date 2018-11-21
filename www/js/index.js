@@ -39,7 +39,7 @@ var app = {
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			alert("Works");
 			alert("Die Aktivität zum Zeitpunkt des Pushes: "+JSON.stringify(currentAcitvity));
-			pushActivity = currentAcitvity;
+			// pushActivity = currentAcitvity;
 			const date = moment().format("DD MM YY ");
 			const time = moment().format("HH mm ss");
 			document.getElementById('abfrage').classList.add('active');
@@ -88,7 +88,7 @@ var app = {
 var serverURL = 'https://calm-wildwood-42488.herokuapp.com/response';//ServerURL
 // --------------Abfrage done--------------------//
 function abfrageDone(answer){
-	answerSituation = answer;
+	// answerSituation = answer;
 	document.getElementById('popup').classList.add('active');
 	document.getElementById('abfrage').classList.remove('active');
 
