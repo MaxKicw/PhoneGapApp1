@@ -3,6 +3,7 @@ var app = {
 	pushActivity:"",
 	userActivity:"",
 	timestamp:"",
+	user:device.uuid,
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -102,7 +103,7 @@ function answer(choice){
 	if(choice == "ja"){
 		document.getElementById('popup').classList.remove('active');
 		// sendToServer();
-		alert("Erhaltene Informationen: "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
+		alert("Erhaltene Informationen: "+app.user+", "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
 	}else{
 		document.getElementById('whichone').classList.add('active');
 		alert("More");
@@ -110,7 +111,7 @@ function answer(choice){
 };
 function acitvityCorrection(rightActivity){
 		app.userActivity = rightActivity;
-		alert("Erhaltene Informationen: "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
+		alert("Erhaltene Informationen: "+app.user+", "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
 		document.getElementById('popup').classList.remove('active');
 		document.getElementById('whichone').classList.remove('active');
 		// sendToServer(rightActivity);
