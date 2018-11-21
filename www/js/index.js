@@ -24,20 +24,21 @@ var app = {
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
 			console.log("Registration Id:" + token);
-			});
+		});
 	
 			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
 			
-			window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
+		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
 			console.log("user:ids" + JSON.stringify(data));
-			});
+		});
 			
 			//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 			
-			window.plugins.PushbotsPlugin.on("notification:received", function(data){
-				alert("Works");
-				alert(JSON.stringify(currentAcitvity));
-			});
+		window.plugins.PushbotsPlugin.on("notification:received", function(data){
+			alert("Works");
+			alert("Die Aktivität zum Zeitpunkt des Pushes: "+JSON.stringify(currentAcitvity));
+		});
+
 		// Setup Activity Recognition Plugin
 		var bgLocationServices =  window.plugins.backgroundLocationServices;
 		bgLocationServices.configure({
@@ -60,7 +61,6 @@ var app = {
 			bgLocationServices.registerForActivityUpdates(function(activities) {
 				currentAcitvity = activities
 				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
-				alert(JSON.stringify(currentAcitvity));
 		   }, function(err) {
 				alert("Error: Something went wrong", JSON.stringify(err));
 		   });
