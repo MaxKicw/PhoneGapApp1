@@ -23,7 +23,39 @@ var app = {
 		let currentAcitvity = [];
    		//Accelerometer call
 		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
+		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
+		window.plugins.PushbotsPlugin.on("registered", 		function(token){
+			console.log("Registration Id:" + token);
+			});
+	
+			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
+			
+			window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
+			console.log("user:ids" + JSON.stringify(data));
+			});
+			
+			//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
+			
+			window.plugins.PushbotsPlugin.on("notification:received", function(data){
+				alert("Push erhalten");
+				function sendFetch(){
+					fetchAll();
+					fetch(serverURL, {
+						method: 'POST',
+						body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,activities:activities}), // data can be `string` or {object}!
+						headers:{
+						  'Content-Type': 'application/json'
+						}
+					  }).then(res => res.json())
+					  .then(response => console.log('Success:', JSON.stringify(response)))
+					  .catch(error => console.error('Error:', error));
+				}
+				sendFetch();
+	
+				  document.getElementById('popup').classList.add('active');
+			});
+		// Setup Activity Recognition Plugin
 		var bgLocationServices =  window.plugins.backgroundLocationServices;
 		bgLocationServices.configure({
 			//Both
@@ -40,37 +72,6 @@ var app = {
 			
 	   });
 	   bgLocationServices.start();
-		// Only with First time registration - For Pushbot
-		window.plugins.PushbotsPlugin.on("registered", 		function(token){
-		console.log("Registration Id:" + token);
-		});
-
-		//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
-		
-		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
-		console.log("user:ids" + JSON.stringify(data));
-		});
-		
-		//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
-		
-		window.plugins.PushbotsPlugin.on("notification:received", function(data){
-			alert("Push erhalten");
-			function sendFetch(){
-				fetchAll();
-				fetch(serverURL, {
-					method: 'POST',
-					body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,activities:activities}), // data can be `string` or {object}!
-					headers:{
-					  'Content-Type': 'application/json'
-					}
-				  }).then(res => res.json())
-				  .then(response => console.log('Success:', JSON.stringify(response)))
-				  .catch(error => console.error('Error:', error));
-			}
-			sendFetch();
-
-  			document.getElementById('popup').classList.add('active');
-		});
 		// Geolocation/Gyroscope/Abstandssensor/Lichtsensor
 		navigator.geolocation.getCurrentPosition(positionSuccess);
 		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
