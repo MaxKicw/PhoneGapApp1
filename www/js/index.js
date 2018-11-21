@@ -39,22 +39,8 @@ var app = {
 			
 			window.plugins.PushbotsPlugin.on("notification:received", function(data){
 				let activityRecievedPush = activities
-				alert(JSON.stringify(activityRecievedPush));
-				function sendFetch(){
-					fetchAll();
-					fetch(serverURL, {
-						method: 'POST',
-						body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,activities:activities}), // data can be `string` or {object}!
-						headers:{
-						  'Content-Type': 'application/json'
-						}
-					  }).then(res => res.json())
-					  .then(response => console.log('Success:', JSON.stringify(response)))
-					  .catch(error => console.error('Error:', error));
-				}
-				sendFetch();
-	
-				  document.getElementById('popup').classList.add('active');
+				alert(JSON.stringify(activityRecievedPush[0]));
+				document.getElementById('popup').classList.add('active');
 			});
 		// Setup Activity Recognition Plugin
 		var bgLocationServices =  window.plugins.backgroundLocationServices;
