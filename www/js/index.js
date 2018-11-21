@@ -59,11 +59,19 @@ var app = {
 			bgLocationServices.registerForActivityUpdates(function(activities) {
 				currentAcitvity = [];
 				currentAcitvity.push(activities)
-				document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
+				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
+				alert(activities);
 		   }, function(err) {
 				alert("Error: Something went wrong", JSON.stringify(err));
 		   });
 		}, 1000);
+		
+		recivedPush = (activity) => {
+			// let activityOnPush = JSON.stringify(activity);
+			// document.getElementById("onpush").innerHTML = '<p>Activity on Push: '+activityOnPush+'</p>'
+			alert("Works");
+			alert(JSON.stringify(activity));
+		}
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -105,10 +113,7 @@ function sendToServer(answer){
 		  .catch(error => console.error('Error:', error));
 };
 
-recivedPush = (activity) => {
-	let activityOnPush = JSON.stringify(activity);
-	document.getElementById("onpush").innerHTML = '<p>Activity on Push: '+activityOnPush+'</p>'
-}
+
 
 
 
