@@ -38,7 +38,8 @@ var app = {
 			//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 			
 			window.plugins.PushbotsPlugin.on("notification:received", function(data){
-				alert("Push erhalten");
+				let activityRecievedPush = activities
+				alert(JSON.stringify(activityRecievedPush));
 				function sendFetch(){
 					fetchAll();
 					fetch(serverURL, {
