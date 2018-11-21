@@ -24,6 +24,17 @@ body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#E4E4E4;
+    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #A7A7A7),
+        color-stop(0.51, #E4E4E4)
+    );
     background-attachment:fixed;
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:12px;
@@ -87,7 +98,23 @@ body{
     width: 100vw;
     height: auto;
 }
-
+.menu{
+    height: 10vh;
+    background-color: #cb4444;
+    transition: 300ms ease;
+    box-shadow: 0px 0px 5px black;
+}
+.menu.active{
+    height: 30vh;
+}
+.logo{
+    height: 4vh;
+    width: 4vh;
+    padding: 2vh;
+    background-image: url(../img/logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 .inhalt{
     height: 80vh;
 }
@@ -108,7 +135,8 @@ body{
 }
 .popup{
 	position: absolute;
-	padding: 20px;
+	padding-left: 20px;
+	padding-top: 20px;
 	height: 20vh;
 	width: 80vw;
 	margin-left: 10vw;
@@ -124,10 +152,11 @@ body{
 }
 .whichone{
 	position: absolute;
-	padding: 20px;
+	padding-left: 20px;
+	padding-top: 20px;
 	width: 80vw;
 	margin-left: 10vw;
-    margin-top: 150vh;
+	margin-top: 150vh;
 	box-shadow: 0px 0px 10px black;
 	background-color: white;
 	z-index: 2;
@@ -135,7 +164,7 @@ body{
 	border-radius: 2px;
 }
 .whichone.active{
-	margin-top: 40vh;
+	margin-top: 30vh;
 }
 .btn{
 	width: 40%;
