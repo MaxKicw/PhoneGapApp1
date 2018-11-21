@@ -55,29 +55,29 @@
         <div class="inhalt">
             <div class="abfrage" id="abfrage">
                     <p>Passt es dir gerade?</p>
-                    <button type="button" onclick="abfrageAnswer('Passt')">War gerade gut erreichbar!</button>
-                    <button type="button" onclick="abfrageAnswer('NichtinReichweite')">Späger geöffnet weil Smartphone vorher nicht in der Hand</button>
-                    <button type="button" onclick="abfrageAnswer('Unpassend')">Später geöffnet weil es gerade unpassend war</button>
-                    <button type="button" onclick="abfrageAnswer('Nichtgelesen')">Später geöffnet weil Nachricht vorher nicht gelesen</button>
+                    <button type="button" onclick="app.onDeviceReady.abfrageAnswer('Passt')">War gerade gut erreichbar!</button>
+                    <button type="button" onclick="app.onDeviceReady.abfrageAnswer('NichtinReichweite')">Späer geöffnet weil Smartphone vorher nicht in der Hand</button>
+                    <button type="button" onclick="app.onDeviceReady.abfrageAnswer('Unpassend')">Später geöffnet weil es gerade unpassend war</button>
+                    <button type="button" onclick="app.onDeviceReady.abfrageAnswer('Nichtgelesen')">Später geöffnet weil Nachricht vorher nicht gelesen</button>
             </div>
 			<div class="popup" id="popup">
 				<p id="frage"></p>
-				<div class="btn" id="ja" onclick="answer('ja')" value="ja">
+				<div class="btn" id="ja" onclick="app.onDeviceReady.answer('ja')" value="ja">
 					<p>Ja</p>
 				</div>
-				<div class="btn" id="nein" onclick="answer('nein')" value="nein">
+				<div class="btn" id="nein" onclick="app.onDeviceReady.answer('nein')" value="nein">
 					<p>Nein</p>
 				</div>
             </div>
             <div class="whichone" id="whichone">
                 <p>Wähle dann bitte die richtige Aktivtät aus!</p>
-                <button type="button" onclick="acitvityCorrection('IN_VEHICLE')">In einem Fahrzeug</button>
-                <button type="button" onclick="acitvityCorrection('ON_BICYCLE')">Auf dem Fahrrad</button>
-                <button type="button" onclick="acitvityCorrection('ON_FOOT')">Zu Fuß</button>
-                <button type="button" onclick="acitvityCorrection('RUNNING')">Gerannt</button>
-                <button type="button" onclick="acitvityCorrection('STILL')">Ruhig</button>
-                <button type="button" onclick="acitvityCorrection('TILTING')">Handy in der Hand</button>
-                <button type="button" onclick="acitvityCorrection('UNKNOWN')">Weiß ich nicht mehr</button>
+                <button type="button" onclick="app.onDeviceReady.acitvityCorrection('IN_VEHICLE')">In einem Fahrzeug</button>
+                <button type="button" onclick="app.onDeviceReady.acitvityCorrection('ON_BICYCLE')">Auf dem Fahrrad</button>
+                <button type="button" onclick="app.onDeviceReady.acitvityCorrection('ON_FOOT')">Zu Fuß</button>
+                <button type="button" onclick="app.onDeviceReady.acitvityCorrection('RUNNING')">Gerannt</button>
+                <button type="button" onclick="app.onDeviceReady.acitvityCorrection('STILL')">Ruhig</button>
+                <button type="button" onclick="app.onDeviceReady.acitvityCorrection('TILTING')">Handy in der Hand</button>
+                <button type="button" onclick="app.onDeviceReady.acitvityCorrection('UNKNOWN')">Weiß ich nicht mehr</button>
             </div>
         </div>
         

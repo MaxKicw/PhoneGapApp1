@@ -1,3 +1,7 @@
+let abfrageAnswer;
+let pushActivity;
+let userActivity;
+let timestamp;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -15,7 +19,6 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-		defineVars();
 		//For JSON Call
 		
 		//
@@ -72,50 +75,6 @@ var app = {
 				alert("Error: Something went wrong", JSON.stringify(err));
 		   });
 		}, 300);
-		//---------------Define antwort vars ----------------//
-		function defineVars(){
-			let abfrageAnswer;
-			let pushActivity;
-			let userActivity;
-			let timestamp;
-			var serverURL = 'https://calm-wildwood-42488.herokuapp.com/response';//ServerURL
-		}
-		//----------------Antwortfunktionen----------------//
-		function abfrageAnswer(answer){
-			abfrageAnswer = answer;
-			alert(abfrageAnswer);
-			document.getElementById('popup').classList.add('active');
-			document.getElementById('abfrage').classList.remove('active');
-		}
-
-		function answer(choice){
-			if(choice == "ja"){
-				document.getElementById('popup').classList.remove('active');
-				// sendToServer();
-				alert("Erhaltene Informationen: "+abfrageAnswer+", "+pushActivity+", "+rightActivity+", "+timestamp);
-			}else{
-				document.getElementById('whichone').classList.add('active');
-				alert("More");
-			}
-		};
-
-		function acitvityCorrection(rightActivity){
-				userActivity = rightActivity;
-				alert("Erhaltene Informationen: "+abfrageAnswer+", "+pushActivity+", "+rightActivity+", "+timestamp);
-				// sendToServer(rightActivity);
-		}
-		//---------------JSON-Call------------------------//
-		function sendToServer(rightActivity){
-				fetch(serverURL, {
-					method: 'POST',
-					body: JSON.stringify({significantmotion1:pushActivity,significantmotion2:rightActivity,timediff:1234}), // data can be `string` or {object}!
-					headers:{
-					'Content-Type': 'application/json'
-					}
-				}).then(res => res.json())
-				.then(response => console.log('Success:', JSON.stringify(response)))
-				.catch(error => console.error('Error:', error));
-		};
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -129,4 +88,45 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+var serverURL = 'https://calm-wildwood-42488.herokuapp.com/response';//ServerURL
+//---------------Define antwort vars ----------------//
+//----------------Antwortfunktionen----------------//
+function abfrageAnswer(answer){
+	abfrageAnswer = answer;
+	alert(abfrageAnswer);
+	document.getElementById('popup').classList.add('active');
+	document.getElementById('abfrage').classList.remove('active');
+}
+
+function answer(choice){
+	if(choice == "ja"){
+		document.getElementById('popup').classList.remove('active');
+		// sendToServer();
+		alert("Erhaltene Informationen: "+abfrageAnswer+", "+pushActivity+", "+rightActivity+", "+timestamp);
+	}else{
+		document.getElementById('whichone').classList.add('active');
+		alert("More");
+	}
+};
+function acitvityCorrection(rightActivity){
+		userActivity = rightActivity;
+		alert("Erhaltene Informationen: "+abfrageAnswer+", "+pushActivity+", "+rightActivity+", "+timestamp);
+		// sendToServer(rightActivity);
+}
+//---------------JSON-Call------------------------//
+function sendToServer(rightActivity){
+		fetch(serverURL, {
+			method: 'POST',
+			body: JSON.stringify({significantmotion1:pushActivity,significantmotion2:rightActivity,timediff:1234}), // data can be `string` or {object}!
+			headers:{
+			  'Content-Type': 'application/json'
+			}
+		  }).then(res => res.json())
+		  .then(response => console.log('Success:', JSON.stringify(response)))
+		  .catch(error => console.error('Error:', error));
+};
+
+
+
+
 
