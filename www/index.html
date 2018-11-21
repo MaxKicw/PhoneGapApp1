@@ -53,6 +53,13 @@
             </div>
         </div>
         <div class="inhalt">
+            <div class="abfrage" id="abfrage">
+                    <p>Passt es dir gerade?</p>
+                    <button type="button" onclick="abfrageAnswer('Passt')">War gerade gut erreichbar!</button>
+                    <button type="button" onclick="abfrageAnswer('NichtinReichweite')">Späger geöffnet weil Smartphone vorher nicht in der Hand</button>
+                    <button type="button" onclick="abfrageAnswer('Unpassend')">Später geöffnet weil es gerade unpassend war</button>
+                    <button type="button" onclick="abfrageAnswer('Nichtgelesen')">Später geöffnet weil Nachricht vorher nicht gelesen</button>
+            </div>
 			<div class="popup" id="popup">
 				<p id="frage"></p>
 				<div class="btn" id="ja" onclick="answer('ja')" value="ja">

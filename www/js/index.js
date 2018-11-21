@@ -41,7 +41,7 @@ var app = {
 			pushActivity = currentAcitvity;
 			const date = moment().format("DD MM YY ");
 			const time = moment().format("HH mm ss");
-			document.getElementById('popup').classList.add('active');
+			document.getElementById('abfrage').classList.add('active');
 			document.getElementById('frage').innerText = 'Wir haben dir am '+date+' um '+time+' Uhr eine Push-Notification gesendet! Warst du zu diesem Zeitpunkt wirklich '+JSON.stringify(currentAcitvity)+'?';
 		});
 
@@ -87,16 +87,24 @@ var app = {
 var serverURL = 'https://calm-wildwood-42488.herokuapp.com/response';//ServerURL
 
 //----------------Antwortfunktionen----------------//
+function abfrageAnswer(answer){
+	alert(answer);
+	document.getElementById('popup').classList.add('active');
+	document.getElementById('abfrage').classList.remove('active');
+}
+
 function answer(choice){
 	if(choice == "ja"){
 		document.getElementById('popup').classList.remove('active');
-		sendToServer();
+		// sendToServer();
+		alert("Done")
 	}else{
 		document.getElementById('whichone').classList.add('active');
 	}
 };
 function acitvityCorrection(rightActivity){
-		sendToServer(rightActivity);
+		alert(rightActivity);
+		// sendToServer(rightActivity);
 }
 //---------------JSON-Call------------------------//
 function sendToServer(rightActivity){
