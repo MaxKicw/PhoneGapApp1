@@ -35,7 +35,7 @@ var app = {
 			//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 			
 			window.plugins.PushbotsPlugin.on("notification:received", function(data){
-				alert("Hi");
+				recievedPush(activities[0]);
 			});
 		// Setup Activity Recognition Plugin
 		var bgLocationServices =  window.plugins.backgroundLocationServices;
@@ -103,6 +103,11 @@ function sendToServer(answer){
 		  .then(response => console.log('Success:', JSON.stringify(response)))
 		  .catch(error => console.error('Error:', error));
 };
+
+recivedPush = (activity) => {
+	let activityOnPush = JSON.stringify(activity);
+	alert("Works look: "+activityOnPush);
+}
 
 
 
