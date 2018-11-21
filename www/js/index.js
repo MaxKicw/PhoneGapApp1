@@ -37,6 +37,10 @@ var app = {
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			alert("Works");
 			alert("Die Aktivität zum Zeitpunkt des Pushes: "+JSON.stringify(currentAcitvity));
+			const date = moment().format("DD MM YY ");
+			const time = moment().format("HH mm ss");
+			document.getElementById('popup').classList.add('active');
+			document.getElementById('frage').innerText = 'Wir haben dir am'+date+' um '+time+' eine Push-Notification gesendet! Warst du zu diesem Zeitpunkt wirklich '+JSON.stringify(currentAcitvity)+'?';
 		});
 
 		// Setup Activity Recognition Plugin
