@@ -21,7 +21,6 @@ var app = {
        	app.receivedEvent('deviceready');
 		let currentAcitvity;
 		let pushActivity;
-		let answerSituation;
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
@@ -42,7 +41,7 @@ var app = {
 			pushActivity = currentAcitvity;
 			const date = moment().format("DD MM YY ");
 			const time = moment().format("HH mm ss");
-			document.getElementById('abfrage').classList.add('active');
+			document.getElementById('popup').classList.add('active');
 			document.getElementById('frage').innerText = 'Wir haben dir am '+date+' um '+time+' Uhr eine Push-Notification gesendet! Warst du zu diesem Zeitpunkt wirklich '+JSON.stringify(currentAcitvity)+'?';
 		});
 
@@ -86,13 +85,7 @@ var app = {
     }
 };
 var serverURL = 'https://calm-wildwood-42488.herokuapp.com/response';//ServerURL
-// --------------Abfrage done--------------------//
-function abfrageDone(answer){
-	answerSituation = answer;
-	document.getElementById('popup').classList.add('active');
-	document.getElementById('abfrage').classList.remove('active');
 
-}
 //----------------Antwortfunktionen----------------//
 function answer(choice){
 	if(choice == "ja"){
@@ -107,16 +100,15 @@ function acitvityCorrection(rightActivity){
 }
 //---------------JSON-Call------------------------//
 function sendToServer(rightActivity){
-		// fetch(serverURL, {
-		// 	method: 'POST',
-		// 	body: JSON.stringify({significantmotion1:pushActivity,significantmotion2:rightActivity,timediff:1234}), // data can be `string` or {object}!
-		// 	headers:{
-		// 	  'Content-Type': 'application/json'
-		// 	}
-		//   }).then(res => res.json())
-		//   .then(response => console.log('Success:', JSON.stringify(response)))
-		//   .catch(error => console.error('Error:', error));
-		alert("Das sind die Daten: "+answerSituation+", "+pushActivity+", "+rightActivity);
+		fetch(serverURL, {
+			method: 'POST',
+			body: JSON.stringify({significantmotion1:pushActivity,significantmotion2:rightActivity,timediff:1234}), // data can be `string` or {object}!
+			headers:{
+			  'Content-Type': 'application/json'
+			}
+		  }).then(res => res.json())
+		  .then(response => console.log('Success:', JSON.stringify(response)))
+		  .catch(error => console.error('Error:', error));
 };
 
 
