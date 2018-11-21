@@ -59,7 +59,7 @@ var app = {
 			bgLocationServices.registerForActivityUpdates(function(activities) {
 				currentAcitvity = [];
 				currentAcitvity.push(activities)
-				document.getElementById('activity').innerHTML = "<p>"+currentAcitvity[0]+"</p>";
+				document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
 		   }, function(err) {
 				alert("Error: Something went wrong", JSON.stringify(err));
 		   });
@@ -107,7 +107,7 @@ function sendToServer(answer){
 
 recivedPush = (activity) => {
 	let activityOnPush = JSON.stringify(activity);
-	alert("Works look: "+activityOnPush);
+	document.getElementById("onpush").innerHTML = '<p>Activity on Push: '+activityOnPush+'</p>'
 }
 
 
