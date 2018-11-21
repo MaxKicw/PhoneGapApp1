@@ -64,7 +64,7 @@ var app = {
 		   }, function(err) {
 				alert("Error: Something went wrong", JSON.stringify(err));
 		   });
-		}, 1000);
+		}, 300);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
