@@ -19,10 +19,7 @@ var app = {
 		
 		//
        	app.receivedEvent('deviceready');
-		var options = {frequency: 1000};
 		let currentAcitvity = [];
-   		//Accelerometer call
-		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
@@ -59,14 +56,8 @@ var app = {
 			
 	   });
 	   bgLocationServices.start();
-		// Geolocation/Gyroscope/Abstandssensor/Lichtsensor
-		navigator.geolocation.getCurrentPosition(positionSuccess);
-		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
-		navigator.proximity.enableSensor();
-		// Mit API für Activity Recognition Verbinden
+		// Wird alle 1000ms ausgeführt / Welche Aktivität machst du?
 		setInterval(function(){
-			navigator.proximity.getProximityState(proximitySuccess);
-			window.plugin.lightsensor.getReading(lightSuccess);
 			bgLocationServices.registerForActivityUpdates(function(activities) {
 				currentAcitvity = [];
 				currentAcitvity.push(activities)
@@ -74,8 +65,6 @@ var app = {
 				alert("Error: Something went wrong", JSON.stringify(err));
 		   });
 		}, 1000);
-		//Netzwerkverbindung
-		fetchNetworkConnectionInfo();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -89,92 +78,7 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-//Globale Variablen
-var prox;//für Abstandssensor
-var acc;//Beschleunigungssensor 
-var gps;//GPS-Sensor
-var light;//Lichtsensor
-var gyro;//Gyroscope
-var net;//Netzwerkverbindung
-var didClickIt = false;//For ServerURL
 var serverURL = 'https://calm-wildwood-42488.herokuapp.com/response';//ServerURL
-//------------Daten des Beschleunigungssensors--------------------//
-function accelerometerSuccess(acceleration) {
-		acc = acceleration;
-        var node = document.createElement('div');
-        document.getElementById('1').innerHTML = '';
-        node.innerHTML = '<p>Beschleunigungssensor:<br>X-Achse :</p>'+acceleration.x+'<p>Y-Achse :</p>'+acceleration.y+'<p>Z-Achse :</p>'+acceleration.z+'<p>Time :</p>'+acceleration.timestamp;
-        document.getElementById('1').appendChild(node);
-};
-function onError(error){
-        console.log("---Error--"+error.code+"---MSG---"+error.message);
-};
-//----------------Geräteinformationen------------------------//
-
-//------------Art der Netzwerkverbindung--------------------//
-
-function fetchNetworkConnectionInfo(){
-	console.log("-----Netzwerk-----");
-	navigator.vibrate(300);
-    var networkType = navigator.network.connection.type;
-	net = networkType;
-    var networkTypes = {};
-    networkTypes[Connection.NONE] = "Keine Netzwerkverbindung";
-    networkTypes[Connection.UNKNOWN] = "Unbekannte Netzwerkverbindung";
-    networkTypes[Connection.CELL_2G] = "2G Netzwerkverbindung";
-    networkTypes[Connection.CELL_3G] = "3G Netzwerkverbindung";
-    networkTypes[Connection.CELL_4G] = "4G Netzwerkverbindung";
-    networkTypes[Connection.WIFI] = "WiFi Netzwerkverbindung";
-    networkTypes[Connection.ETHERNET] = "Ethernet Netzwerkverbindung";
-    
-    document.getElementById('2').innerHTML = networkTypes[networkType];
-};
-
-//---------GPS-Location----------------------------------//
-
-function positionSuccess(position){
-    console.log("-----Location-----");
-	gps = position.coords;
-    var node = document.createElement('div');
-    node.innerHTML = '<p>GPS:<br>Latitude : </p>'+ position.coords.latitude+'<p>Longitude :</p>'+position.coords.longitude+'<p>Höhe :</p>'+position.coords.altitude;
-    document.getElementById('3').appendChild(node);
-};
-
-//---------Gyroscope----------------------------------//
-
-function gyroscopeSuccess(acceleration) {
-	    console.log("-----GYRO-----");
-		gyro = acceleration;
-		document.getElementById('4').innerHTML = '';
-        var node = document.createElement('div');
-      	node.innerHTML = "<p>Gyroskop:<br>X-Achse: </p>"+acceleration.x+"<p><Y-Achse: </p>"+acceleration.y+"<p><Z-Achse: </p>"+acceleration.z;
-		document.getElementById('4').appendChild(node);
-};
-function gyroscopeError(msg) {
-	    console.log("-----GYRO-RRor----");
-		alert("-----GYRO-RRor----");
-        var node = document.createElement('div');
-        document.getElementById('4').innerHTML = '';
-        node.innerHTML = "Error"+msg.info+"MSG"+msg.message;
-        document.getElementById('4').appendChild(node);
-};
-//-------------Proximity------------------------//
-function proximitySuccess(state){
-        document.getElementById('5').innerHTML = '';
-        var node = document.createElement('div');
-      	node.innerHTML = "<p>Abstandssensor/Ohrmuschel:<br>Success: "+state;
-		document.getElementById('5').appendChild(node);
-};
-//---------------Light-------------------------//
-function lightSuccess(reading){
-		light = reading;
-        document.getElementById('6').innerHTML = '';
-        var node = document.createElement('div');
-      	node.innerHTML = "<p>Helligkeitssenor:<br>Success: "+JSON.stringify(reading);
-		document.getElementById('6').appendChild(node);
-	      // Output: {"intensity": 25}
-};
-//---------------Activitiy-----------------------//
 
 //----------------Antwortfunktion----------------//
 function answer(choice){
@@ -190,8 +94,6 @@ function answer(choice){
 	}
 };
 //---------------JSON-Call------------------------//
-//Quellen: https://stackoverflow.com/questions/10005939/how-do-i-consume-the-json-post-data-in-an-express-application
-//
 function sendToServer(answer){
 		fetch(serverURL, {
 			method: 'POST',
@@ -203,23 +105,6 @@ function sendToServer(answer){
 		  .then(response => console.log('Success:', JSON.stringify(response)))
 		  .catch(error => console.error('Error:', error));
 };
-//---------------URL-Setup----------------------//
-//Quelle: https://stackoverflow.com/questions/15305527/javascript-user-input-through-html-input-tag-to-set-a-javascript-variable
-document.getElementById("send").addEventListener("click",function(){
-	// same as onclick, keeps the JS and HTML separate
-	didClickIt = true;
-});
-setInterval(function(){
-		// this is the closest you get to an infinite loop in JavaScript
-		if( didClickIt ) {
-			didClickIt = false;
-			// document.write causes silly problems, do this instead (or better yet, use a library like jQuery to do this stuff for you)
-			serverURL=document.getElementById("url").value+'/response';
-			console.log(serverURL);
-		}
-	},500);
 
-fetchAll = () => {
-	console.log("Fetch all");
-}
+
 
