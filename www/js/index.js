@@ -20,6 +20,7 @@ var app = {
 		//
        	app.receivedEvent('deviceready');
 		let currentAcitvity;
+		let pushActivity;
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
@@ -37,10 +38,11 @@ var app = {
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			alert("Works");
 			alert("Die Aktivität zum Zeitpunkt des Pushes: "+JSON.stringify(currentAcitvity));
+			pushActivity = currentAcitvity;
 			const date = moment().format("DD MM YY ");
 			const time = moment().format("HH mm ss");
 			document.getElementById('popup').classList.add('active');
-			document.getElementById('frage').innerText = 'Wir haben dir am'+date+' um '+time+' eine Push-Notification gesendet! Warst du zu diesem Zeitpunkt wirklich '+JSON.stringify(currentAcitvity)+'?';
+			document.getElementById('frage').innerText = 'Wir haben dir am '+date+' um '+time+' Uhr eine Push-Notification gesendet! Warst du zu diesem Zeitpunkt wirklich '+JSON.stringify(currentAcitvity)+'?';
 		});
 
 		// Setup Activity Recognition Plugin
@@ -84,24 +86,23 @@ var app = {
 };
 var serverURL = 'https://calm-wildwood-42488.herokuapp.com/response';//ServerURL
 
-//----------------Antwortfunktion----------------//
+//----------------Antwortfunktionen----------------//
 function answer(choice){
-	console.log("Answer");
-	console.log(choice);
 	if(choice == "ja"){
 		document.getElementById('popup').classList.remove('active');
-		sendToServer('Ja');
-		
+		sendToServer();
 	}else{
-		document.getElementById('popup').classList.remove('active');
-		sendToServer('Nein');	
+		document.getElementById('whichone').classList.add('active');
 	}
 };
+function acitvityCorrection(rightActivity){
+		sendToServer(rightActivity);
+}
 //---------------JSON-Call------------------------//
-function sendToServer(answer){
+function sendToServer(rightActivity){
 		fetch(serverURL, {
 			method: 'POST',
-			body: JSON.stringify({answer:answer,network:net,acceleration:acc,gps:gps,lightsensor:light,proimitysensor:prox,activities:activities}), // data can be `string` or {object}!
+			body: JSON.stringify({significantmotion1:pushActivity,significantmotion2:rightActivity,timediff:1234}), // data can be `string` or {object}!
 			headers:{
 			  'Content-Type': 'application/json'
 			}
