@@ -3,7 +3,7 @@ var app = {
 	pushActivity:"",
 	userActivity:"",
 	timestamp:"",
-	user:device.uuid,
+	user:"",
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -43,6 +43,7 @@ var app = {
 			alert("Works");
 			alert("Die Aktivität zum Zeitpunkt des Pushes: "+JSON.stringify(currentAcitvity));
 			app.pushActivity = currentAcitvity;
+			app.user = device.uuid;
 			const date = moment().format("DD MM YY ");
 			const time = moment().format("HH mm ss");
 			app.timestamp = moment().format("DD MM YY HH mm ss");
