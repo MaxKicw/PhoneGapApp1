@@ -35,9 +35,7 @@ var app = {
 			//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 			
 			window.plugins.PushbotsPlugin.on("notification:received", function(data){
-				let activityRecievedPush = activities
-				alert(JSON.stringify(activityRecievedPush[0]));
-				document.getElementById('popup').classList.add('active');
+				alert("Hi");
 			});
 		// Setup Activity Recognition Plugin
 		var bgLocationServices =  window.plugins.backgroundLocationServices;
