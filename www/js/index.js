@@ -121,24 +121,31 @@ function acitvityCorrection(rightActivity){
 }
 //---------------JSON-Call------------------------//
 function sendToServer(user,abfrage,tracked_activity,timestamp){
-		var formData = new FormData();
-		formData.append("user",user);
-		formData.append("significantmotion1",abfrage);
-		formData.append("significantmotion2",tracked_activity);
-		formData.append("timediff",timestamp);
-		fetch(serverURL, {
-			aysnc: true,
-			crossDomain: true, 
-			headers:{
-			  'Content-Type': 'application/json'
-			},
-			processData: false,
-			contentType: false,
-			mimeType: "multipart/form-data",
-			data:formData
-		  }).then(res => res.json())
-		  .then(response => alert('Success:', JSON.stringify(response)))
-		  .catch(error => alert('Error:', JSON.stringify(error)));
+		var form = new FormData();
+		form.append("user", user);
+		form.append("significantmotion1", abfrage);
+		form.append("significantmotion2", tracked_activity);
+		form.append("timediff", timestamp);
+		
+		var settings = {
+		"async": true,
+		"crossDomain": true,
+		"url": "http://caebus.de/hackathon/testapp/testapp.php",
+		"method": "POST",
+		"headers": {
+			"Content-Type": "application/json",
+			"cache-control": "no-cache",
+			"Postman-Token": "1f60a982-a00c-4956-b6a8-3fa058035833"
+		},
+		"processData": false,
+		"contentType": false,
+		"mimeType": "multipart/form-data",
+		"data": form
+		}
+		
+		$.ajax(settings).done(function (response) {
+		console.log(response);
+		});
 };
 
 
