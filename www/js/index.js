@@ -138,7 +138,7 @@ function sendToServer(user,abfrage,tracked_activity,timestamp){
 			data:formData
 		  }).then(res => res.json())
 		  .then(response => alert('Success:', JSON.stringify(response)))
-		  .catch(error => alert('Error:', error));
+		  .catch(error => alert('Error:', JSON.stringify(error)));
 };
 
 
