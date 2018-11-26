@@ -144,7 +144,7 @@ function sendToServer(user,abfrage,tracked_activity,timestamp){
 		}
 		
 		$.ajax(settings).done(function (response) {
-		console.log(response);
+		alert(response);
 		});
 };
 
