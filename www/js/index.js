@@ -90,7 +90,7 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-var serverURL = 'https://calm-wildwood-42488.herokuapp.com/response';//ServerURL
+var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
 //---------------Define antwort vars ----------------//
 //----------------Antwortfunktionen----------------//
 function abfrageAnswer(answer){
