@@ -126,6 +126,7 @@ function sendToServer(user,abfrage,tracked_activity,timestamp){
 		form.append("significantmotion1", abfrage);
 		form.append("significantmotion2", tracked_activity);
 		form.append("timediff", timestamp);
+		form.append("timediff","337935472304890")
 		
 		var settings = {
 		"async": true,
