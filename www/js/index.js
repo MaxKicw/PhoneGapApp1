@@ -122,28 +122,31 @@ function acitvityCorrection(rightActivity){
 //---------------JSON-Call------------------------//
 function sendToServer(user,abfrage,tracked_activity,timestamp){
 		var form = new FormData();
-		form.append("user", user);
-		form.append("significantmotion1", abfrage);
-		form.append("significantmotion2", tracked_activity);
-		form.append("timediff", timestamp);
+		form.append(user, user);
+		form.append(significantmotion1, abfrage);
+		form.append(significantmotion2, tracked_activity);
+		form.append(timediff, timestamp);
 		
-
-		var xhr = new XMLHttpRequest();
-		xhr.withCredentials = true;
-
-		xhr.addEventListener("readystatechange", function () {
-		if (this.readyState === 4) {
-			alert(this.responseText);
+		var settings = {
+		"async": true,
+		"crossDomain": true,
+		"url": "http://caebus.de/hackathon/testapp/testapp.php",
+		"method": "POST",
+		"headers": {
+			"Content-Type": "application/json",
+			"cache-control": "no-cache",
+			"Postman-Token": "1f60a982-a00c-4956-b6a8-3fa058035833"
+		},
+		"processData": false,
+		"contentType": false,
+		"mimeType": "multipart/form-data",
+		"data": form
 		}
+		
+		$.ajax(settings).done(function (response) {
+		console.log(response);
 		});
-
-		xhr.open("POST", "http://caebus.de/hackathon/testapp/testapp.php");
-		xhr.setRequestHeader("Content-Type", "application/json");
-		xhr.setRequestHeader("cache-control", "no-cache");
-		xhr.setRequestHeader("Postman-Token", "5a68f89b-f293-49f5-9441-d70a7cafe056");
-
-		xhr.send(data);
-		};
+};
 
 
 
