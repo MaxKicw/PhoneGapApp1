@@ -122,10 +122,10 @@ function acitvityCorrection(rightActivity){
 //---------------JSON-Call------------------------//
 function sendToServer(user,abfrage,tracked_activity,timestamp){
 		var formData = new FormData();
-		formData.append(user,user);
-		formData.append(significantmotion1,abfrage);
-		formData.append(significantmotion2,tracked_activity);
-		formData.append(timediff,timestamp);
+		formData.append("user",user);
+		formData.append("significantmotion1",abfrage);
+		formData.append("significantmotion2",tracked_activity);
+		formData.append("timediff",timestamp);
 		fetch(serverURL, {
 			method: 'POST',
 			body: formData, 
@@ -133,8 +133,8 @@ function sendToServer(user,abfrage,tracked_activity,timestamp){
 			  'Content-Type': 'mulitpart/form-data'
 			}
 		  }).then(res => res.json())
-		  .then(response => console.log('Success:', JSON.stringify(response)))
-		  .catch(error => console.error('Error:', error));
+		  .then(response => alert('Success:', JSON.stringify(response)))
+		  .catch(error => alert('Error:', error));
 };
 
 
