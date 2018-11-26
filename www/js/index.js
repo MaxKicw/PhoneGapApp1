@@ -122,30 +122,23 @@ function acitvityCorrection(rightActivity){
 //---------------JSON-Call------------------------//
 function sendToServer(user,abfrage,tracked_activity,timestamp){
 		var form = new FormData();
-		form.append("user", user);
-		form.append("significantmotion1", abfrage);
-		form.append("significantmotion2", tracked_activity);
-		form.append("timediff", timestamp);
-		form.append("timediff","337935472304890")
+		form.append("user", "Testen");
+		form.append("significantmotion1", "Testen");
+		form.append("significantmotion2", "Testen");
+		form.append("timediff", "Testen");
 		
-		var settings = {
-		"async": true,
-		"crossDomain": true,
-		"url": "http://caebus.de/hackathon/testapp/testapp.php",
-		"method": "POST",
-		"headers": {
-			"Content-Type": "application/json",
-			"cache-control": "no-cache",
-		},
-		"processData": false,
-		"contentType": false,
-		"mimeType": "multipart/form-data",
-		"data": form
+		let settings = {
+			method:"POST",
+			mode:'cors',
+			body: form,
 		}
 		
-		$.ajax(settings).done(function (response) {
-		alert(response);
-		});
+		let request = new Request(serverURL,settings);
+
+		fetch(request)
+		.then((res) => {
+			alert(res)
+		});		
 };
 
 
