@@ -127,11 +127,15 @@ function sendToServer(user,abfrage,tracked_activity,timestamp){
 		formData.append("significantmotion2",tracked_activity);
 		formData.append("timediff",timestamp);
 		fetch(serverURL, {
-			method: 'POST',
-			body: formData, 
+			aysnc: true,
+			crossDomain: true, 
 			headers:{
-			  'Content-Type': 'mulitpart/form-data'
-			}
+			  'Content-Type': 'application/json'
+			},
+			processData: false,
+			contentType: false,
+			mimeType: "multipart/form-data",
+			data:formData
 		  }).then(res => res.json())
 		  .then(response => alert('Success:', JSON.stringify(response)))
 		  .catch(error => alert('Error:', error));
