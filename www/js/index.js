@@ -122,10 +122,10 @@ function acitvityCorrection(rightActivity){
 //---------------JSON-Call------------------------//
 function sendToServer(user,abfrage,tracked_activity,timestamp){
 		var form = new FormData();
-		form.append("user", "Testen");
-		form.append("significantmotion1", "Testen");
-		form.append("significantmotion2", "Testen");
-		form.append("timediff", "Testen");
+		form.append("user", user);
+		form.append("significantmotion1", abfrage);
+		form.append("significantmotion2", tracked_activity);
+		form.append("timediff", timestamp);
 		
 		let settings = {
 			method:"POST",
