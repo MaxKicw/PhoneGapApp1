@@ -105,6 +105,7 @@ function answer(choice){
 		document.getElementById('popup').classList.remove('active');
 		// sendToServer();
 		alert("Erhaltene Informationen: "+app.user+", "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
+		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
 	}else{
 		document.getElementById('whichone').classList.add('active');
 		alert("More");
@@ -115,15 +116,21 @@ function acitvityCorrection(rightActivity){
 		alert("Erhaltene Informationen: "+app.user+", "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
 		document.getElementById('popup').classList.remove('active');
 		document.getElementById('whichone').classList.remove('active');
+		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
 		// sendToServer(rightActivity);
 }
 //---------------JSON-Call------------------------//
-function sendToServer(rightActivity){
+function sendToServer(user,abfrage,tracked_activity,timestamp){
+		var formData = new FormData();
+		formData.append(user,user);
+		formData.append(significantmotion1,abfrage);
+		formData.append(significantmotion2,tracked_activity);
+		formData.append(timediff,timestamp);
 		fetch(serverURL, {
 			method: 'POST',
-			body: JSON.stringify({significantmotion1:pushActivity,significantmotion2:rightActivity,timediff:1234}), // data can be `string` or {object}!
+			body: formData, 
 			headers:{
-			  'Content-Type': 'application/json'
+			  'Content-Type': 'mulitpart/form-data'
 			}
 		  }).then(res => res.json())
 		  .then(response => console.log('Success:', JSON.stringify(response)))
