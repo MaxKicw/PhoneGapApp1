@@ -122,10 +122,10 @@ function acitvityCorrection(rightActivity){
 //---------------JSON-Call------------------------//
 function sendToServer(user,abfrage,tracked_activity,timestamp){
 		var form = new FormData();
-		form.append(user, user);
-		form.append(significantmotion1, abfrage);
-		form.append(significantmotion2, tracked_activity);
-		form.append(timediff, timestamp);
+		form.append("user", user);
+		form.append("significantmotion1", abfrage);
+		form.append("significantmotion2", tracked_activity);
+		form.append("timediff", timestamp);
 		
 		var settings = {
 		"async": true,
@@ -135,7 +135,6 @@ function sendToServer(user,abfrage,tracked_activity,timestamp){
 		"headers": {
 			"Content-Type": "application/json",
 			"cache-control": "no-cache",
-			"Postman-Token": "1f60a982-a00c-4956-b6a8-3fa058035833"
 		},
 		"processData": false,
 		"contentType": false,
@@ -144,7 +143,7 @@ function sendToServer(user,abfrage,tracked_activity,timestamp){
 		}
 		
 		$.ajax(settings).done(function (response) {
-		console.log(response);
+		alert(response);
 		});
 };
 
