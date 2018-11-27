@@ -122,7 +122,7 @@ body{
 .button p{
 	color: black;
 	text-align: center;
-	font-size: 0.6em;
+	font-size: 0.9em;
 }
 .card.active{
 	top: 10vh;
