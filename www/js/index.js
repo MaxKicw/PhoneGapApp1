@@ -108,7 +108,7 @@ function answer(choice){
 		alert("Erhaltene Informationen: "+app.user+", "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
 		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
 		document.getElementById('thanx').classList.add('active');
-		settimeout(function(){
+		setTimeout(function(){
 			document.getElementById('thanx').classList.remove('active');
 			document.getElementById('intro').classList.add('active');
 		},3000);
@@ -124,7 +124,7 @@ function acitvityCorrection(rightActivity){
 		document.getElementById('q3').classList.remove('active');
 		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
 		document.getElementById('thanx').classList.add('active');
-		settimeout(function(){
+		setTimeout(function(){
 			document.getElementById('thanx').classList.remove('active');
 			document.getElementById('intro').classList.add('active');
 		},3000);
