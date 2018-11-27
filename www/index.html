@@ -45,43 +45,72 @@
     <title>Hello World</title>
 </head>
 <body>
-        <div class="menu" id="menu">
-            <div class="logo"></div>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
+    <div class="menu" id="menu">
+        <div class="logo"></div>
+        <div id="deviceready">
+            <p class="event listening">Connecting to Device</p>
+            <p class="event received">Device is Ready</p>
         </div>
-        <div class="inhalt">
-            <p>Vielen Dank, dass Sie Tester sind. Bitte schließen Sie diese App wärend des Testes nicht. Vielen Dank!</p>
-            <div class="abfrage" id="abfrage">
-                    <p>Passt es dir gerade?</p>
-                    <button type="button" onclick="abfrageAnswer('Passt')">War gerade gut erreichbar!</button>
-                    <button type="button" onclick="abfrageAnswer('NichtinReichweite')">Späer geöffnet weil Smartphone vorher nicht in der Hand</button>
-                    <button type="button" onclick="abfrageAnswer('Unpassend')">Später geöffnet weil es gerade unpassend war</button>
-                    <button type="button" onclick="abfrageAnswer('Nichtgelesen')">Später geöffnet weil Nachricht vorher nicht gelesen</button>
-            </div>
-			<div class="popup" id="popup">
+    </div>
+        <div class="wraper">
+			<div class="card active" id="intro">
+				<h1>Herzlich Willkommen</h1>
+				<p>Während diese App läuft, 
+nehmen Sie am Test teil und die App sammelt Daten.</p>
+				<div class="button">
+					<p>Keine Daten mehr sammeln!</p>
+				</div>
+			</div>
+			<div class="card" id="q1">
 				<p id="frage"></p>
-				<div class="btn" id="ja" onclick="answer('ja')" value="ja">
+				<div class="button" onclick="abfrageAnswer('Passt')">
+					<p>War gerade gut erreichbar</p>
+				</div>
+				<div class="button" onclick="abfrageAnswer('NichtinReichweite')">
+					<p>Smartphone nicht bei Hand</p>
+				</div>
+				<div class="button" onclick="abfrageAnswer('Unpassend')">
+					<p>War unpassend!</p>
+				</div>
+				<div class="button" onclick="abfrageAnswer('Nichtgelesen')">
+					<p>Habe die Nachricht nicht gelesen</p>
+				</div>
+			</div>
+			<div class="card" id="q2">
+				<p>Wir haben dir am 24.02.2018 eine Push-Notification gesendet. Warst du zu diesem Zeitpunkt wirklich zu Fuß?</p>
+				<div class="button" onclick="answer('ja')">
 					<p>Ja</p>
 				</div>
-				<div class="btn" id="nein" onclick="answer('nein')" value="nein">
+				<div class="button" onclick="answer('nein')">
 					<p>Nein</p>
 				</div>
-            </div>
-            <div class="whichone" id="whichone">
-                <p>Wähle dann bitte die richtige Aktivtät aus!</p>
-                <button type="button" onclick="acitvityCorrection('IN_VEHICLE')">In einem Fahrzeug</button>
-                <button type="button" onclick="acitvityCorrection('ON_BICYCLE')">Auf dem Fahrrad</button>
-                <button type="button" onclick="acitvityCorrection('ON_FOOT')">Zu Fuß</button>
-                <button type="button" onclick="acitvityCorrection('RUNNING')">Gerannt</button>
-                <button type="button" onclick="acitvityCorrection('STILL')">Ruhig</button>
-                <button type="button" onclick="acitvityCorrection('TILTING')">Handy in der Hand</button>
-                <button type="button" onclick="acitvityCorrection('UNKNOWN')">Weiß ich nicht mehr</button>
-            </div>
-        </div>
-        
+			</div>
+			<div class="card" id="q3">
+				<p>Wähle bitte die richtige Aktivität aus!</p>
+				<div class="button" onclick="acitvityCorrection('STILL')">
+					<p>Das Handy lag nicht bei mir.</p>
+				</div>
+				<div class="button" onclick="acitvityCorrection('TILTING')">
+					<p>Ich saß mit dem Handy in der Hand.</p>
+				</div>
+				<div class="button" onclick="acitvityCorrection('ON_FOOT')">
+					<p>Ich war zu Fuß.</p>
+				</div>
+				<div class="button" onclick="acitvityCorrection('RUNNING')">
+					<p>Ich war Joggen.</p>
+				</div>
+				<div class="button" onclick="acitvityCorrection('ON_BICYCLE')">
+					<p>Ich war auf dem Fahrrad.</p>
+				</div>
+				<div class="button" onclick="acitvityCorrection('IN_VEHICLE')">
+					<p>Ich war in einem Fahrzeug</p>
+				</div>
+				<div class="button" onclick="acitvityCorrection('UNKNOWN')">
+					<p>Weiß ich nicht mehr!</p>
+				</div>
+			</div>
+			<p class="thanx">Die Daten werden an die Hochschule gesendet. Vielen Dank!</p>
+		</div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">

@@ -47,7 +47,8 @@ var app = {
 			const date = moment().format("DD MM YY ");
 			const time = moment().format("HH mm ss");
 			app.timestamp = moment().format("DD MM YY HH mm ss");
-			document.getElementById('abfrage').classList.add('active');
+			document.getElementById('q1').classList.add('active');
+			document.getElementById('intro').classList.remove('active');
 			document.getElementById('frage').innerText = 'Wir haben dir am '+date+' um '+time+' Uhr eine Push-Notification gesendet! Warst du zu diesem Zeitpunkt wirklich '+JSON.stringify(currentAcitvity)+'?';
 		});
 
@@ -96,27 +97,37 @@ var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
 function abfrageAnswer(answer){
 	app.abfrageAnswer = answer;
 	alert(app.abfrageAnswer);
-	document.getElementById('popup').classList.add('active');
-	document.getElementById('abfrage').classList.remove('active');
+	document.getElementById('q2').classList.add('active');
+	document.getElementById('q1').classList.remove('active');
 }
 
 function answer(choice){
 	if(choice == "ja"){
-		document.getElementById('popup').classList.remove('active');
+		document.getElementById('q2').classList.remove('active');
 		// sendToServer();
 		alert("Erhaltene Informationen: "+app.user+", "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
 		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
+		document.getElementById('thanx').classList.add('active');
+		settimeout(function(){
+			document.getElementById('thanx').classList.remove('active');
+			document.getElementById('intro').classList.add('active');
+		},3000);
 	}else{
-		document.getElementById('whichone').classList.add('active');
+		document.getElementById('q3').classList.add('active');
+		document.getElementById('q2').classList.remove('active');
 		alert("More");
 	}
 };
 function acitvityCorrection(rightActivity){
 		app.userActivity = rightActivity;
 		alert("Erhaltene Informationen: "+app.user+", "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
-		document.getElementById('popup').classList.remove('active');
-		document.getElementById('whichone').classList.remove('active');
+		document.getElementById('q3').classList.remove('active');
 		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
+		document.getElementById('thanx').classList.add('active');
+		settimeout(function(){
+			document.getElementById('thanx').classList.remove('active');
+			document.getElementById('intro').classList.add('active');
+		},3000);
 		// sendToServer(rightActivity);
 }
 //---------------JSON-Call------------------------//
