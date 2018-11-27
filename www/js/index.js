@@ -21,17 +21,20 @@ var app = {
 	onPause: function(){
 		app.background = true;
 		document.getElementById('background').innerText = 'Die App wurde in den Hintergrund gebracht!';
+		document.getElementById('bg-btn').style.backgroundColor = "#46A364";
 	},
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-		//For JSON Call
+		//For JSON Can
 		
 		//
-		document.getElementById('track').innerText = 'Keine Daten senden!';
-       	app.receivedEvent('deviceready');
+		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
+		document.getElementById('track-btn').style.backgroundColor = "#46A364";
+		app.receivedEvent('deviceready');
+		document.getElementById('rdy-btn').style.backgroundColor = "#46A364";
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
@@ -104,10 +107,13 @@ var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
 function trackingToggle(){
 	if(app.track){
 		app.track = false;
-		document.getElementById('track').innerText = 'Wieder Daten senden!';
+		document.getElementById('track').innerText = 'Klicke damit Daten gesendet werden!';
+		document.getElementById('track-btn').style.backgroundColor = "#FF0000";
+
 	}else{
 		app.track = true;
-		document.getElementById('track').innerText = 'Keine Daten senden!';
+		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
+		document.getElementById('track-btn').style.backgroundColor = "#46A364";
 	}
 }
 
