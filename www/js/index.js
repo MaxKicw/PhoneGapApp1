@@ -24,7 +24,7 @@ var app = {
 		//For JSON Call
 		
 		//
-		document.getElementById('frage').innerText = 'Klick hier, damit keine Daten mehr gesendet werden!';
+		document.getElementById('track').innerText = 'Klick hier, damit keine Daten mehr gesendet werden!';
        	app.receivedEvent('deviceready');
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
@@ -42,8 +42,6 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
-				alert("Works");
-				alert("Die Aktivität zum Zeitpunkt des Pushes: "+JSON.stringify(currentAcitvity));
 				app.pushActivity = currentAcitvity;
 				app.user = device.uuid;
 				const date = moment().format("DD MM YY ");
@@ -78,7 +76,7 @@ var app = {
 				currentAcitvity = activities
 				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
 		   }, function(err) {
-				alert("Error: Something went wrong", JSON.stringify(err));
+				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
 		   });
 		}, 300);
     },
@@ -100,16 +98,15 @@ var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
 function trackingToggle(){
 	if(app.track){
 		app.track = false;
-		document.getElementById('frage').innerText = 'Klick hier, damit keine Daten mehr gesendet werden!';
+		document.getElementById('track').innerText = 'Klick hier, damit keine Daten mehr gesendet werden!';
 	}else{
 		app.track = true;
-		document.getElementById('frage').innerText = 'Klick hier, damit wieder Daten gesendet werden!';
+		document.getElementById('track').innerText = 'Klick hier, damit wieder Daten gesendet werden!';
 	}
 }
 
 function abfrageAnswer(answer){
 	app.abfrageAnswer = answer;
-	alert(app.abfrageAnswer);
 	document.getElementById('q2').classList.add('active');
 	document.getElementById('q1').classList.remove('active');
 }
@@ -117,19 +114,16 @@ function abfrageAnswer(answer){
 function answer(choice){
 	if(choice == "ja"){
 		// sendToServer();
-		alert("Erhaltene Informationen: "+app.user+", "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
 		document.getElementById('thanx').classList.add('active');
 		document.getElementById('q2').classList.remove('active');
 		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
 	}else{
 		document.getElementById('q3').classList.add('active');
 		document.getElementById('q2').classList.remove('active');
-		alert("More");
 	}
 };
 function acitvityCorrection(rightActivity){
 		app.userActivity = rightActivity;
-		alert("Erhaltene Informationen: "+app.user+", "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
 		document.getElementById('q3').classList.remove('active');
 		document.getElementById('thanx').classList.add('active');
 		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
@@ -153,7 +147,6 @@ function sendToServer(user,abfrage,tracked_activity,timestamp){
 
 		fetch(request)
 		.then((res) => {
-			alert(res);
 			document.getElementById('thanx').classList.remove('active');
 			document.getElementById('intro').classList.add('active');
 		});		
