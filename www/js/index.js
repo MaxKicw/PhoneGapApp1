@@ -53,8 +53,8 @@ var app = {
 			if(app.track){
 				app.pushActivity = currentAcitvity;
 				app.user = device.uuid;
-				const date = moment().format("DD MM YY ");
-				const time = moment().format("HH mm ss");
+				const date = moment().format("DD-MM-YY ");
+				const time = moment().format("HH:mm");
 				app.timestamp = moment().format("DD MM YY HH mm ss");
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');

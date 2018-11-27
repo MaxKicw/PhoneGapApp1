@@ -29,12 +29,10 @@
 }
 
 .event.listening {
-    background-color:#333333;
     display:block;
 }
 
 .event.received {
-    background-color:#4B946A;
     display:none;
 }
 
@@ -88,7 +86,7 @@ body{
 }
 .card{
 	min-height: 60vh;
-	max-height: 80vh;
+	max-height: 90vh;
 	width: 85vw;
 	background-color: #591D1D;
 	border-radius: 20px;
@@ -99,6 +97,10 @@ body{
 	max-width: 500px;
 	transition: 300ms ease;
 	top: -120vh;
+}
+.big{
+    top: 5vh;
+    max-height: 90vh;
 }
 .card p, h1{
 	color: white;
