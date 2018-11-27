@@ -4,7 +4,8 @@ var app = {
 	userActivity:"",
 	timestamp:"",
 	user:"",
-	track:true,
+	track:false,
+	background:false,
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -24,7 +25,7 @@ var app = {
 		//For JSON Call
 		
 		//
-		document.getElementById('track').innerText = 'Klick hier, damit keine Daten mehr gesendet werden!';
+		document.getElementById('track').innerText = 'Keine Daten sammeln!';
        	app.receivedEvent('deviceready');
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
@@ -73,6 +74,11 @@ var app = {
 		// Wird alle 1000ms ausgeführt / Welche Aktivität machst du?
 		setInterval(function(){
 			bgLocationServices.registerForActivityUpdates(function(activities) {
+				if(app.background){
+
+				}else{
+					app.background = true;
+				}
 				currentAcitvity = activities
 				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
 		   }, function(err) {
@@ -95,6 +101,12 @@ var app = {
 var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
 //---------------Define antwort vars ----------------//
 //----------------Antwortfunktionen----------------//
+if(app.background){
+	document.getElementById('track').innerText = 'Die App ist jetzt bereit!';
+}else{
+	document.getElementById('track').innerText = 'Die App muss einmal in den Hintergrund gebracht werden!';
+}
+
 function trackingToggle(){
 	if(app.track){
 		app.track = false;
@@ -147,8 +159,10 @@ function sendToServer(user,abfrage,tracked_activity,timestamp){
 
 		fetch(request)
 		.then((res) => {
-			document.getElementById('thanx').classList.remove('active');
-			document.getElementById('intro').classList.add('active');
+			setTimeout(function(){
+				document.getElementById('thanx').classList.remove('active');
+				document.getElementById('intro').classList.add('active');
+			}, 1200);
 		});		
 };
 
