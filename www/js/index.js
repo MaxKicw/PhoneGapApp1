@@ -25,6 +25,10 @@ var app = {
 		//For JSON Call
 		
 		//
+		document.addEventListener("pause", onPause, false);
+		function onPause() {
+			app.background = true;
+		}
 		document.getElementById('track').innerText = 'Keine Daten senden!';
        	app.receivedEvent('deviceready');
 		// Only with First time registration - For Pushbot
@@ -70,10 +74,7 @@ var app = {
 			fastestInterval: 5000 // <-- (Milliseconds) Fastest interval your app / server can handle updates
 			
 	   });
-	   bgLocationServices.start(setBackground());
-	   function setBackground(){
-		   app.background = true;
-	   }
+	   bgLocationServices.start();
 		// Wird alle 1000ms ausgeführt / Welche Aktivität machst du?
 		setInterval(function(){
 			bgLocationServices.registerForActivityUpdates(function(activities) {
@@ -100,9 +101,9 @@ var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
 //---------------Define antwort vars ----------------//
 //----------------Antwortfunktionen----------------//
 if(app.background){
-	document.getElementById('track').innerText = 'Die App ist jetzt bereit!';
+	document.getElementById('background').innerText = 'Die App ist jetzt bereit!';
 }else{
-	document.getElementById('track').innerText = 'Die App muss einmal in den Hintergrund gebracht werden!';
+	document.getElementById('background').innerText = 'Die App muss einmal in den Hintergrund gebracht werden!';
 }
 
 function trackingToggle(){
