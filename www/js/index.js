@@ -4,6 +4,7 @@ var app = {
 	userActivity:"",
 	timestamp:"",
 	user:"",
+	track:true,
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -40,16 +41,18 @@ var app = {
 			//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
-			alert("Works");
-			alert("Die Aktivität zum Zeitpunkt des Pushes: "+JSON.stringify(currentAcitvity));
-			app.pushActivity = currentAcitvity;
-			app.user = device.uuid;
-			const date = moment().format("DD MM YY ");
-			const time = moment().format("HH mm ss");
-			app.timestamp = moment().format("DD MM YY HH mm ss");
-			document.getElementById('q1').classList.add('active');
-			document.getElementById('intro').classList.remove('active');
-			document.getElementById('frage').innerText = 'Wir haben dir am '+date+' um '+time+' Uhr eine Push-Notification gesendet! Warst du zu diesem Zeitpunkt wirklich '+JSON.stringify(currentAcitvity)+'?';
+			if(app.track){
+				alert("Works");
+				alert("Die Aktivität zum Zeitpunkt des Pushes: "+JSON.stringify(currentAcitvity));
+				app.pushActivity = currentAcitvity;
+				app.user = device.uuid;
+				const date = moment().format("DD MM YY ");
+				const time = moment().format("HH mm ss");
+				app.timestamp = moment().format("DD MM YY HH mm ss");
+				document.getElementById('q1').classList.add('active');
+				document.getElementById('intro').classList.remove('active');
+				document.getElementById('frage').innerText = 'Wir haben dir am '+date+' um '+time+' Uhr eine Push-Notification gesendet! Warst du zu diesem Zeitpunkt wirklich '+JSON.stringify(currentAcitvity)+'?';
+			}
 		});
 
 		// Setup Activity Recognition Plugin
@@ -94,6 +97,16 @@ var app = {
 var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
 //---------------Define antwort vars ----------------//
 //----------------Antwortfunktionen----------------//
+function trackingToggle(){
+	if(app.track){
+		app.track = false;
+		document.getElementById('frage').innerText = 'Klick hier, damit keine Daten mehr gesendet werden!';
+	}else{
+		app.track = true;
+		document.getElementById('frage').innerText = 'Klick hier, damit wieder Daten gesendet werden!';
+	}
+}
+
 function abfrageAnswer(answer){
 	app.abfrageAnswer = answer;
 	alert(app.abfrageAnswer);
@@ -103,15 +116,11 @@ function abfrageAnswer(answer){
 
 function answer(choice){
 	if(choice == "ja"){
-		document.getElementById('q2').classList.remove('active');
 		// sendToServer();
 		alert("Erhaltene Informationen: "+app.user+", "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
-		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
 		document.getElementById('thanx').classList.add('active');
-		setTimeout(function(){
-			document.getElementById('thanx').classList.remove('active');
-			document.getElementById('intro').classList.add('active');
-		  }, 3000);
+		document.getElementById('q2').classList.remove('active');
+		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
 	}else{
 		document.getElementById('q3').classList.add('active');
 		document.getElementById('q2').classList.remove('active');
@@ -122,11 +131,8 @@ function acitvityCorrection(rightActivity){
 		app.userActivity = rightActivity;
 		alert("Erhaltene Informationen: "+app.user+", "+app.abfrageAnswer+", "+JSON.stringify(app.pushActivity)+", "+app.userActivity+", "+app.timestamp);
 		document.getElementById('q3').classList.remove('active');
+		document.getElementById('thanx').classList.add('active');
 		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
-		setTimeout(function(){
-			document.getElementById('thanx').classList.remove('active');
-			document.getElementById('intro').classList.add('active');
-		  }, 3000);
 		// sendToServer(rightActivity);
 }
 //---------------JSON-Call------------------------//
@@ -147,7 +153,9 @@ function sendToServer(user,abfrage,tracked_activity,timestamp){
 
 		fetch(request)
 		.then((res) => {
-			alert(res)
+			alert(res);
+			document.getElementById('thanx').classList.remove('active');
+			document.getElementById('intro').classList.add('active');
 		});		
 };
 
