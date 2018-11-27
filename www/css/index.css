@@ -68,7 +68,7 @@ body{
     padding: 0;
 }
 .wraper{
-	background-image: url(../images/BG_Prototype.png);
+	background-image: url(../img/BG_Prototype.png);
 	background-size: contain;
 	height: 100vh;
 	overflow: hidden;
