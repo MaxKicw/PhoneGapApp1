@@ -14,7 +14,7 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+		document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     // deviceready Event Handler
     //
@@ -24,7 +24,7 @@ var app = {
 		//For JSON Call
 		
 		//
-		
+		document.getElementById('frage').innerText = 'Klick hier, damit keine Daten mehr gesendet werden!';
        	app.receivedEvent('deviceready');
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
