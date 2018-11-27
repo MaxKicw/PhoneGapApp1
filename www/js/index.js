@@ -16,7 +16,12 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
 		document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
+		document.addEventListener('pause', this.onPause, false);
+	},
+	onPause: function(){
+		app.background = true;
+		document.getElementById('background').innerText = 'Die App wurde in den Hintergrund gebracht!';
+	},
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
@@ -25,10 +30,6 @@ var app = {
 		//For JSON Call
 		
 		//
-		document.addEventListener("pause", onPause, false);
-		function onPause() {
-			app.background = true;
-		}
 		document.getElementById('track').innerText = 'Keine Daten senden!';
        	app.receivedEvent('deviceready');
 		// Only with First time registration - For Pushbot
@@ -100,12 +101,6 @@ var app = {
 var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
 //---------------Define antwort vars ----------------//
 //----------------Antwortfunktionen----------------//
-if(app.background){
-	document.getElementById('background').innerText = 'Die App ist jetzt bereit!';
-}else{
-	document.getElementById('background').innerText = 'Die App muss einmal in den Hintergrund gebracht werden!';
-}
-
 function trackingToggle(){
 	if(app.track){
 		app.track = false;
