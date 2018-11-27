@@ -4,7 +4,7 @@ var app = {
 	userActivity:"",
 	timestamp:"",
 	user:"",
-	track:false,
+	track:true,
 	background:false,
     // Application Constructor
     initialize: function() {
@@ -25,7 +25,7 @@ var app = {
 		//For JSON Call
 		
 		//
-		document.getElementById('track').innerText = 'Keine Daten sammeln!';
+		document.getElementById('track').innerText = 'Keine Daten senden!';
        	app.receivedEvent('deviceready');
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
@@ -70,15 +70,13 @@ var app = {
 			fastestInterval: 5000 // <-- (Milliseconds) Fastest interval your app / server can handle updates
 			
 	   });
-	   bgLocationServices.start();
+	   bgLocationServices.start(setBackground());
+	   function setBackground(){
+		   app.background = true;
+	   }
 		// Wird alle 1000ms ausgeführt / Welche Aktivität machst du?
 		setInterval(function(){
 			bgLocationServices.registerForActivityUpdates(function(activities) {
-				if(app.background){
-
-				}else{
-					app.background = true;
-				}
 				currentAcitvity = activities
 				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
 		   }, function(err) {
@@ -110,10 +108,10 @@ if(app.background){
 function trackingToggle(){
 	if(app.track){
 		app.track = false;
-		document.getElementById('track').innerText = 'Klick hier, damit keine Daten mehr gesendet werden!';
+		document.getElementById('track').innerText = 'Wieder Daten senden!';
 	}else{
 		app.track = true;
-		document.getElementById('track').innerText = 'Klick hier, damit wieder Daten gesendet werden!';
+		document.getElementById('track').innerText = 'Keine Daten senden!';
 	}
 }
 
