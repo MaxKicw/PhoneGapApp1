@@ -130,13 +130,13 @@ function answer(choice){
 		document.getElementById('q2').classList.remove('active');
 		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
 	}else{
-		document.getElementById('q3').classList.add('active');
+		document.getElementById('q3').classList.add('big');
 		document.getElementById('q2').classList.remove('active');
 	}
 };
 function acitvityCorrection(rightActivity){
 		app.userActivity = rightActivity;
-		document.getElementById('q3').classList.remove('active');
+		document.getElementById('q3').classList.remove('big');
 		document.getElementById('thanx').classList.add('active');
 		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
 		// sendToServer(rightActivity);
