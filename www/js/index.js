@@ -1,5 +1,6 @@
 var app = {
 	user_answer:"",
+	calcNowTimestamp:"",
 	trackedActivity:"",
 	userActivity:{},
 	timestamp_push:"",
@@ -54,6 +55,7 @@ var app = {
 				app.uuid = device.uuid;
 				const date = moment().format("DD.MM.YY ");
 				const time = moment().format("HH:mm");
+				app.calcNowTimestamp = new moment();
 				app.timestamp_push = moment().format("DD.MM.YY HH:mm:ss");
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
@@ -90,9 +92,6 @@ var app = {
 						break;
 				}
 				document.getElementById('trackedActivity').innerText = activityMessage;
-				let now = moment().format("DD.MM.YY HH:mm:ss");
-				let diff = moment().duration(app.timestamp_push.diff(now));
-				alert("Zeitunterschied errechnet ist "+diff);
 			}
 		});
 
@@ -161,6 +160,9 @@ function user_answer(answer){
 function answer(choice){
 	if(choice == "ja"){
 		// sendToServer();
+		let now = new moment();
+		let diff = moment.duration(now.diff(app.calcNowTimestamp));
+		alert(diff._data.minutes);
 		document.getElementById('thanx').classList.add('active');
 		document.getElementById('q2').classList.remove('active');
 		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
