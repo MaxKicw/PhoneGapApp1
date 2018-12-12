@@ -162,7 +162,7 @@ function answer(choice){
 		// sendToServer();
 		let now = new moment();
 		let diff = moment.duration(now.diff(app.calcNowTimestamp));
-		document.getElementById('thanx').innerText = diff;
+		document.getElementById('diff').innerText = diff;
 		document.getElementById('thanx').classList.add('active');
 		document.getElementById('q2').classList.remove('active');
 		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
