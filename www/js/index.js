@@ -157,6 +157,9 @@ function user_answer(answer){
 
 function answer(choice){
 	if(choice == "ja"){
+		let now = moment().format("DD.MM.YY HH:mm:ss");
+		let diff = moment().duration(app.timestamp_push.diff(now));
+		alert("Zeitunterschied errechnet ist "+diff);
 		// sendToServer();
 		document.getElementById('thanx').classList.add('active');
 		document.getElementById('q2').classList.remove('active');
@@ -200,7 +203,7 @@ function acitvityCorrection(rightActivity){
 }
 //---------------JSON-Call------------------------//
 function sendToServer(uuid,timestamp_push,user_answer,trackedActivity,userActivity){
-		let timestamp_send = moment().format("DD MM YY HH mm ss");
+		let timestamp_send = moment().format("DD.MM.YY HH:mm:ss");
 		var form = new FormData();
 		form.append("UUID", uuid);
 		form.append("TIMESTAMP_PUSH", timestamp_push);
