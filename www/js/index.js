@@ -116,7 +116,7 @@ var app = {
 		setInterval(function(){
 			bgLocationServices.registerForActivityUpdates(function(activities) {
 				app.trackedActivity = activities
-				alert(app.trackedActivity);
+				alert(JSON.stringify(app.trackedActivity));
 				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
 		   }, function(err) {
 				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
