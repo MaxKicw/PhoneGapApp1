@@ -52,16 +52,14 @@ var app = {
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
 				app.trackedActivity = currentAcitvity;
-				alert(JSON.stringify(app.trackedActivity));
-				app.user = device.uuid;
+				app.uuid = device.uuid;
 				const date = moment().format("DD.MM.YY ");
 				const time = moment().format("HH:mm");
-				app.timestamp_push = moment().format("DD MM YY HH mm ss");
+				app.timestamp_push = moment().format("DD.MM.YY HH:mm:ss");
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
 				document.getElementById('frage').innerText = 'Wir haben dir um '+time+' am '+date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 				let hightestValue = Object.keys(app.trackedActivity).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
-				alert(hightestValue);
 				let activityMessage;
 				switch(hightestValue){
 					case "STILL":
@@ -86,6 +84,9 @@ var app = {
 						activityMessage = "Du saßst mit dem Handy in der Hand.";
 						break;
 					case "UNKNOWN":
+						activityMessage = "Es konnte keine Aktivität erfasst werden!";
+						break;
+					default:
 						activityMessage = "Es konnte keine Aktivität erfasst werden!";
 						break;
 				}
