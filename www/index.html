@@ -63,27 +63,31 @@
                 </div>
 			</div>
 			<div class="card" id="q1">
-				<p>Hallo! War dir diese Push-Notification gerade recht?</p>
-				<div class="button" onclick="abfrageAnswer('Passt')">
-					<p>War gerade gut erreichbar</p>
+				<p id="frage"></p>
+				<div class="button">
+					<p id="trackedActivity"></p>
 				</div>
-				<div class="button" onclick="abfrageAnswer('NichtinReichweite')">
-					<p>Smartphone nicht bei Hand</p>
+				<p>Trifft das zu bzw. ist das korrekt?</p>
+				<div class="button" onclick="user_answer('ja')">
+					<p>Ja</p>
 				</div>
-				<div class="button" onclick="abfrageAnswer('Unpassend')">
-					<p>War unpassend!</p>
-				</div>
-				<div class="button" onclick="abfrageAnswer('Nichtgelesen')">
-					<p>Habe die Nachricht nicht gelesen</p>
+				<div class="button" onclick="user_answer('nein')">
+					<p>Nein</p>
 				</div>
 			</div>
 			<div class="card" id="q2">
-				<p id="frage"></p>
-				<div class="button" onclick="answer('ja')">
-					<p>Ja</p>
+				<p>Hallo! War dir diese Push-Notification gerade recht?</p>
+				<div class="button" onclick="answer('Passt')">
+					<p>War gerade gut erreichbar</p>
 				</div>
-				<div class="button" onclick="answer('nein')">
-					<p>Nein</p>
+				<div class="button" onclick="answer('NichtinReichweite')">
+					<p>Smartphone nicht bei Hand</p>
+				</div>
+				<div class="button" onclick="answer('Unpassend')">
+					<p>War unpassend!</p>
+				</div>
+				<div class="button" onclick="answer('Nichtgelesen')">
+					<p>Habe die Nachricht nicht gelesen</p>
 				</div>
 			</div>
 			<div class="card" id="q3">
@@ -94,8 +98,11 @@
 				<div class="button" onclick="acitvityCorrection('TILTING')">
 					<p>Ich saß mit dem Handy in der Hand.</p>
 				</div>
-				<div class="button" onclick="acitvityCorrection('ON_FOOT')">
+				<div class="button" onclick="acitvityCorrection('WALKING')">
 					<p>Ich war zu Fuß.</p>
+				</div>
+				<div class="button" onclick="acitvityCorrection('ON_FOOT')">
+					<p>Ich stand aufrecht.</p>
 				</div>
 				<div class="button" onclick="acitvityCorrection('RUNNING')">
 					<p>Ich war Joggen.</p>

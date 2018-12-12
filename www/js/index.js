@@ -1,9 +1,9 @@
 var app = {
-	abfrageAnswer:"",
-	pushActivity:"",
-	userActivity:"",
-	timestamp:"",
-	user:"",
+	user_answer:"",
+	trackedActivity:"",
+	userActivity:{},
+	timestamp_push:"",
+	uuid:"",
 	track:true,
 	background:false,
     // Application Constructor
@@ -51,14 +51,43 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
-				app.pushActivity = currentAcitvity;
+				app.trackedActivity = currentAcitvity;
 				app.user = device.uuid;
 				const date = moment().format("DD-MM-YY ");
 				const time = moment().format("HH:mm");
-				app.timestamp = moment().format("DD MM YY HH mm ss");
+				app.timestamp_push = moment().format("DD MM YY HH mm ss");
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
-				document.getElementById('frage').innerText = 'Wir haben dir am '+date+' um '+time+' Uhr eine Push-Notification gesendet! Warst du zu diesem Zeitpunkt wirklich '+JSON.stringify(currentAcitvity)+'?';
+				document.getElementById('frage').innerText = 'Wir haben dir um '+time+' am '+date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
+				let hightestValue = Object.keys(app.trackedActivity).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
+				let activityMessage;
+				switch(hightestValue){
+					case "STILL":
+						activityMessage = "Das Handy lag nicht bei dir.";
+						break;
+					case "ON_FOOT":
+						activityMessage = "Du standest aufrecht.";
+						break;
+					case "IN_VEHICLE":
+						activityMessage = "Du warst in einem Fahrzeug.";
+						break;
+					case "RUNNING":
+						activityMessage = "Du warst Joggen.";
+						break;
+					case "WALKING":
+						activityMessage = "Du warst zu Fuß.";
+						break;
+					case "ON_BICYLE":
+						activityMessage = "Du war auf dem Fahrrad.";
+						break;
+					case "TILTING":
+						activityMessage = "Du saßst mit dem Handy in der Hand.";
+						break;
+					case "UNKNOWN":
+						activityMessage = "Es konnte keine Aktivität erfasst werden!";
+						break;
+				}
+				document.getElementById('trackedActivity').innerText = activityMessage;
 			}
 		});
 
@@ -117,8 +146,8 @@ function trackingToggle(){
 	}
 }
 
-function abfrageAnswer(answer){
-	app.abfrageAnswer = answer;
+function user_answer(answer){
+	app.user_answer = answer;
 	document.getElementById('q2').classList.add('active');
 	document.getElementById('q1').classList.remove('active');
 }
@@ -128,26 +157,70 @@ function answer(choice){
 		// sendToServer();
 		document.getElementById('thanx').classList.add('active');
 		document.getElementById('q2').classList.remove('active');
-		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
+		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
 	}else{
 		document.getElementById('q3').classList.add('big');
 		document.getElementById('q2').classList.remove('active');
 	}
 };
 function acitvityCorrection(rightActivity){
-		app.userActivity = rightActivity;
+		switch(rightActivity){
+			case "STILL":
+				app.userActivity.STILL = 100;
+				break;
+			case "ON_FOOT":
+				app.userActivity.ON_FOOT = 100;
+				break;
+			case "IN_VEHICLE":
+				app.userActivity.IN_VEHICLE = 100;
+				break;
+			case "RUNNING":
+				app.userActivity.RUNNING = 100;
+				break;
+			case "WALKING":
+				app.userActivity.WALKING = 100;
+				break;
+			case "ON_BICYLE":
+				app.userActivity.ON_BICYLE = 100;
+				break;
+			case "TILTING":
+				app.userActivity.TILTING = 100;
+				break;
+			case "UNKNOWN":
+				app.userActivity.UNKNOWN = 100;
+				break;
+		}
 		document.getElementById('q3').classList.remove('big');
 		document.getElementById('thanx').classList.add('active');
-		sendToServer(app.user,app.abfrageAnswer,JSON.stringify(app.pushActivity),app.userActivity,app.timestamp);
+		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
 		// sendToServer(rightActivity);
 }
 //---------------JSON-Call------------------------//
-function sendToServer(user,abfrage,tracked_activity,timestamp){
+function sendToServer(uuid,timestamp_push,user_answer,trackedActivity,userActivity){
+		let timestamp_send = moment().format("DD MM YY HH mm ss");
 		var form = new FormData();
-		form.append("user", user);
-		form.append("significantmotion1", abfrage);
-		form.append("significantmotion2", tracked_activity);
-		form.append("timediff", timestamp);
+		form.append("UUID", uuid);
+		form.append("TIMESTAMP_PUSH", timestamp_push);
+		form.append("USER_ANSWER", user_answer);
+		// Tracked Variablen
+		form.append("TRACKED_ACTIVITY_ON_FOOT", trackedActivity.ON_FOOT);
+		form.append("TRACKED_ACTIVITY_IN_VEHICLE", trackedActivity.IN_VEHICLE);
+		form.append("TRACKED_ACTIVITY_RUNNING", trackedActivity.RUNNING);
+		form.append("TRACKED_ACTIVITY_WALKING", trackedActivity.WALKING);
+		form.append("TRACKED_ACTIVITY_ON_BICYCLE", trackedActivity.ON_BICYLE);
+		form.append("TRACKED_ACTIVITY_STILL", trackedActivity.STILL);
+		form.append("TRACKED_ACTIVITY_TILTING", trackedActivity.TILTING);
+		form.append("TRACKED_ACTIVITY_UNKNOWN", trackedActivity.UNKNOWN);
+		// Usereingabe Variablen
+		form.append("USER_ACTIVITY_ON_FOOT", userActivity.ON_FOOT);
+		form.append("USER_ACTIVITY_IN_VEHICLE", userActivity.IN_VEHICLE);
+		form.append("USER_ACTIVITY_RUNNING", userActivity.RUNNING);
+		form.append("USER_ACTIVITY_WALKING", userActivity.WALKING);
+		form.append("USER_ACTIVITY_ON_BICYCLE", userActivity.ON_BICYLE);
+		form.append("USER_ACTIVITY_STILL", userActivity.STILL);
+		form.append("USER_ACTIVITY_TILTING", userActivity.TILTING);
+		form.append("USER_ACTIVITY_UNKNOWN", userActivity.UNKNOWN);
+		form.append("TIMESTAMP_SEND", timestamp_send);
 		
 		let settings = {
 			method:"POST",
