@@ -51,7 +51,6 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
-				app.trackedActivity = currentAcitvity;
 				app.uuid = device.uuid;
 				const date = moment().format("DD.MM.YY ");
 				const time = moment().format("HH:mm");
@@ -91,6 +90,9 @@ var app = {
 						break;
 				}
 				document.getElementById('trackedActivity').innerText = activityMessage;
+				let now = moment().format("DD.MM.YY HH:mm:ss");
+				let diff = moment().duration(app.timestamp_push.diff(now));
+				alert("Zeitunterschied errechnet ist "+diff);
 			}
 		});
 
@@ -114,7 +116,8 @@ var app = {
 		// Wird alle 1000ms ausgeführt / Welche Aktivität machst du?
 		setInterval(function(){
 			bgLocationServices.registerForActivityUpdates(function(activities) {
-				currentAcitvity = activities
+				app.trackedActivity = activities
+				alert(app.trackedActivity);
 				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
 		   }, function(err) {
 				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
@@ -157,9 +160,6 @@ function user_answer(answer){
 
 function answer(choice){
 	if(choice == "ja"){
-		let now = moment().format("DD.MM.YY HH:mm:ss");
-		let diff = moment().duration(app.timestamp_push.diff(now));
-		alert("Zeitunterschied errechnet ist "+diff);
 		// sendToServer();
 		document.getElementById('thanx').classList.add('active');
 		document.getElementById('q2').classList.remove('active');
