@@ -2,6 +2,7 @@ var app = {
 	user_answer:"",
 	calcNowTimestamp:"",
 	trackedActivity:"",
+	pushAcitvity:"",
 	userActivity:{},
 	timestamp_push:{},
 	uuid:"",
@@ -53,15 +54,17 @@ var app = {
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
 				app.uuid = device.uuid;
+				app.pushAcitvity = app.trackedActivity;
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm");
 				app.calcNowTimestamp = new moment();
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
 				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
-				let hightestValue = Object.keys(app.trackedActivity).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
+				let hightestValue = Object.keys(app.pushAcitvity).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
 				let activityMessage;
-				alert(JSON.stringify(app.trackedActivity));
+				alert("Ermittelte PUSH-Aktion: "+JSON.stringify(app.pushAcitvity));
+				alert(hightestValue);
 				switch(hightestValue){
 					case "STILL":
 						activityMessage = "Das Handy lag nicht bei dir.";
@@ -92,9 +95,6 @@ var app = {
 						break;
 				}
 				document.getElementById('trackedActivity').innerText = activityMessage;
-				document.getElementById('q1').classList.add('active');
-				document.getElementById('intro').classList.remove('active');
-				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.date+' am '+app.timestamp_push.time+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 			}
 		});
 
@@ -124,7 +124,7 @@ var app = {
 		   }, function(err) {
 				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
 		   });
-		}, 300);
+		}, 1000);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
