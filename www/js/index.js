@@ -5,6 +5,7 @@ var app = {
 	pushAcitvity:"",
 	userActivity:{},
 	timestamp_push:{},
+	verzögerungsGrund:"",
 	uuid:"",
 	track:true,
 	background:false,
@@ -124,7 +125,7 @@ var app = {
 		   }, function(err) {
 				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
 		   });
-		}, 1000);
+		}, 5000);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -162,10 +163,10 @@ function user_answer(answer){
 	app.timediff = diff;
 	alert(diff);
 	// Und Zeitdifferenz
-	if(app.user_answer === "Ja" && diff <= 4 ){
+	if(app.user_answer === "Ja" && diff <= 0 ){
 		document.getElementById('q4').classList.add('active');
 		document.getElementById('q1').classList.remove('active');
-	}else if(app.user_answer === "Ja" && diff >= 5){
+	}else if(app.user_answer === "Ja" && diff >= 1){
 		document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?"
 		document.getElementById('q2').classList.add('active');
 		document.getElementById('q1').classList.remove('active');
@@ -177,18 +178,9 @@ function user_answer(answer){
 }
 
 function answer(choice){
-	if(choice == "ja"){
-		// sendToServer();
-		let now = new moment();
-		let diff = moment.duration(now.diff(app.calcNowTimestamp));
-		document.getElementById('diff').innerText = app.calcNowTimestamp + " / "+now+" / "+diff;
-		document.getElementById('thanx').classList.add('active');
-		document.getElementById('q2').classList.remove('active');
-		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
-	}else{
-		document.getElementById('q3').classList.add('big');
-		document.getElementById('q2').classList.remove('active');
-	}
+	app.verzögerungsGrund = choice;
+	document.getElementById('q4').classList.add('active');
+	document.getElementById('q2').classList.remove('active');
 };
 function acitvityCorrection(rightActivity){
 		switch(rightActivity){
