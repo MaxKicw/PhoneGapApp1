@@ -1,9 +1,13 @@
+// Zeitdifferenz ist noch nicht am start ansonsten noch die alert aus dem Activity Update raus bitte!
+
 var app = {
 	user_answer:"",
 	calcNowTimestamp:"",
 	trackedActivity:"",
 	userActivity:{},
-	timestamp_push:"",
+	timestamp_push={},
+	verzögerungsGrund = "",
+	timediff = "",
 	uuid:"",
 	track:true,
 	background:false,
@@ -53,13 +57,9 @@ var app = {
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
 				app.uuid = device.uuid;
-				const date = moment().format("DD.MM.YY ");
-				const time = moment().format("HH:mm");
+				app.timestamp_push.date = moment().format("DD.MM.YY ");
+				app.timestamp_push.time = moment().format("HH:mm");
 				app.calcNowTimestamp = new moment();
-				app.timestamp_push = moment().format("DD.MM.YY HH:mm:ss");
-				document.getElementById('q1').classList.add('active');
-				document.getElementById('intro').classList.remove('active');
-				document.getElementById('frage').innerText = 'Wir haben dir um '+time+' am '+date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 				let hightestValue = Object.keys(app.trackedActivity).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
 				let activityMessage;
 				switch(hightestValue){
@@ -92,6 +92,9 @@ var app = {
 						break;
 				}
 				document.getElementById('trackedActivity').innerText = activityMessage;
+				document.getElementById('q1').classList.add('active');
+				document.getElementById('intro').classList.remove('active');
+				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.date+' am '+app.timestamp_push.time+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 			}
 		});
 
@@ -153,23 +156,31 @@ function trackingToggle(){
 
 function user_answer(answer){
 	app.user_answer = answer;
-	document.getElementById('q2').classList.add('active');
-	document.getElementById('q1').classList.remove('active');
+	let now = new moment();
+	let diff = moment.duration(now.diff(app.calcNowTimestamp));
+	diff = diff._data.minutes;
+	app.timediff = diff;
+	alert("Hi");
+	alert(diff);
+	// Und Zeitdifferenz
+	if(app.user_answer === "Ja" && diff <= 4 ){
+		document.getElementById('q4').classList.add('active');
+		document.getElementById('q1').classList.remove('active');
+	}else if(app.user_answer === "Ja" && diff >= 5){
+		document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?"
+		document.getElementById('q2').classList.add('active');
+		document.getElementById('q1').classList.remove('active');
+	}else{
+		document.getElementById('falscheAktivitätNachricht').innerHTML = "Wenn die App die Aktivität am "+app.timestamp_push.date+" um "+app.timestamp_push.time+" falsch ermittelt hat, welche der folgenden Aktivitätsbeschreibungen trifft ansonsten am ehesten zu?"
+		document.getElementById('q3').classList.add('active');
+		document.getElementById('q1').classList.remove('active');
+	}
 }
 
 function answer(choice){
-	if(choice == "ja"){
-		// sendToServer();
-		let now = new moment();
-		let diff = moment.duration(now.diff(app.calcNowTimestamp));
-		document.getElementById('diff').innerText = app.calcNowTimestamp + " / "+now+" / "+diff;
-		document.getElementById('thanx').classList.add('active');
-		document.getElementById('q2').classList.remove('active');
-		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
-	}else{
-		document.getElementById('q3').classList.add('big');
-		document.getElementById('q2').classList.remove('active');
-	}
+	app.verzögerungsGrund = choice;
+	document.getElementById('q4').classList.add('active');
+	document.getElementById('q2').classList.remove('active');
 };
 function acitvityCorrection(rightActivity){
 		switch(rightActivity){
@@ -198,18 +209,42 @@ function acitvityCorrection(rightActivity){
 				app.userActivity.UNKNOWN = 100;
 				break;
 		}
-		document.getElementById('q3').classList.remove('big');
-		document.getElementById('thanx').classList.add('active');
-		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
+		if(app.timediff >= 5){
+			document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?";
+			document.getElementById('q2').classList.add('active');
+			document.getElementById('q3').classList.remove('big');
+		}else{
+			document.getElementById('q4').classList.add('active');
+			document.getElementById('q3').classList.remove('big');
+		}
+		
+		
 		// sendToServer(rightActivity);
+}
+
+function shouldSend(choice){
+	if(choice === "Ja"){
+		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
+		document.getElementById("dankeText").innerHTML = "Die Daten wurden an die Hochschule gesendet!";
+		document.getElementById('q5').classList.add('active');
+		document.getElementById('q4').classList.remove('active');
+	}else{
+		document.getElementById("dankeText").innerHTML = "Die Daten werden NICHT an die Hochschule gesendet!";
+		document.getElementById('q5').classList.add('active');
+		document.getElementById('q4').classList.remove('active');
+		resetLocalData();
+	}
 }
 //---------------JSON-Call------------------------//
 function sendToServer(uuid,timestamp_push,user_answer,trackedActivity,userActivity){
-		let timestamp_send = moment().format("DD.MM.YY HH:mm:ss");
+		let timestamp_send_date = moment().format("DD.MM.YY");
+		let timestamp_send_time = moment().format("HH:mm");
 		var form = new FormData();
 		form.append("UUID", uuid);
-		form.append("TIMESTAMP_PUSH", timestamp_push);
+		form.append("TIMESTAMP_PUSH_DATE", timestamp_push.date);
+		form.append("TIMESTAMP_PUSH_TIME", timestamp_push.time);
 		form.append("USER_ANSWER", user_answer);
+		form.append("USER_DELAY_REASON",app.verzögerungsGrund);
 		// Tracked Variablen
 		form.append("TRACKED_ACTIVITY_ON_FOOT", trackedActivity.ON_FOOT);
 		form.append("TRACKED_ACTIVITY_IN_VEHICLE", trackedActivity.IN_VEHICLE);
@@ -228,7 +263,8 @@ function sendToServer(uuid,timestamp_push,user_answer,trackedActivity,userActivi
 		form.append("USER_ACTIVITY_STILL", userActivity.STILL);
 		form.append("USER_ACTIVITY_TILTING", userActivity.TILTING);
 		form.append("USER_ACTIVITY_UNKNOWN", userActivity.UNKNOWN);
-		form.append("TIMESTAMP_SEND", timestamp_send);
+		form.append("TIMESTAMP_SEND_DATE", timestamp_send_date);
+		form.append("TIMESTAMP_SEND_TIME", timestamp_send_time);
 		
 		let settings = {
 			method:"POST",
@@ -241,11 +277,22 @@ function sendToServer(uuid,timestamp_push,user_answer,trackedActivity,userActivi
 		fetch(request)
 		.then((res) => {
 			setTimeout(function(){
-				document.getElementById('thanx').classList.remove('active');
+				document.getElementById('q5').classList.remove('active');
 				document.getElementById('intro').classList.add('active');
+				resetLocalData();
 			}, 1200);
 		});		
 };
+
+function resetLocalData(){
+	app.user_answer="";
+	app.calcNowTimestamp="";
+	app.trackedActivity="";
+	app.userActivity={};
+	app.timestamp_push={};
+	app.verzögerungsGrund = "";
+	app.timediff = "";
+}
 
 
 
