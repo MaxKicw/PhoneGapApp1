@@ -63,7 +63,6 @@ var app = {
 				let hightestValue = Object.keys(app.trackedActivity).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
 				let activityMessage;
 				alert(JSON.stringify(app.trackedActivity));
-				alert(hightestValue);
 				switch(hightestValue){
 					case "STILL":
 						activityMessage = "Das Handy lag nicht bei dir.";
