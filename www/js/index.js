@@ -62,6 +62,7 @@ var app = {
 				document.getElementById('frage').innerText = 'Wir haben dir um '+time+' am '+date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 				let hightestValue = Object.keys(app.trackedActivity).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
 				let activityMessage;
+				alert(JSON.stringify(app.trackedActivity));
 				alert(hightestValue);
 				switch(hightestValue){
 					case "STILL":
@@ -93,6 +94,9 @@ var app = {
 						break;
 				}
 				document.getElementById('trackedActivity').innerText = activityMessage;
+				document.getElementById('q1').classList.add('active');
+				document.getElementById('intro').classList.remove('active');
+				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.date+' am '+app.timestamp_push.time+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 			}
 		});
 
@@ -153,8 +157,25 @@ function trackingToggle(){
 
 function user_answer(answer){
 	app.user_answer = answer;
-	document.getElementById('q2').classList.add('active');
-	document.getElementById('q1').classList.remove('active');
+	let now = new moment();
+	let diff = moment.duration(now.diff(app.calcNowTimestamp));
+	diff = diff._data.minutes;
+	app.timediff = diff;
+	alert("Hi");
+	alert(diff);
+	// Und Zeitdifferenz
+	if(app.user_answer === "Ja" && diff <= 4 ){
+		document.getElementById('q4').classList.add('active');
+		document.getElementById('q1').classList.remove('active');
+	}else if(app.user_answer === "Ja" && diff >= 5){
+		document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?"
+		document.getElementById('q2').classList.add('active');
+		document.getElementById('q1').classList.remove('active');
+	}else{
+		document.getElementById('falscheAktivitätNachricht').innerHTML = "Wenn die App die Aktivität am "+app.timestamp_push.date+" um "+app.timestamp_push.time+" falsch ermittelt hat, welche der folgenden Aktivitätsbeschreibungen trifft ansonsten am ehesten zu?"
+		document.getElementById('q3').classList.add('active');
+		document.getElementById('q1').classList.remove('active');
+	}
 }
 
 function answer(choice){
