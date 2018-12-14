@@ -218,13 +218,11 @@ function acitvityCorrection(rightActivity){
 		document.getElementById('q3').classList.remove('big');
 	}
 	
-	
-	// sendToServer(rightActivity);
 }
 
 function shouldSend(choice){
 	if(choice === 'Ja'){
-		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
+		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.pushAcitvity,app.userActivity);
 		document.getElementById("dankeText").innerHTML = "Die Daten wurden an die Hochschule gesendet!";
 		document.getElementById('q5').classList.add('active');
 		document.getElementById('q4').classList.remove('active');
@@ -240,21 +238,23 @@ function shouldSend(choice){
 	}
 }
 //---------------JSON-Call------------------------//
-function sendToServer(uuid,timestamp_push,user_answer,trackedActivity,userActivity){
-		let timestamp_send = moment().format("DD.MM.YY HH:mm:ss");
+function sendToServer(uuid,timestamp_push,user_answer,pushActivity,userActivity){
+		let timestamp_send_date = moment().format("DD.MM.YY");
+		let timestamp_send_time = moment().format("HH:ss");
 		var form = new FormData();
 		form.append("UUID", uuid);
-		form.append("TIMESTAMP_PUSH", timestamp_push);
+		form.append("TIMESTAMP_PUSH_DATE", timestamp_push.date);
+		form.append("TIMESTAMP_PUSH_DATE", timestamp_push.time);
 		form.append("USER_ANSWER", user_answer);
 		// Tracked Variablen
-		form.append("TRACKED_ACTIVITY_ON_FOOT", trackedActivity.ON_FOOT);
-		form.append("TRACKED_ACTIVITY_IN_VEHICLE", trackedActivity.IN_VEHICLE);
-		form.append("TRACKED_ACTIVITY_RUNNING", trackedActivity.RUNNING);
-		form.append("TRACKED_ACTIVITY_WALKING", trackedActivity.WALKING);
-		form.append("TRACKED_ACTIVITY_ON_BICYCLE", trackedActivity.ON_BICYLE);
-		form.append("TRACKED_ACTIVITY_STILL", trackedActivity.STILL);
-		form.append("TRACKED_ACTIVITY_TILTING", trackedActivity.TILTING);
-		form.append("TRACKED_ACTIVITY_UNKNOWN", trackedActivity.UNKNOWN);
+		form.append("TRACKED_ACTIVITY_ON_FOOT", pushActivity.ON_FOOT);
+		form.append("TRACKED_ACTIVITY_IN_VEHICLE", pushActivity.IN_VEHICLE);
+		form.append("TRACKED_ACTIVITY_RUNNING", pushActivity.RUNNING);
+		form.append("TRACKED_ACTIVITY_WALKING", pushActivity.WALKING);
+		form.append("TRACKED_ACTIVITY_ON_BICYCLE", pushActivity.ON_BICYLE);
+		form.append("TRACKED_ACTIVITY_STILL", pushActivity.STILL);
+		form.append("TRACKED_ACTIVITY_TILTING", pushActivity.TILTING);
+		form.append("TRACKED_ACTIVITY_UNKNOWN", pushActivity.UNKNOWN);
 		// Usereingabe Variablen
 		form.append("USER_ACTIVITY_ON_FOOT", userActivity.ON_FOOT);
 		form.append("USER_ACTIVITY_IN_VEHICLE", userActivity.IN_VEHICLE);
@@ -264,7 +264,8 @@ function sendToServer(uuid,timestamp_push,user_answer,trackedActivity,userActivi
 		form.append("USER_ACTIVITY_STILL", userActivity.STILL);
 		form.append("USER_ACTIVITY_TILTING", userActivity.TILTING);
 		form.append("USER_ACTIVITY_UNKNOWN", userActivity.UNKNOWN);
-		form.append("TIMESTAMP_SEND", timestamp_send);
+		form.append("TIMESTAMP_SEND_DATE", timestamp_send_date);
+		form.append("TIMESTAMP_SEND_TIME", timestamp_send_time);
 		
 		let settings = {
 			method:"POST",
