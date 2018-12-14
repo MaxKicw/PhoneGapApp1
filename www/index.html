@@ -68,33 +68,33 @@
 					<p id="trackedActivity"></p>
 				</div>
 				<p>Trifft das zu bzw. ist das korrekt?</p>
-				<div class="button" onclick="user_answer('Ja')">
+				<div class="button" onclick="user_answer('ja')">
 					<p>Ja</p>
 				</div>
-				<div class="button" onclick="user_answer('Nein')">
+				<div class="button" onclick="user_answer('nein')">
 					<p>Nein</p>
 				</div>
 			</div>
 			<div class="card" id="q2">
-				<p id="verzugNachricht"></p>
-				<div class="button" onclick="answer('Erst angekommen')">
-					<p>Nachricht ist erst jetzt auf meinem Gerät angekommen.</p>
+				<p>Hallo! War dir diese Push-Notification gerade recht?</p>
+				<div class="button" onclick="answer('Passt')">
+					<p>War gerade gut erreichbar</p>
 				</div>
-				<div class="button" onclick="answer('Nicht gesehen')">
-					<p>Ich habe die Nachricht vorher nicht gesehen.</p>
+				<div class="button" onclick="answer('NichtinReichweite')">
+					<p>Smartphone nicht bei Hand</p>
 				</div>
-				<div class="button" onclick="answer('Nicht erreichbar')">
-					<p>Ich konnte die Nachricht vorher nicht öffnen / war nicht erreichbar.</p>
+				<div class="button" onclick="answer('Unpassend')">
+					<p>War unpassend!</p>
 				</div>
-				<div class="button" onclick="answer('Keine Lust')">
-					<p>Ich hatte vorher keine Lust die Nachricht zu öffnen / zu beantworten.</p>
+				<div class="button" onclick="answer('Nichtgelesen')">
+					<p>Habe die Nachricht nicht gelesen</p>
 				</div>
-				<div class="button" onclick="answer('Nicht mehr erinnern')">
-					<p>Ich kann mich nicht mehr erinnern.</p>
+				<div class="button" id="diff">
+
 				</div>
 			</div>
 			<div class="card" id="q3">
-				<p id="falscheAktivitätNachricht"></p>
+				<p>Wähle bitte die richtige Aktivität aus!</p>
 				<div class="button" onclick="acitvityCorrection('STILL')">
 					<p>Das Handy lag nicht bei mir.</p>
 				</div>
@@ -120,21 +120,7 @@
 					<p>Weiß ich nicht mehr!</p>
 				</div>
 			</div>
-			<div class="card" id="q4">
-				<p>Vielen Dank, dass Du bei der Befragung teilgenommen hast! Dürfen die Daten nun an die Hochschule gesendet werden?</p>
-				<div class="button" onclick="shouldSend('Ja')">
-					<p>Ja</p>
-				</div>
-				<div class="button" onclick="shouldSend('Nein')">
-					<p>Nein</p>
-				</div>
-				<div class="button" onclick="showData()">
-					<p>Erfasste Daten anzeigen</p>
-				</div>
-			</div>
-			<div class="card" id="q5">
-				<p id="dankeText"></p>
-			</div>
+			<p id="thanx" class="thanx">Die Daten werden an die Hochschule gesendet. Vielen Dank!</p>
 		</div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
