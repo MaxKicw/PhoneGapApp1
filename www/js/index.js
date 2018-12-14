@@ -161,10 +161,10 @@ function user_answer(answer){
 	app.timediff = diff;
 	alert(diff);
 	// Und Zeitdifferenz
-	if(app.user_answer === 'Ja' && diff <= 4 ){
+	if(app.user_answer === "Ja" && diff <= 4 ){
 		document.getElementById('q4').classList.add('active');
 		document.getElementById('q1').classList.remove('active');
-	}else if(app.user_answer === 'Ja' && diff >= 5){
+	}else if(app.user_answer === "Ja" && diff >= 5){
 		document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?"
 		document.getElementById('q2').classList.add('active');
 		document.getElementById('q1').classList.remove('active');
