@@ -183,36 +183,43 @@ function answer(choice){
 	document.getElementById('q2').classList.remove('active');
 };
 function acitvityCorrection(rightActivity){
-		switch(rightActivity){
-			case "STILL":
-				app.userActivity.STILL = 100;
-				break;
-			case "ON_FOOT":
-				app.userActivity.ON_FOOT = 100;
-				break;
-			case "IN_VEHICLE":
-				app.userActivity.IN_VEHICLE = 100;
-				break;
-			case "RUNNING":
-				app.userActivity.RUNNING = 100;
-				break;
-			case "WALKING":
-				app.userActivity.WALKING = 100;
-				break;
-			case "ON_BICYLE":
-				app.userActivity.ON_BICYLE = 100;
-				break;
-			case "TILTING":
-				app.userActivity.TILTING = 100;
-				break;
-			case "UNKNOWN":
-				app.userActivity.UNKNOWN = 100;
-				break;
-		}
+	switch(rightActivity){
+		case 'STILL':
+			app.userActivity.STILL = 100;
+			break;
+		case 'ON_FOOT':
+			app.userActivity.ON_FOOT = 100;
+			break;
+		case 'IN_VEHICLE':
+			app.userActivity.IN_VEHICLE = 100;
+			break;
+		case 'RUNNING':
+			app.userActivity.RUNNING = 100;
+			break;
+		case 'WALKING':
+			app.userActivity.WALKING = 100;
+			break;
+		case 'ON_BICYLE':
+			app.userActivity.ON_BICYLE = 100;
+			break;
+		case 'TILTING':
+			app.userActivity.TILTING = 100;
+			break;
+		case 'UNKNOWN':
+			app.userActivity.UNKNOWN = 100;
+			break;
+	}
+	if(app.timediff >= 1){
+		document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?";
+		document.getElementById('q2').classList.add('active');
 		document.getElementById('q3').classList.remove('big');
-		document.getElementById('thanx').classList.add('active');
-		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
-		// sendToServer(rightActivity);
+	}else{
+		document.getElementById('q4').classList.add('active');
+		document.getElementById('q3').classList.remove('big');
+	}
+	
+	
+	// sendToServer(rightActivity);
 }
 
 function shouldSend(choice){
