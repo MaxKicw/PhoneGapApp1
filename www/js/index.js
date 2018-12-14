@@ -3,9 +3,7 @@ var app = {
 	calcNowTimestamp:"",
 	trackedActivity:"",
 	userActivity:{},
-	timestamp_push={},
-	verzögerungsGrund = "",
-	timediff = "",
+	timestamp_push:"",
 	uuid:"",
 	track:true,
 	background:false,
@@ -55,9 +53,13 @@ var app = {
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
 				app.uuid = device.uuid;
-				app.timestamp_push.date = moment().format("DD.MM.YY ");
-				app.timestamp_push.time = moment().format("HH:mm");
+				const date = moment().format("DD.MM.YY ");
+				const time = moment().format("HH:mm");
 				app.calcNowTimestamp = new moment();
+				app.timestamp_push = moment().format("DD.MM.YY HH:mm:ss");
+				document.getElementById('q1').classList.add('active');
+				document.getElementById('intro').classList.remove('active');
+				document.getElementById('frage').innerText = 'Wir haben dir um '+time+' am '+date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 				let hightestValue = Object.keys(app.trackedActivity).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
 				let activityMessage;
 				alert(JSON.stringify(app.trackedActivity));
@@ -118,7 +120,6 @@ var app = {
 		setInterval(function(){
 			bgLocationServices.registerForActivityUpdates(function(activities) {
 				app.trackedActivity = activities
-				alert(JSON.stringify(app.trackedActivity));
 				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
 		   }, function(err) {
 				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
@@ -159,6 +160,7 @@ function user_answer(answer){
 	let diff = moment.duration(now.diff(app.calcNowTimestamp));
 	diff = diff._data.minutes;
 	app.timediff = diff;
+	alert("Hi");
 	alert(diff);
 	// Und Zeitdifferenz
 	if(app.user_answer === "Ja" && diff <= 4 ){
@@ -220,20 +222,6 @@ function acitvityCorrection(rightActivity){
 		document.getElementById('thanx').classList.add('active');
 		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
 		// sendToServer(rightActivity);
-}
-
-function shouldSend(choice){
-	if(choice === "Ja"){
-		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
-		document.getElementById("dankeText").innerHTML = "Die Daten wurden an die Hochschule gesendet!";
-		document.getElementById('q5').classList.add('active');
-		document.getElementById('q4').classList.remove('active');
-	}else{
-		document.getElementById("dankeText").innerHTML = "Die Daten werden NICHT an die Hochschule gesendet!";
-		document.getElementById('q5').classList.add('active');
-		document.getElementById('q4').classList.remove('active');
-		resetLocalData();
-	}
 }
 //---------------JSON-Call------------------------//
 function sendToServer(uuid,timestamp_push,user_answer,trackedActivity,userActivity){
