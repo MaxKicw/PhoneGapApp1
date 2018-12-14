@@ -3,7 +3,7 @@ var app = {
 	calcNowTimestamp:"",
 	trackedActivity:"",
 	userActivity:{},
-	timestamp_push:"",
+	timestamp_push:{},
 	uuid:"",
 	track:true,
 	background:false,
@@ -53,13 +53,12 @@ var app = {
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
 				app.uuid = device.uuid;
-				const date = moment().format("DD.MM.YY ");
-				const time = moment().format("HH:mm");
+				app.timestamp_push.date = moment().format("DD.MM.YY ");
+				app.timestamp_push.time = moment().format("HH:mm");
 				app.calcNowTimestamp = new moment();
-				app.timestamp_push = moment().format("DD.MM.YY HH:mm:ss");
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
-				document.getElementById('frage').innerText = 'Wir haben dir um '+time+' am '+date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
+				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 				let hightestValue = Object.keys(app.trackedActivity).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
 				let activityMessage;
 				alert(JSON.stringify(app.trackedActivity));
