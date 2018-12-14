@@ -279,6 +279,7 @@ function sendToServer(uuid,timestamp_push,user_answer,pushActivity,userActivity)
 		fetch(request)
 		.then((res) => {
 			resetLocalData();
+			alert(res);
 			setTimeout(function(){
 				document.getElementById('q5').classList.remove('active');
 				document.getElementById('intro').classList.add('active');
