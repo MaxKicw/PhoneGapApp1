@@ -76,25 +76,25 @@
 				</div>
 			</div>
 			<div class="card" id="q2">
-				<p>Hallo! War dir diese Push-Notification gerade recht?</p>
-				<div class="button" onclick="answer('Passt')">
-					<p>War gerade gut erreichbar</p>
+				<p id="verzugNachricht"></p>
+				<div class="button" onclick="answer('Erst angekommen')">
+					<p>Nachricht ist erst jetzt auf meinem Gerät angekommen.</p>
 				</div>
-				<div class="button" onclick="answer('NichtinReichweite')">
-					<p>Smartphone nicht bei Hand</p>
+				<div class="button" onclick="answer('Nicht gesehen')">
+					<p>Ich habe die Nachricht vorher nicht gesehen.</p>
 				</div>
-				<div class="button" onclick="answer('Unpassend')">
-					<p>War unpassend!</p>
+				<div class="button" onclick="answer('Nicht erreichbar')">
+					<p>Ich konnte die Nachricht vorher nicht öffnen / war nicht erreichbar.</p>
 				</div>
-				<div class="button" onclick="answer('Nichtgelesen')">
-					<p>Habe die Nachricht nicht gelesen</p>
+				<div class="button" onclick="answer('Keine Lust')">
+					<p>Ich hatte vorher keine Lust die Nachricht zu öffnen / zu beantworten.</p>
 				</div>
-				<div class="button" id="diff">
-
+				<div class="button" onclick="answer('Nicht mehr erinnern')">
+					<p>Ich kann mich nicht mehr erinnern.</p>
 				</div>
 			</div>
 			<div class="card" id="q3">
-				<p>Wähle bitte die richtige Aktivität aus!</p>
+				<p id="falscheAktivitätNachricht"></p>
 				<div class="button" onclick="acitvityCorrection('STILL')">
 					<p>Das Handy lag nicht bei mir.</p>
 				</div>
@@ -132,7 +132,7 @@
 					<p>Erfasste Daten anzeigen</p>
 				</div>
 			</div>
-			<p id="thanx" class="thanx">Die Daten werden an die Hochschule gesendet. Vielen Dank!</p>
+			
 		</div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
