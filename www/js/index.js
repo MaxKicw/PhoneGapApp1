@@ -172,7 +172,7 @@ function user_answer(answer){
 		document.getElementById('q1').classList.remove('active');
 	}else{
 		document.getElementById('falscheAktivitätNachricht').innerHTML = "Wenn die App die Aktivität am "+app.timestamp_push.date+" um "+app.timestamp_push.time+" falsch ermittelt hat, welche der folgenden Aktivitätsbeschreibungen trifft ansonsten am ehesten zu?"
-		document.getElementById('q3').classList.add('active');
+		document.getElementById('q3').classList.add('big');
 		document.getElementById('q1').classList.remove('active');
 	}
 }
