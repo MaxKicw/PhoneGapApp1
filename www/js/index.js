@@ -225,7 +225,7 @@ function acitvityCorrection(rightActivity){
 }
 
 function shouldSend(choice){
-	if(choice === "Ja"){
+	if(choice === 'Ja'){
 		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
 		document.getElementById("dankeText").innerHTML = "Die Daten wurden an die Hochschule gesendet!";
 		document.getElementById('q5').classList.add('active');
@@ -235,6 +235,10 @@ function shouldSend(choice){
 		document.getElementById('q5').classList.add('active');
 		document.getElementById('q4').classList.remove('active');
 		resetLocalData();
+		setTimeout(function(){
+			document.getElementById('q5').classList.remove('active');
+			document.getElementById('intro').classList.add('active');
+		}, 1200);
 	}
 }
 //---------------JSON-Call------------------------//
@@ -281,6 +285,15 @@ function sendToServer(uuid,timestamp_push,user_answer,trackedActivity,userActivi
 		});		
 };
 
+function resetLocalData(){
+	app.user_answer="";
+	app.calcNowTimestamp="";
+	app.trackedActivity="";
+	app.userActivity={};
+	app.timestamp_push={};
+	app.verzögerungsGrund = "";
+	app.timediff = "";
+}
 
 
 
