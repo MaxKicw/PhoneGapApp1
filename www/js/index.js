@@ -248,11 +248,13 @@ function sendToServer(uuid,timestamp_push,user_answer,pushActivity,userActivity)
 		alert("PushActivity: "+JSON.stringify(pushActivity));
 		alert("UserActivity: "+JSON.stringify(userActivity));
 		alert("TimestampSendTimeDate: "+timestamp_send.date + " / "+timestamp_send.time);
+		alert("UserDelayReason: "+app.verzögerungsGrund);
 		var form = new FormData();
 		form.append("UUID", uuid);
 		form.append("TIMESTAMP_PUSH_DATE", timestamp_push.date);
 		form.append("TIMESTAMP_PUSH_DATE", timestamp_push.time);
 		form.append("USER_ANSWER", user_answer);
+		form.append("USER_DELAY_REASON",app.verzögerungsGrund);
 		// Tracked Variablen
 		form.append("TRACKED_ACTIVITY_ON_FOOT", pushActivity.ON_FOOT);
 		form.append("TRACKED_ACTIVITY_IN_VEHICLE", pushActivity.IN_VEHICLE);
