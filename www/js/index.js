@@ -62,6 +62,7 @@ var app = {
 				document.getElementById('frage').innerText = 'Wir haben dir um '+time+' am '+date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 				let hightestValue = Object.keys(app.trackedActivity).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
 				let activityMessage;
+				alert(hightestValue);
 				switch(hightestValue){
 					case "STILL":
 						activityMessage = "Das Handy lag nicht bei dir.";
@@ -116,7 +117,6 @@ var app = {
 		setInterval(function(){
 			bgLocationServices.registerForActivityUpdates(function(activities) {
 				app.trackedActivity = activities
-				alert(JSON.stringify(app.trackedActivity));
 				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
 		   }, function(err) {
 				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
