@@ -242,7 +242,12 @@ function sendToServer(uuid,timestamp_push,user_answer,pushActivity,userActivity)
 		alert("Send stuff!");
 		let timestamp_send_date = moment().format("DD.MM.YY");
 		let timestamp_send_time = moment().format("HH:ss");
-		alert(uuid,timestamp_push,user_answer,pushActivity,userActivity);
+		alert("UUID: "+uuid);
+		alert("TimestampPushTimeDate: "+timestamp_push.date + " / "+timestamp_push.time);
+		alert("Nutzerantwort: "+user_answer);
+		alert("PushActivity: "+JSON.stringify(pushActivity));
+		alert("UserActivity: "+JSON.stringify(userActivity));
+		alert("TimestampSendTimeDate: "+timestamp_send.date + " / "+timestamp_send.time);
 		var form = new FormData();
 		form.append("UUID", uuid);
 		form.append("TIMESTAMP_PUSH_DATE", timestamp_push.date);
