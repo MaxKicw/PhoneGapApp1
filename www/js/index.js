@@ -120,6 +120,7 @@ var app = {
 		setInterval(function(){
 			bgLocationServices.registerForActivityUpdates(function(activities) {
 				app.trackedActivity = activities
+				alert(JSON.stringify(app.trackedActivity));
 				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
 		   }, function(err) {
 				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
@@ -160,7 +161,6 @@ function user_answer(answer){
 	let diff = moment.duration(now.diff(app.calcNowTimestamp));
 	diff = diff._data.minutes;
 	app.timediff = diff;
-	alert("Hi");
 	alert(diff);
 	// Und Zeitdifferenz
 	if(app.user_answer === "Ja" && diff <= 4 ){
@@ -222,6 +222,20 @@ function acitvityCorrection(rightActivity){
 		document.getElementById('thanx').classList.add('active');
 		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
 		// sendToServer(rightActivity);
+}
+
+function shouldSend(choice){
+	if(choice === "Ja"){
+		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.trackedActivity,app.userActivity);
+		document.getElementById("dankeText").innerHTML = "Die Daten wurden an die Hochschule gesendet!";
+		document.getElementById('q5').classList.add('active');
+		document.getElementById('q4').classList.remove('active');
+	}else{
+		document.getElementById("dankeText").innerHTML = "Die Daten werden NICHT an die Hochschule gesendet!";
+		document.getElementById('q5').classList.add('active');
+		document.getElementById('q4').classList.remove('active');
+		resetLocalData();
+	}
 }
 //---------------JSON-Call------------------------//
 function sendToServer(uuid,timestamp_push,user_answer,trackedActivity,userActivity){
