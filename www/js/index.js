@@ -276,8 +276,9 @@ function sendToServer(uuid,timestamp_push,user_answer,trackedActivity,userActivi
 
 		fetch(request)
 		.then((res) => {
+			resetLocalData();
 			setTimeout(function(){
-				document.getElementById('thanx').classList.remove('active');
+				document.getElementById('q5').classList.remove('active');
 				document.getElementById('intro').classList.add('active');
 			}, 1200);
 		});		
