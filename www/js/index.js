@@ -56,7 +56,8 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
-				let hightestValue = Object.keys(app.pushActivity).reduce((a, b) => app.pushActivity[a] > app.pushActivity[b] ? a : b);
+				// let hightestValue = Object.keys(app.pushActivity).reduce((a, b) => app.pushActivity[a] > app.pushActivity[b] ? a : b);
+				let hightestValue = "STILL";
 				alert(hightestValue);
 				let activityMessage;
 				switch(hightestValue){
