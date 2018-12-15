@@ -247,7 +247,7 @@ function sendToServer(){
 		var form = new FormData();
 		form.append("UUID", app.uuid);
 		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.date);
-		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.time);
+		form.append("TIMESTAMP_PUSH_TIME", app.timestamp_push.time);
 		form.append("USER_ANSWER", app.user_answer);
 		form.append("USER_DELAY_REASON",app.verzögerungsGrund);
 		// Tracked Variablen
@@ -284,15 +284,8 @@ function sendToServer(){
 			setTimeout(function(){
 				document.getElementById('q5').classList.remove('active');
 				document.getElementById('intro').classList.add('active');
+				resetLocalData();
 			}, 1200);
-			alert(JSON.stringify(res));
-			alert("UUID: "+app.uuid);
-			alert("TIMESTAMP_PUSH_DATETIME: "+app.timestamp_push.date+" / "+app.timestamp_push.time);
-			alert("USER_ANSWER: "+app.user_answer);
-			alert("USER_DELAY_REASON: "+app.verzögerungsGrund);
-			alert("TRACKED_ACTIVITY: "+JSON.stringify(app.pushAcitvity));
-			alert("USER_ACITVITY: "+JSON.stringify(app.userActivity));
-			alert("TIMESTAMP_SEND_DATETIME: "+timestamp_send_date+" / "+timestamp_send_time);
 		});	
 };
 
@@ -300,8 +293,9 @@ function resetLocalData(){
 	app.user_answer="";
 	app.calcNowTimestamp="";
 	app.trackedActivity="";
-	app.userActivity={};
+	app.userActivity={STILL:0,ON_FOOT:0,IN_VEHICLE:0,RUNNING:0,WALKING:0,ON_BICYLE:0,TILTING:0,UNKNOWN:0};
 	app.timestamp_push={};
+	app.pushAcitvity="";
 	app.verzögerungsGrund = "";
 	app.timediff = "";
 }
