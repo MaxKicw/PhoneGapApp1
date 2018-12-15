@@ -232,6 +232,13 @@ function shouldSend(choice){
 		document.getElementById("dankeText").innerHTML = "Die Daten werden NICHT an die Hochschule gesendet!";
 		document.getElementById('q5').classList.add('active');
 		document.getElementById('q4').classList.remove('active');
+		alert("UUID: "+app.uuid);
+		alert("TimestampPushTimeDate: "+app.timestamp_push.date + " / "+app.timestamp_push.time);
+		alert("Nutzerantwort: "+app.user_answer);
+		alert("PushActivity: "+JSON.stringify(app.pushActivity));
+		alert("UserActivity: "+JSON.stringify(app.userActivity));
+		alert("TimestampSendTimeDate: "+timestamp_send_date + " / "+timestamp_send_time);
+		alert("UserDelayReason: "+app.verzögerungsGrund);	
 		resetLocalData();
 		setTimeout(function(){
 			document.getElementById('q5').classList.remove('active');
@@ -287,13 +294,6 @@ function sendToServer(){
 			}, 1200);
 			alert(JSON.stringify(res));
 		});	
-		alert("UUID: "+app.uuid);
-		alert("TimestampPushTimeDate: "+app.timestamp_push.date + " / "+app.timestamp_push.time);
-		alert("Nutzerantwort: "+app.user_answer);
-		alert("PushActivity: "+JSON.stringify(app.pushActivity));
-		alert("UserActivity: "+JSON.stringify(app.userActivity));
-		alert("TimestampSendTimeDate: "+timestamp_send_date + " / "+timestamp_send_time);
-		alert("UserDelayReason: "+app.verzögerungsGrund);	
 };
 
 function resetLocalData(){
