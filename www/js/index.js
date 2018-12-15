@@ -285,6 +285,14 @@ function sendToServer(){
 				document.getElementById('q5').classList.remove('active');
 				document.getElementById('intro').classList.add('active');
 			}, 1200);
+			alert(JSON.stringify(res));
+			alert("UUID: "+app.uuid);
+			alert("TIMESTAMP_PUSH_DATETIME: "+app.timestamp_push.date+" / "+app.timestamp_push.time);
+			alert("USER_ANSWER: "+app.user_answer);
+			alert("USER_DELAY_REASON: "+app.verzögerungsGrund);
+			alert("TRACKED_ACTIVITY: "+JSON.stringify(app.pushAcitvity));
+			alert("USER_ACITVITY: "+JSON.stringify(app.userActivity));
+			alert("TIMESTAMP_SEND_DATETIME: "+timestamp_send_date+" / "+timestamp_send_time);
 		});	
 };
 
