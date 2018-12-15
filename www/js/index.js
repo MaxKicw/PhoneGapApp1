@@ -5,7 +5,7 @@ var app = {
 	calcNowTimestamp:"",
 	trackedActivity:"",
 	pushAcitvity:"",
-	userActivity:{STILL:0,ON_FOOT:0,IN_VEHICLE:0,RUNNING:0,WALKING:0,ON_BICYLE:0,TILTING:0,UNKNOWN:0},
+	userActivity:{STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYLE:undefined,TILTING:undefined,UNKNOWN:undefined},
 	timestamp_push:{},
 	verzögerungsGrund:"",
 	uuid:"",
@@ -293,7 +293,7 @@ function resetLocalData(){
 	app.user_answer="";
 	app.calcNowTimestamp="";
 	app.trackedActivity="";
-	app.userActivity={STILL:0,ON_FOOT:0,IN_VEHICLE:0,RUNNING:0,WALKING:0,ON_BICYLE:0,TILTING:0,UNKNOWN:0};
+	app.userActivity={STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYLE:undefined,TILTING:undefined,UNKNOWN:undefined};
 	app.timestamp_push={};
 	app.pushAcitvity="";
 	app.verzögerungsGrund = "";
