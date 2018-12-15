@@ -69,7 +69,7 @@ var app = {
 				let activityMessage;
 				for (var x in app.pushAcitvity) {
 					if(app.pushAcitvity[x] > highestCount){
-						highestCount = obj[x];
+						highestCount = app.pushAcitvity[x];
 						highestKey = x;
 					}
 				}
