@@ -91,7 +91,7 @@ var app = {
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
-				app.timestamp_push.time = moment().format("HH:mm");
+				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
 				// alert("Timestamp Ankunft der Nachricht: "+app.calcNowTimestamp);
 				// alert("Erfasste Aktivität zum Push: "+app.pushAcitvity);
@@ -243,7 +243,7 @@ function shouldSend(choice){
 function sendToServer(){
 		// alert("Send stuff!");
 		let timestamp_send_date = moment().format("DD.MM.YY");
-		let timestamp_send_time = moment().format("HH:ss");
+		let timestamp_send_time = moment().format("ssHH:mm:");
 		var form = new FormData();
 		form.append("UUID", app.uuid);
 		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.date);
