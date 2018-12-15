@@ -1,9 +1,11 @@
+// UI passt nun vom Aufbau, paar Daten kommen noch immer nicht an. Und er sendet nix zum Server.
+
 var app = {
 	user_answer:"",
 	calcNowTimestamp:"",
 	trackedActivity:"",
 	pushAcitvity:"",
-	userActivity:{},
+	userActivity:{STILL:0,ON_FOOT:0,IN_VEHICLE:0,RUNNING:0,WALKING:0,ON_BICYLE:0,TILTING:0,UNKNOWN:0},
 	timestamp_push:{},
 	verzögerungsGrund:"",
 	uuid:"",
@@ -62,7 +64,7 @@ var app = {
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
 				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
-				let hightestValue = Object.keys(app.pushAcitvity).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
+				let hightestValue = Object.keys(app.pushAcitvity).reduce(function(a, b){ return app.pushAcitvity[a] > app.pushAcitvity[b] ? a : b });
 				let activityMessage;
 				alert("Ermittelte PUSH-Aktion: "+JSON.stringify(app.pushAcitvity));
 				alert(hightestValue);
