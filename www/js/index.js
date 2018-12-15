@@ -56,9 +56,16 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
-				let hightestValue = Object.keys(app.pushAcitvity).reduce(function(a, b){ return app.pushAcitvity[a] > app.pushAcitvity[b] ? a : b });
+				let highestCount = 0;
+				let highestKey;
 				let activityMessage;
-				switch(hightestValue){
+				for (var x in app.pushAcitvity) {
+					if(app.pushAcitvity[x] > highestCount){
+						highestCount = obj[x];
+						highestKey = x;
+					}
+				}
+				switch(highestKey){
 					case "STILL":
 						activityMessage = "Das Handy lag nicht bei dir.";
 						break;
