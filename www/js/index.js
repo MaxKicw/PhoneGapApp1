@@ -73,7 +73,7 @@ var app = {
 						highestKey = x;
 					}
 				}
-				alert(JSON.stringify(app.pushAcitvity));
+				alert(app.pushAcitvity);
 				alert(highestKey);
 				alert(highestCount);
 				switch(highestKey){
