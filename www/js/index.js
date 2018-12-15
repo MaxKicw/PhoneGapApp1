@@ -56,6 +56,8 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
+				app.uuid = device.uuid;
+				app.pushActivity = app.trackedActivity;
 				let highestCount = 0;
 				let highestKey;
 				let activityMessage;
@@ -65,8 +67,6 @@ var app = {
 						highestKey = x;
 					}
 				}
-				alert("Gefundener highest Key: "+highestKey);
-				alert(app.pushAcitvity);
 				switch(highestKey){
 					case "STILL":
 						activityMessage = "Das Handy lag nicht bei dir.";
@@ -96,8 +96,6 @@ var app = {
 						activityMessage = "Es konnte keine Aktivität erfasst werden!";
 						break;
 				}
-				app.uuid = device.uuid;
-				app.pushActivity = app.trackedActivity;
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
