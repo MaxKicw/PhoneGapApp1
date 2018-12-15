@@ -224,7 +224,6 @@ function acitvityCorrection(rightActivity){
 
 function shouldSend(choice){
 	if(choice === 'Ja'){
-		alert("JA");
 		sendToServer();
 		document.getElementById("dankeText").innerHTML = "Die Daten wurden an die Hochschule gesendet!";
 		document.getElementById('q5').classList.add('active');
@@ -246,31 +245,31 @@ function sendToServer(){
 		let timestamp_send_date = moment().format("DD.MM.YY");
 		let timestamp_send_time = moment().format("HH:ss");
 		var form = new FormData();
-		form.append("UUID", uuid);
-		// form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.date);
-		// form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.time);
-		// form.append("USER_ANSWER", app.user_answer);
-		// form.append("USER_DELAY_REASON",app.verzögerungsGrund);
-		// // Tracked Variablen
-		// form.append("TRACKED_ACTIVITY_ON_FOOT", app.pushActivity.ON_FOOT);
-		// form.append("TRACKED_ACTIVITY_IN_VEHICLE", app.pushActivity.IN_VEHICLE);
-		// form.append("TRACKED_ACTIVITY_RUNNING", app.pushActivity.RUNNING);
-		// form.append("TRACKED_ACTIVITY_WALKING", app.pushActivity.WALKING);
-		// form.append("TRACKED_ACTIVITY_ON_BICYCLE", app.pushActivity.ON_BICYLE);
-		// form.append("TRACKED_ACTIVITY_STILL", app.pushActivity.STILL);
-		// form.append("TRACKED_ACTIVITY_TILTING", app.pushActivity.TILTING);
-		// form.append("TRACKED_ACTIVITY_UNKNOWN", app.pushActivity.UNKNOWN);
-		// // Usereingabe Variablen
-		// form.append("USER_ACTIVITY_ON_FOOT", app.userActivity.ON_FOOT);
-		// form.append("USER_ACTIVITY_IN_VEHICLE", app.userActivity.IN_VEHICLE);
-		// form.append("USER_ACTIVITY_RUNNING", app.userActivity.RUNNING);
-		// form.append("USER_ACTIVITY_WALKING", app.userActivity.WALKING);
-		// form.append("USER_ACTIVITY_ON_BICYCLE", app.userActivity.ON_BICYLE);
-		// form.append("USER_ACTIVITY_STILL", app.userActivity.STILL);
-		// form.append("USER_ACTIVITY_TILTING", app.userActivity.TILTING);
-		// form.append("USER_ACTIVITY_UNKNOWN", app.userActivity.UNKNOWN);
-		// form.append("TIMESTAMP_SEND_DATE", timestamp_send_date);
-		// form.append("TIMESTAMP_SEND_TIME", timestamp_send_time);
+		form.append("UUID", app.uuid);
+		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.date);
+		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.time);
+		form.append("USER_ANSWER", app.user_answer);
+		form.append("USER_DELAY_REASON",app.verzögerungsGrund);
+		// Tracked Variablen
+		form.append("TRACKED_ACTIVITY_ON_FOOT", app.pushActivity.ON_FOOT);
+		form.append("TRACKED_ACTIVITY_IN_VEHICLE", app.pushActivity.IN_VEHICLE);
+		form.append("TRACKED_ACTIVITY_RUNNING", app.pushActivity.RUNNING);
+		form.append("TRACKED_ACTIVITY_WALKING", app.pushActivity.WALKING);
+		form.append("TRACKED_ACTIVITY_ON_BICYCLE", app.pushActivity.ON_BICYLE);
+		form.append("TRACKED_ACTIVITY_STILL", app.pushActivity.STILL);
+		form.append("TRACKED_ACTIVITY_TILTING", app.pushActivity.TILTING);
+		form.append("TRACKED_ACTIVITY_UNKNOWN", app.pushActivity.UNKNOWN);
+		// Usereingabe Variablen
+		form.append("USER_ACTIVITY_ON_FOOT", app.userActivity.ON_FOOT);
+		form.append("USER_ACTIVITY_IN_VEHICLE", app.userActivity.IN_VEHICLE);
+		form.append("USER_ACTIVITY_RUNNING", app.userActivity.RUNNING);
+		form.append("USER_ACTIVITY_WALKING", app.userActivity.WALKING);
+		form.append("USER_ACTIVITY_ON_BICYCLE", app.userActivity.ON_BICYLE);
+		form.append("USER_ACTIVITY_STILL", app.userActivity.STILL);
+		form.append("USER_ACTIVITY_TILTING", app.userActivity.TILTING);
+		form.append("USER_ACTIVITY_UNKNOWN", app.userActivity.UNKNOWN);
+		form.append("TIMESTAMP_SEND_DATE", timestamp_send_date);
+		form.append("TIMESTAMP_SEND_TIME", timestamp_send_time);
 		
 		let settings = {
 			method:"POST",
