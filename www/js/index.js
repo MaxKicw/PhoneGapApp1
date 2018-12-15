@@ -56,14 +56,6 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
-				app.uuid = device.uuid;
-				app.pushActivity = app.trackedActivity;
-				app.timestamp_push.date = moment().format("DD.MM.YY ");
-				app.timestamp_push.time = moment().format("HH:mm");
-				app.calcNowTimestamp = new moment();
-				document.getElementById('q1').classList.add('active');
-				document.getElementById('intro').classList.remove('active');
-				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 				let hightestValue = Object.keys(app.pushAcitvity).reduce(function(a, b){ return app.pushAcitvity[a] > app.pushAcitvity[b] ? a : b });
 				let activityMessage;
 				alert("Ermittelte PUSH-Aktion: "+JSON.stringify(app.pushAcitvity));
@@ -97,6 +89,14 @@ var app = {
 						activityMessage = "Es konnte keine Aktivität erfasst werden!";
 						break;
 				}
+				app.uuid = device.uuid;
+				app.pushActivity = app.trackedActivity;
+				app.timestamp_push.date = moment().format("DD.MM.YY ");
+				app.timestamp_push.time = moment().format("HH:mm");
+				app.calcNowTimestamp = new moment();
+				document.getElementById('q1').classList.add('active');
+				document.getElementById('intro').classList.remove('active');
+				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 				document.getElementById('trackedActivity').innerText = activityMessage;
 			}
 		});
