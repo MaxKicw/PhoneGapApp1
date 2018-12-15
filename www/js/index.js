@@ -66,6 +66,7 @@ var app = {
 					}
 				}
 				alert("Gefundener highest Key: "+highestKey);
+				alert(app.pushAcitvity);
 				switch(highestKey){
 					case "STILL":
 						activityMessage = "Das Handy lag nicht bei dir.";
