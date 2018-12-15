@@ -222,7 +222,7 @@ function acitvityCorrection(rightActivity){
 
 function shouldSend(choice){
 	if(choice === 'Ja'){
-		sendToServer(app.uuid,app.timestamp_push,app.user_answer,app.pushAcitvity,app.userActivity);
+		sendToServer();
 		document.getElementById("dankeText").innerHTML = "Die Daten wurden an die Hochschule gesendet!";
 		document.getElementById('q5').classList.add('active');
 		document.getElementById('q4').classList.remove('active');
@@ -238,41 +238,41 @@ function shouldSend(choice){
 	}
 }
 //---------------JSON-Call------------------------//
-function sendToServer(uuid,timestamp_push,user_answer,pushActivity,userActivity){
+function sendToServer(){
 		alert("Send stuff!");
 		let timestamp_send_date = moment().format("DD.MM.YY");
 		let timestamp_send_time = moment().format("HH:ss");
-		alert("UUID: "+uuid);
-		alert("TimestampPushTimeDate: "+timestamp_push.date + " / "+timestamp_push.time);
-		alert("Nutzerantwort: "+user_answer);
-		alert("PushActivity: "+JSON.stringify(pushActivity));
-		alert("UserActivity: "+JSON.stringify(userActivity));
+		alert("UUID: "+app.uuid);
+		alert("TimestampPushTimeDate: "+app.timestamp_push.date + " / "+app.timestamp_push.time);
+		alert("Nutzerantwort: "+app.user_answer);
+		alert("PushActivity: "+JSON.stringify(app.pushActivity));
+		alert("UserActivity: "+JSON.stringify(app.userActivity));
 		alert("TimestampSendTimeDate: "+timestamp_send.date + " / "+timestamp_send.time);
 		alert("UserDelayReason: "+app.verzögerungsGrund);
 		var form = new FormData();
 		form.append("UUID", uuid);
-		form.append("TIMESTAMP_PUSH_DATE", timestamp_push.date);
-		form.append("TIMESTAMP_PUSH_DATE", timestamp_push.time);
-		form.append("USER_ANSWER", user_answer);
+		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.date);
+		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.time);
+		form.append("USER_ANSWER", app.user_answer);
 		form.append("USER_DELAY_REASON",app.verzögerungsGrund);
 		// Tracked Variablen
-		form.append("TRACKED_ACTIVITY_ON_FOOT", pushActivity.ON_FOOT);
-		form.append("TRACKED_ACTIVITY_IN_VEHICLE", pushActivity.IN_VEHICLE);
-		form.append("TRACKED_ACTIVITY_RUNNING", pushActivity.RUNNING);
-		form.append("TRACKED_ACTIVITY_WALKING", pushActivity.WALKING);
-		form.append("TRACKED_ACTIVITY_ON_BICYCLE", pushActivity.ON_BICYLE);
-		form.append("TRACKED_ACTIVITY_STILL", pushActivity.STILL);
-		form.append("TRACKED_ACTIVITY_TILTING", pushActivity.TILTING);
-		form.append("TRACKED_ACTIVITY_UNKNOWN", pushActivity.UNKNOWN);
+		form.append("TRACKED_ACTIVITY_ON_FOOT", app.pushActivity.ON_FOOT);
+		form.append("TRACKED_ACTIVITY_IN_VEHICLE", app.pushActivity.IN_VEHICLE);
+		form.append("TRACKED_ACTIVITY_RUNNING", app.pushActivity.RUNNING);
+		form.append("TRACKED_ACTIVITY_WALKING", app.pushActivity.WALKING);
+		form.append("TRACKED_ACTIVITY_ON_BICYCLE", app.pushActivity.ON_BICYLE);
+		form.append("TRACKED_ACTIVITY_STILL", app.pushActivity.STILL);
+		form.append("TRACKED_ACTIVITY_TILTING", app.pushActivity.TILTING);
+		form.append("TRACKED_ACTIVITY_UNKNOWN", app.pushActivity.UNKNOWN);
 		// Usereingabe Variablen
-		form.append("USER_ACTIVITY_ON_FOOT", userActivity.ON_FOOT);
-		form.append("USER_ACTIVITY_IN_VEHICLE", userActivity.IN_VEHICLE);
-		form.append("USER_ACTIVITY_RUNNING", userActivity.RUNNING);
-		form.append("USER_ACTIVITY_WALKING", userActivity.WALKING);
-		form.append("USER_ACTIVITY_ON_BICYCLE", userActivity.ON_BICYLE);
-		form.append("USER_ACTIVITY_STILL", userActivity.STILL);
-		form.append("USER_ACTIVITY_TILTING", userActivity.TILTING);
-		form.append("USER_ACTIVITY_UNKNOWN", userActivity.UNKNOWN);
+		form.append("USER_ACTIVITY_ON_FOOT", app.userActivity.ON_FOOT);
+		form.append("USER_ACTIVITY_IN_VEHICLE", app.userActivity.IN_VEHICLE);
+		form.append("USER_ACTIVITY_RUNNING", app.userActivity.RUNNING);
+		form.append("USER_ACTIVITY_WALKING", app.userActivity.WALKING);
+		form.append("USER_ACTIVITY_ON_BICYCLE", app.userActivity.ON_BICYLE);
+		form.append("USER_ACTIVITY_STILL", app.userActivity.STILL);
+		form.append("USER_ACTIVITY_TILTING", app.userActivity.TILTING);
+		form.append("USER_ACTIVITY_UNKNOWN", app.userActivity.UNKNOWN);
 		form.append("TIMESTAMP_SEND_DATE", timestamp_send_date);
 		form.append("TIMESTAMP_SEND_TIME", timestamp_send_time);
 		
@@ -286,8 +286,7 @@ function sendToServer(uuid,timestamp_push,user_answer,pushActivity,userActivity)
 
 		fetch(request)
 		.then((res) => {
-			resetLocalData();
-			alert(res);
+			alert(JSON.stringify(res));
 			setTimeout(function(){
 				document.getElementById('q5').classList.remove('active');
 				document.getElementById('intro').classList.add('active');
