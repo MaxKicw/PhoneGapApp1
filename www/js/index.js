@@ -58,6 +58,7 @@ var app = {
 			if(app.track){
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
+				let messageActivity = app.trackedActivity;
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
@@ -67,13 +68,13 @@ var app = {
 				let highestCount = 0;
 				let highestKey;
 				let activityMessage;
-				for (var x in app.pushAcitvity) {
-					if(app.pushAcitvity[x] > highestCount){
-						highestCount = app.pushAcitvity[x];
+				for (var x in messageActivity) {
+					if(messageActivity[x] > highestCount){
+						highestCount = messageActivity[x];
 						highestKey = x;
 					}
 				}
-				alert(app.pushAcitvity);
+				alert(messageActivity);
 				alert(highestKey);
 				alert(highestCount);
 				switch(highestKey){
