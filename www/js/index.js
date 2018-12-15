@@ -58,7 +58,6 @@ var app = {
 			if(app.track){
 				// let hightestValue = Object.keys(app.pushActivity).reduce((a, b) => app.pushActivity[a] > app.pushActivity[b] ? a : b);
 				let hightestValue = "STILL";
-				alert(hightestValue);
 				let activityMessage;
 				switch(hightestValue){
 					case "STILL":
@@ -89,12 +88,13 @@ var app = {
 						activityMessage = "Es konnte keine Aktivität erfasst werden!";
 						break;
 				}
-                alert(activityMessage)
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm");
 				app.calcNowTimestamp = new moment();
+				alert("Timestamp Ankunft der Nachricht: "+app.calcNowTimestamp);
+				alert("Erfasste Aktivität zum Push: "+app.pushAcitvity);
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
 				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
@@ -123,7 +123,6 @@ var app = {
 		setInterval(function(){
 			bgLocationServices.registerForActivityUpdates(function(activities) {
 				app.trackedActivity = activities
-				alert(JSON.stringify(app.trackedActivity));
 				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
 		   }, function(err) {
 				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
@@ -203,7 +202,7 @@ function acitvityCorrection(rightActivity){
 			app.userActivity.WALKING = 100;
 			break;
 		case 'ON_BICYLE':
-			app.userActivity.ON_BICYLE = 100;
+			app.userActivity.ON_BICYCLE = 100;
 			break;
 		case 'TILTING':
 			app.userActivity.TILTING = 100;
