@@ -224,6 +224,7 @@ function acitvityCorrection(rightActivity){
 
 function shouldSend(choice){
 	if(choice === 'Ja'){
+		alert("JA");
 		sendToServer();
 		document.getElementById("dankeText").innerHTML = "Die Daten wurden an die Hochschule gesendet!";
 		document.getElementById('q5').classList.add('active');
