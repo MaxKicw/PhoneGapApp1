@@ -127,7 +127,7 @@ var app = {
 		   }, function(err) {
 				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
 		   });
-		}, 5000);
+		}, 15000);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -232,13 +232,6 @@ function shouldSend(choice){
 		document.getElementById("dankeText").innerHTML = "Die Daten werden NICHT an die Hochschule gesendet!";
 		document.getElementById('q5').classList.add('active');
 		document.getElementById('q4').classList.remove('active');
-		alert("UUID: "+app.uuid);
-		alert("TimestampPushTimeDate: "+app.timestamp_push.date + " / "+app.timestamp_push.time);
-		alert("Nutzerantwort: "+app.user_answer);
-		alert("PushActivity: "+JSON.stringify(app.pushActivity));
-		alert("UserActivity: "+JSON.stringify(app.userActivity));
-		alert("TimestampSendTimeDate: "+timestamp_send_date + " / "+timestamp_send_time);
-		alert("UserDelayReason: "+app.verzögerungsGrund);	
 		resetLocalData();
 		setTimeout(function(){
 			document.getElementById('q5').classList.remove('active');
@@ -292,7 +285,6 @@ function sendToServer(){
 				document.getElementById('q5').classList.remove('active');
 				document.getElementById('intro').classList.add('active');
 			}, 1200);
-			alert(JSON.stringify(res));
 		});	
 };
 
