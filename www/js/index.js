@@ -93,8 +93,8 @@ var app = {
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm");
 				app.calcNowTimestamp = new moment();
-				alert("Timestamp Ankunft der Nachricht: "+app.calcNowTimestamp);
-				alert("Erfasste Aktivität zum Push: "+app.pushAcitvity);
+				// alert("Timestamp Ankunft der Nachricht: "+app.calcNowTimestamp);
+				// alert("Erfasste Aktivität zum Push: "+app.pushAcitvity);
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
 				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
@@ -163,7 +163,7 @@ function user_answer(answer){
 	let diff = moment.duration(now.diff(app.calcNowTimestamp));
 	diff = diff._data.minutes;
 	app.timediff = diff;
-	alert(diff);
+	// alert(diff);
 	// Und Zeitdifferenz
 	if(app.user_answer === "Ja" && diff <= 0 ){
 		document.getElementById('q4').classList.add('active');
@@ -241,16 +241,16 @@ function shouldSend(choice){
 }
 //---------------JSON-Call------------------------//
 function sendToServer(){
-		alert("Send stuff!");
+		// alert("Send stuff!");
 		let timestamp_send_date = moment().format("DD.MM.YY");
 		let timestamp_send_time = moment().format("HH:ss");
-		alert("UUID: "+app.uuid);
-		alert("TimestampPushTimeDate: "+app.timestamp_push.date + " / "+app.timestamp_push.time);
-		alert("Nutzerantwort: "+app.user_answer);
-		alert("PushActivity: "+JSON.stringify(app.pushActivity));
-		alert("UserActivity: "+JSON.stringify(app.userActivity));
-		alert("TimestampSendTimeDate: "+timestamp_send_date + " / "+timestamp_send_time);
-		alert("UserDelayReason: "+app.verzögerungsGrund);
+		// alert("UUID: "+app.uuid);
+		// alert("TimestampPushTimeDate: "+app.timestamp_push.date + " / "+app.timestamp_push.time);
+		// alert("Nutzerantwort: "+app.user_answer);
+		// alert("PushActivity: "+JSON.stringify(app.pushActivity));
+		// alert("UserActivity: "+JSON.stringify(app.userActivity));
+		// alert("TimestampSendTimeDate: "+timestamp_send_date + " / "+timestamp_send_time);
+		// alert("UserDelayReason: "+app.verzögerungsGrund);
 		var form = new FormData();
 		form.append("UUID", uuid);
 		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.date);
@@ -288,11 +288,11 @@ function sendToServer(){
 
 		fetch(request)
 		.then((res) => {
-			alert(JSON.stringify(res));
 			setTimeout(function(){
 				document.getElementById('q5').classList.remove('active');
 				document.getElementById('intro').classList.add('active');
 			}, 1200);
+			alert(JSON.stringify(res));
 		});		
 };
 
