@@ -67,6 +67,9 @@ var app = {
 						highestKey = x;
 					}
 				}
+				alert(JSON.stringify(app.pushAcitvity));
+				alert(highestKey);
+				alert(highestCount);
 				switch(highestKey){
 					case "STILL":
 						activityMessage = "Das Handy lag nicht bei dir.";
