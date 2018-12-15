@@ -56,10 +56,9 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
-				let hightestValue = Object.keys(app.pushAcitvity).reduce(function(a, b){ return app.pushAcitvity[a] > app.pushAcitvity[b] ? a : b });
-				let activityMessage;
-				alert("Ermittelte PUSH-Aktion: "+JSON.stringify(app.pushAcitvity));
+				let hightestValue = Object.keys(app.pushActivity).reduce((a, b) => app.pushActivity[a] > app.pushActivity[b] ? a : b);
 				alert(hightestValue);
+				let activityMessage;
 				switch(hightestValue){
 					case "STILL":
 						activityMessage = "Das Handy lag nicht bei dir.";
@@ -89,6 +88,7 @@ var app = {
 						activityMessage = "Es konnte keine Aktivität erfasst werden!";
 						break;
 				}
+                alert(activityMessage)
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
