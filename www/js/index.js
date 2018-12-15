@@ -247,7 +247,7 @@ function sendToServer(){
 		alert("Nutzerantwort: "+app.user_answer);
 		alert("PushActivity: "+JSON.stringify(app.pushActivity));
 		alert("UserActivity: "+JSON.stringify(app.userActivity));
-		alert("TimestampSendTimeDate: "+timestamp_send.date + " / "+timestamp_send.time);
+		alert("TimestampSendTimeDate: "+timestamp_send_date + " / "+timestamp_send_time);
 		alert("UserDelayReason: "+app.verzögerungsGrund);
 		var form = new FormData();
 		form.append("UUID", uuid);
