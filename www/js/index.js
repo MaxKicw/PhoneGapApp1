@@ -56,8 +56,7 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
-				// let hightestValue = Object.keys(app.pushActivity).reduce((a, b) => app.pushActivity[a] > app.pushActivity[b] ? a : b);
-				let hightestValue = "STILL";
+				let hightestValue = Object.keys(app.pushAcitvity).reduce(function(a, b){ return app.pushAcitvity[a] > app.pushAcitvity[b] ? a : b });
 				let activityMessage;
 				switch(hightestValue){
 					case "STILL":
@@ -243,7 +242,7 @@ function shouldSend(choice){
 function sendToServer(){
 		// alert("Send stuff!");
 		let timestamp_send_date = moment().format("DD.MM.YY");
-		let timestamp_send_time = moment().format("ssHH:mm:");
+		let timestamp_send_time = moment().format("HH:mm:ss");
 		var form = new FormData();
 		form.append("UUID", app.uuid);
 		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.date);
