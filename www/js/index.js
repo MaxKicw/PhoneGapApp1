@@ -244,13 +244,6 @@ function sendToServer(){
 		// alert("Send stuff!");
 		let timestamp_send_date = moment().format("DD.MM.YY");
 		let timestamp_send_time = moment().format("HH:ss");
-		// alert("UUID: "+app.uuid);
-		// alert("TimestampPushTimeDate: "+app.timestamp_push.date + " / "+app.timestamp_push.time);
-		// alert("Nutzerantwort: "+app.user_answer);
-		// alert("PushActivity: "+JSON.stringify(app.pushActivity));
-		// alert("UserActivity: "+JSON.stringify(app.userActivity));
-		// alert("TimestampSendTimeDate: "+timestamp_send_date + " / "+timestamp_send_time);
-		// alert("UserDelayReason: "+app.verzögerungsGrund);
 		var form = new FormData();
 		form.append("UUID", uuid);
 		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.date);
@@ -293,7 +286,14 @@ function sendToServer(){
 				document.getElementById('intro').classList.add('active');
 			}, 1200);
 			alert(JSON.stringify(res));
-		});		
+		});	
+		alert("UUID: "+app.uuid);
+		alert("TimestampPushTimeDate: "+app.timestamp_push.date + " / "+app.timestamp_push.time);
+		alert("Nutzerantwort: "+app.user_answer);
+		alert("PushActivity: "+JSON.stringify(app.pushActivity));
+		alert("UserActivity: "+JSON.stringify(app.userActivity));
+		alert("TimestampSendTimeDate: "+timestamp_send_date + " / "+timestamp_send_time);
+		alert("UserDelayReason: "+app.verzögerungsGrund);	
 };
 
 function resetLocalData(){
