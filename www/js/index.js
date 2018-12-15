@@ -4,7 +4,6 @@ var app = {
 	trackedActivity:"",
 	pushAcitvity:"",
 	userActivity:{},
-	timediff:"",
 	timestamp_push:{},
 	verzögerungsGrund:"",
 	uuid:"",
@@ -162,7 +161,7 @@ function user_answer(answer){
 	let diff = moment.duration(now.diff(app.calcNowTimestamp));
 	diff = diff._data.minutes;
 	app.timediff = diff;
-	alert(app.timediff);
+	alert(diff);
 	// Und Zeitdifferenz
 	if(app.user_answer === "Ja" && diff <= 0 ){
 		document.getElementById('q4').classList.add('active');
@@ -184,7 +183,6 @@ function answer(choice){
 	document.getElementById('q2').classList.remove('active');
 };
 function acitvityCorrection(rightActivity){
-	alert(rightActivity);
 	switch(rightActivity){
 		case 'STILL':
 			app.userActivity.STILL = 100;
@@ -211,7 +209,6 @@ function acitvityCorrection(rightActivity){
 			app.userActivity.UNKNOWN = 100;
 			break;
 	}
-	alert(JSON.stringify(app.userActivity));
 	if(app.timediff >= 1){
 		document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?";
 		document.getElementById('q2').classList.add('active');
