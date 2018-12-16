@@ -105,7 +105,7 @@ var app = {
 				// 		activityMessage = "Es konnte keine Aktivität erfasst werden!";
 				// 		break;
 				// }
-				document.getElementById('trackedActivity').innerText = app.trackedActivity;
+				document.getElementById('trackedActivity').innerText = "Das Ergebnis ist so: "+app.trackedActivity;
 			}
 		});
 
