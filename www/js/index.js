@@ -1,5 +1,4 @@
-// UI passt nun vom Aufbau, paar Daten kommen noch immer nicht an. Und er sendet nix zum Server.
-
+// Alles geht außer der Drecks nachrichtengenerator 
 var app = {
 	user_answer:"",
 	calcNowTimestamp:"",
@@ -58,55 +57,55 @@ var app = {
 			if(app.track){
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
-				let messageActivity = app.trackedActivity;
+				// let messageActivity = app.trackedActivity;
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
 				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
-				let highestCount = 0;
-				let highestKey;
-				let activityMessage;
-				for (var x in messageActivity) {
-					if(messageActivity[x] > highestCount){
-						highestCount = messageActivity[x];
-						highestKey = x;
-					}
-				}
-				alert(messageActivity);
-				alert(highestKey);
-				alert(highestCount);
-				switch(highestKey){
-					case "STILL":
-						activityMessage = "Das Handy lag nicht bei dir.";
-						break;
-					case "ON_FOOT":
-						activityMessage = "Du standest aufrecht.";
-						break;
-					case "IN_VEHICLE":
-						activityMessage = "Du warst in einem Fahrzeug.";
-						break;
-					case "RUNNING":
-						activityMessage = "Du warst Joggen.";
-						break;
-					case "WALKING":
-						activityMessage = "Du warst zu Fuß.";
-						break;
-					case "ON_BICYLE":
-						activityMessage = "Du war auf dem Fahrrad.";
-						break;
-					case "TILTING":
-						activityMessage = "Du saßst mit dem Handy in der Hand.";
-						break;
-					case "UNKNOWN":
-						activityMessage = "Es konnte keine Aktivität erfasst werden!";
-						break;
-					default:
-						activityMessage = "Es konnte keine Aktivität erfasst werden!";
-						break;
-				}
-				document.getElementById('trackedActivity').innerText = activityMessage;
+				// let highestCount = 0;
+				// let highestKey;
+				// let activityMessage;
+				// for (var x in messageActivity) {
+				// 	if(messageActivity[x] > highestCount){
+				// 		highestCount = messageActivity[x];
+				// 		highestKey = x;
+				// 	}
+				// }
+				// alert(messageActivity);
+				// alert(highestKey);
+				// alert(highestCount);
+				// switch(highestKey){
+				// 	case "STILL":
+				// 		activityMessage = "Das Handy lag nicht bei dir.";
+				// 		break;
+				// 	case "ON_FOOT":
+				// 		activityMessage = "Du standest aufrecht.";
+				// 		break;
+				// 	case "IN_VEHICLE":
+				// 		activityMessage = "Du warst in einem Fahrzeug.";
+				// 		break;
+				// 	case "RUNNING":
+				// 		activityMessage = "Du warst Joggen.";
+				// 		break;
+				// 	case "WALKING":
+				// 		activityMessage = "Du warst zu Fuß.";
+				// 		break;
+				// 	case "ON_BICYLE":
+				// 		activityMessage = "Du war auf dem Fahrrad.";
+				// 		break;
+				// 	case "TILTING":
+				// 		activityMessage = "Du saßst mit dem Handy in der Hand.";
+				// 		break;
+				// 	case "UNKNOWN":
+				// 		activityMessage = "Es konnte keine Aktivität erfasst werden!";
+				// 		break;
+				// 	default:
+				// 		activityMessage = "Es konnte keine Aktivität erfasst werden!";
+				// 		break;
+				// }
+				document.getElementById('trackedActivity').innerText = app.trackedActivity;
 			}
 		});
 
