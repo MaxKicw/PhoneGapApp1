@@ -100,7 +100,8 @@ body{
 }
 .big{
     top: 1vh;
-    max-height: 90vh;
+	max-height: 99vh;
+	overflow: scroll;
 }
 .card p, h1{
 	color: white;
@@ -117,7 +118,7 @@ body{
 	width: 85%;
 	margin-left: 2.5%;
 	border-radius: 25px;
-	padding: 1px;
+	padding: 10px;
 	margin-top: 5px;
 }
 .button p{
