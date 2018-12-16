@@ -244,9 +244,9 @@ function shouldSend(choice){
 //---------------JSON-Call------------------------//
 function showData(){
 	alert("Deine Geräte-ID: "+app.uuid);
-	alert("Die automatisch erkannte Aktivität: "+app.trackedActivity);
+	alert("Die automatisch erkannte Aktivität: "+JSON.stringify(app.trackedActivity));
 	alert("Hat diese gepasst?: "+app.user_answer);
-	alert("Falls Nein -> Deine wahre Aktivität: "+app.userActivity);
+	alert("Falls Nein -> Deine wahre Aktivität: "+JSON.stringify(app.userActivity));
 }
 function sendToServer(){
 		// alert("Send stuff!");
