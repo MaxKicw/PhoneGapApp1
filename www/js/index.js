@@ -242,7 +242,7 @@ function shouldSend(choice){
 	}
 }
 //---------------JSON-Call------------------------//
-function shouldSend(){
+function showData(){
 	alert("Deine Geräte-ID: "+app.uuid);
 	alert("Die automatisch erkannte Aktivität: "+app.trackedActivity);
 	alert("Hat diese gepasst?: "+app.user_answer);
