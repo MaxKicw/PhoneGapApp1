@@ -99,7 +99,7 @@ body{
 	top: -120vh;
 }
 .big{
-    top: 5vh;
+    top: 1vh;
     max-height: 90vh;
 }
 .card p, h1{
@@ -117,7 +117,7 @@ body{
 	width: 85%;
 	margin-left: 2.5%;
 	border-radius: 25px;
-	padding: 10px;
+	padding: 1px;
 	margin-top: 5px;
 }
 .button p{
