@@ -302,6 +302,12 @@ function resetLocalData(){
 	app.timediff = "";
 }
 
+function showData(){
+	alert("UUID: "+app.uuid+" Nachricht erhalten am "+app.timestamp_push.date+" um "+app.timestamp_push.time);
+	alert("War die erkannte Aktivität korrekt? "+app.user_answer);
+	alert("Erkannte Aktivitäten (rohe Daten): "+JSON.stringify(app.pushAcitvity));
+	alert("Falls falsch -> deine Angabe: "+JSON.stringify(app.userActivity));
+}
 
 
 
