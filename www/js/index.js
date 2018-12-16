@@ -110,7 +110,7 @@ var app = {
 			//Both
 			desiredAccuracy: 20, // Desired Accuracy of the location updates (lower means more accurate but more battery consumption)
 			distanceFilter: 5, // (Meters) How far you must move from the last point to trigger a location update
-			debug: true, // <-- Enable to show visual indications when you receive a background location update
+			debug: false, // <-- Enable to show visual indications when you receive a background location update
 			interval: 9000, // (Milliseconds) Requested Interval in between location updates.
 			useActivityDetection: true, // Uses Activitiy detection to shut off gps when you are still (Greatly enhances Battery Life)
 			
