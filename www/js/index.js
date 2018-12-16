@@ -129,7 +129,7 @@ var app = {
 		   }, function(err) {
 				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
 		   });
-		}, 15000);
+		}, 6000);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
