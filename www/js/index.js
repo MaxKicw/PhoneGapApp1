@@ -76,9 +76,6 @@ var app = {
 					case "STILL":
 						document.getElementById('trackedActivity').innerText = "Das Handy lag nicht bei dir.";
 						break;
-					case "WALKING":
-						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß.";
-						break;
 					case "ON_FOOT":
 						document.getElementById('trackedActivity').innerText = "Du standest aufrecht.";
 						break;
@@ -87,6 +84,9 @@ var app = {
 						break;
 					case "RUNNING":
 						document.getElementById('trackedActivity').innerText = "Du warst Joggen.";
+						break;
+					case "WALKING":
+						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß.";
 						break;
 					case "ON_BICYLE":
 						document.getElementById('trackedActivity').innerText = "Du war auf dem Fahrrad.";
@@ -300,13 +300,6 @@ function resetLocalData(){
 	app.pushAcitvity="";
 	app.verzögerungsGrund = "";
 	app.timediff = "";
-}
-
-function showData(){
-	alert("UUID: "+app.uuid+" Nachricht erhalten am "+app.timestamp_push.date+" um "+app.timestamp_push.time);
-	alert("War die erkannte Aktivität korrekt? "+app.user_answer);
-	alert("Erkannte Aktivitäten (rohe Daten): "+JSON.stringify(app.pushAcitvity));
-	alert("Falls falsch -> deine Angabe: "+JSON.stringify(app.userActivity));
 }
 
 
