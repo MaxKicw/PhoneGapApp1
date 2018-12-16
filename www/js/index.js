@@ -74,22 +74,22 @@ var app = {
 				}
 				switch(highestKey){
 					case "STILL":
-						document.getElementById('trackedActivity').innerText = "Das Handy lag nicht bei dir.";
+						document.getElementById('trackedActivity').innerText = "Das Smartphone lag nicht bei dir.";
+						break;
+					case "WALKING":
+						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
 						break;
 					case "ON_FOOT":
 						document.getElementById('trackedActivity').innerText = "Du standest aufrecht.";
 						break;
 					case "IN_VEHICLE":
-						document.getElementById('trackedActivity').innerText = "Du warst in einem Fahrzeug.";
+						document.getElementById('trackedActivity').innerText = "Du warst in einem Fahrzeug unterwegs.";
 						break;
 					case "RUNNING":
 						document.getElementById('trackedActivity').innerText = "Du warst Joggen.";
 						break;
-					case "WALKING":
-						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß.";
-						break;
 					case "ON_BICYLE":
-						document.getElementById('trackedActivity').innerText = "Du war auf dem Fahrrad.";
+						document.getElementById('trackedActivity').innerText = "Du war auf dem Fahrrad unterwegs.";
 						break;
 					case "TILTING":
 						document.getElementById('trackedActivity').innerText = "Du saßst mit dem Handy in der Hand.";
@@ -242,6 +242,12 @@ function shouldSend(choice){
 	}
 }
 //---------------JSON-Call------------------------//
+function shouldSend(){
+	alert("Deine Geräte-ID: "+app.uuid);
+	alert("Die automatisch erkannte Aktivität: "+app.trackedActivity);
+	alert("Hat diese gepasst?: "+app.user_answer);
+	alert("Falls Nein -> Deine wahre Aktivität: "+app.userActivity);
+}
 function sendToServer(){
 		// alert("Send stuff!");
 		let timestamp_send_date = moment().format("DD.MM.YY");
