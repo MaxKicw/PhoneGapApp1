@@ -74,7 +74,7 @@ var app = {
 				}
 				switch(highestKey){
 					case "STILL":
-						document.getElementById('trackedActivity').innerText = "Das Smartphone lag nicht bei dir.";
+						document.getElementById('trackedActivity').innerText = "Das Smartphone war unbewegt.";
 						break;
 					case "WALKING":
 						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
@@ -92,7 +92,7 @@ var app = {
 						document.getElementById('trackedActivity').innerText = "Du war auf dem Fahrrad unterwegs.";
 						break;
 					case "TILTING":
-						document.getElementById('trackedActivity').innerText = "Du saßst mit dem Handy in der Hand.";
+						document.getElementById('trackedActivity').innerText = "Du hattes das Smartphone in der Hand.";
 						break;
 					case "UNKNOWN":
 						document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
