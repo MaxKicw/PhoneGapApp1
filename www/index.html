@@ -28,9 +28,6 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
-    <script src="https://unpkg.com/moment"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"
-        type="text/javascript"></script>
     <!-- Good default declaration:
     * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
@@ -44,98 +41,26 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <title>Hello World</title>
 </head>
+
 <body>
-        <div class="wraper">
-			<div class="card active" id="intro">
-				<h1>Herzlich Willkommen</h1>
-				<p>Wenn alle Boxen grün sind, nimmst du an dem Test teil! Die App sammelt dann Daten und sendet Sie für Forschungszwecke an die Hochschule!</p>
-				<div class="button" onclick="trackingToggle()" id="track-btn">
-					<p id="track"></p>
-                </div>
-                <div class="button" id="bg-btn">
-                    <p class="background" id="background">Bringe die App bitte einmal in den Hintergrund!</p>
-				</div>
-                <div class="button" id="rdy-btn">
-                    <div id="deviceready">
-                        <p class="event listening">Mit der App stimmt etwas nicht!</p>
-                        <p class="event received">Die App funktioniert ohne Probleme! </p>
-                    </div>
-                </div>
-			</div>
-			<div class="card" id="q1">
-				<p id="frage"></p>
-				<div class="button">
-					<p id="trackedActivity"></p>
-				</div>
-				<p>Trifft das zu bzw. ist das korrekt?</p>
-				<div class="button" onclick="user_answer('Ja')">
-					<p>Ja</p>
-				</div>
-				<div class="button" onclick="user_answer('Nein')">
-					<p>Nein</p>
-				</div>
-			</div>
-			<div class="card" id="q2">
-				<p id="verzugNachricht"></p>
-				<div class="button" onclick="answer('Erst angekommen')">
-					<p>Nachricht ist erst jetzt auf meinem Gerät angekommen.</p>
-				</div>
-				<div class="button" onclick="answer('Nicht gesehen')">
-					<p>Ich habe die Nachricht vorher nicht gesehen.</p>
-				</div>
-				<div class="button" onclick="answer('Nicht erreichbar')">
-					<p>Ich konnte die Nachricht vorher nicht öffnen / war nicht erreichbar.</p>
-				</div>
-				<div class="button" onclick="answer('Keine Lust')">
-					<p>Ich hatte vorher keine Lust die Nachricht zu öffnen / zu beantworten.</p>
-				</div>
-				<div class="button" onclick="answer('Nicht mehr erinnern')">
-					<p>Ich kann mich nicht mehr erinnern.</p>
-				</div>
-			</div>
-			<div class="card" id="q3">
-				<p id="falscheAktivitätNachricht"></p>
-				<div class="button" onclick="acitvityCorrection('STILL')">
-					<p>Ich hatte das Smartphone nicht griffbereit</p>
-				</div>
-				<div class="button" onclick="acitvityCorrection('TILTING')">
-					<p>Ich saß mit dem Smartphone in der Hand.</p>
-				</div>
-				<div class="button" onclick="acitvityCorrection('WALKING')">
-					<p>Ich war zu Fuß unterwegs.</p>
-				</div>
-				<div class="button" onclick="acitvityCorrection('ON_FOOT')">
-					<p>Ich stand aufrecht.</p>
-				</div>
-				<div class="button" onclick="acitvityCorrection('RUNNING')">
-					<p>Ich bin schnell gelaufen / war joggen.</p>
-				</div>
-				<div class="button" onclick="acitvityCorrection('ON_BICYCLE')">
-					<p>Ich war auf dem Fahrrad unterwegs.</p>
-				</div>
-				<div class="button" onclick="acitvityCorrection('IN_VEHICLE')">
-					<p>Ich war in einem Fahrzeug unterwegs.</p>
-				</div>
-				<div class="button" onclick="acitvityCorrection('UNKNOWN')">
-					<p>Weiß ich nicht mehr!</p>
-				</div>
-			</div>
-			<div class="card" id="q4">
-				<p>Vielen Dank, dass Du bei der Befragung teilgenommen hast! Dürfen die Daten nun an die Hochschule gesendet werden?</p>
-				<div class="button" onclick="shouldSend('Ja')">
-					<p>Ja</p>
-				</div>
-				<div class="button" onclick="shouldSend('Nein')">
-					<p>Nein</p>
-				</div>
-				<div class="button" onclick="showData()">
-					<p>Erfasste Daten anzeigen</p>
-				</div>
-			</div>
-			<div class="card" id="q5">
-				<p id="dankeText"></p>
-			</div>
-		</div>
+        <div class="menu">
+            <div class="logo"></div>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+        </div>
+        <div class="inhalt">
+            <div class="kachel" id="1"></div>
+            <div class="kachel" id="2"></div>
+            <div class="kachel" id="3"></div>
+            <div class="kachel" id="4"></div>
+            <div class="kachel" id="5"></div>
+            <div class="kachel" id="6"></div>
+            <div class="kachel" id="7"></div>
+            <div class="kachel" id="8"></div>
+        </div>
+        
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
