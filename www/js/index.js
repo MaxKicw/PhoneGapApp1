@@ -33,7 +33,16 @@ var app = {
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		//For JSON Can
-
+		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
+		window.plugins.PushbotsPlugin.on("registered", 		function(token){
+			alert("Registration Id:" + token);
+		});
+	
+			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
+			
+		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
+			console.log("user:ids" + JSON.stringify(data));
+		});
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
@@ -298,19 +307,6 @@ function resetLocalData(){
 	app.timediff = "";
 }
 
-function register(){
-	window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
-		window.plugins.PushbotsPlugin.on("registered", 		function(token){
-			alert("Registration Id:" + token);
-		});
-	
-			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
-			
-		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
-			console.log("user:ids" + JSON.stringify(data));
-		});
-		alert("Done");
-}
 
 
 
