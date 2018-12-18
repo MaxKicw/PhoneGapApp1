@@ -12,10 +12,12 @@ var app = {
 	background:false,
     // Application Constructor
     initialize: function() {
+		alert("Hallo");
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
 			alert("Registration Id:" + token);
 		});
+		alert("Tschau");
         this.bindEvents();
     },
     // Bind Event Listeners
