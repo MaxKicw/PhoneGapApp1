@@ -35,21 +35,46 @@ var app = {
 		//For JSON Can
 		
 		//
-		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
-		document.getElementById('track-btn').style.backgroundColor = "#46A364";
 		app.receivedEvent('deviceready');
-		document.getElementById('rdy-btn').style.backgroundColor = "#46A364";
-		// Only with First time registration - For Pushbot
+        console.log("----Device-Ready----");
+		navigator.vibrate(300);
+    	var options = {frequency: 1000};
+   		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
+
+		// Only with First time registration
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
-			console.log("Registration Id:" + token);
+		alert("Registration Id:" + token);
 		});
-	
-			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
-			
+
+		//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
+		
 		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
-			console.log("user:ids" + JSON.stringify(data));
+		console.log("user:ids" + JSON.stringify(data));
 		});
+		navigator.geolocation.getCurrentPosition(positionSuccess);
+		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
+		navigator.proximity.enableSensor();
+		setInterval(function(){
+			navigator.proximity.getProximityState(proximitySuccess);
+            window.plugin.lightsensor.getReading(lightSuccess);
+		}, 1000);
+		fetchNetworkConnectionInfo();
+		// document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
+		// document.getElementById('track-btn').style.backgroundColor = "#46A364";
+		// app.receivedEvent('deviceready');
+		// document.getElementById('rdy-btn').style.backgroundColor = "#46A364";
+		// // Only with First time registration - For Pushbot
+		// window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
+		// window.plugins.PushbotsPlugin.on("registered", 		function(token){
+		// 	console.log("Registration Id:" + token);
+		// });
+	
+		// 	//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
+			
+		// window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
+		// 	console.log("user:ids" + JSON.stringify(data));
+		// });
 			
 			//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 			
