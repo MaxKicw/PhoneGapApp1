@@ -12,12 +12,6 @@ var app = {
 	background:false,
     // Application Constructor
     initialize: function() {
-		alert("Hallo");
-		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
-		window.plugins.PushbotsPlugin.on("registered", 		function(token){
-			alert("Registration Id:" + token);
-		});
-		alert("Tschau");
         this.bindEvents();
     },
     // Bind Event Listeners
@@ -39,20 +33,23 @@ var app = {
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		//For JSON Can
-		
-		//
-		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
-		document.getElementById('track-btn').style.backgroundColor = "#46A364";
-		app.receivedEvent('deviceready');
-		document.getElementById('rdy-btn').style.backgroundColor = "#46A364";
-		// Only with First time registration - For Pushbot   878e3aaca8af23571d71081f8c0374b5
+		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
+		window.plugins.PushbotsPlugin.on("registered", 		function(token){
+			alert("Registration Id:" + token);
+		});
 	
 			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
 			
 		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
 			console.log("user:ids" + JSON.stringify(data));
 		});
-			
+		//
+		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
+		document.getElementById('track-btn').style.backgroundColor = "#46A364";
+		app.receivedEvent('deviceready');
+		document.getElementById('rdy-btn').style.backgroundColor = "#46A364";
+	
+		// Only with First time registration - For Pushbot   878e3aaca8af23571d71081f8c0374b5
 			//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
