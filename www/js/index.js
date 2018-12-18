@@ -1,15 +1,22 @@
-// Alles geht außer der Drecks nachrichtengenerator 
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 var app = {
-	user_answer:"",
-	calcNowTimestamp:"",
-	trackedActivity:"",
-	pushAcitvity:"",
-	userActivity:{STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYLE:undefined,TILTING:undefined,UNKNOWN:undefined},
-	timestamp_push:{},
-	verzögerungsGrund:"",
-	uuid:"",
-	track:true,
-	background:false,
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -19,116 +26,38 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
-		document.addEventListener('deviceready', this.onDeviceReady, false);
-		document.addEventListener('pause', this.onPause, false);
-	},
-	onPause: function(){
-		app.background = true;
-		document.getElementById('background').innerText = 'Die App wurde in den Hintergrund gebracht!';
-		document.getElementById('bg-btn').style.backgroundColor = "#46A364";
-	},
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
-	// function, we must explicitly call 'app.receivedEvent(...);'
+    // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-		//For JSON Can
+       	app.receivedEvent('deviceready');
+        console.log("----Device-Ready----");
+		navigator.vibrate(300);
+    	var options = {frequency: 1000};
+   		navigator.accelerometer.watchAcceleration(accelerometerSuccess, onError, options);
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
+
+		// Only with First time registration
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
-			alert("Registration Id:" + token);
-		});
-	
-			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
-			
-		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
-			console.log("user:ids" + JSON.stringify(data));
-		});
-		//
-		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
-		document.getElementById('track-btn').style.backgroundColor = "#46A364";
-		app.receivedEvent('deviceready');
-		document.getElementById('rdy-btn').style.backgroundColor = "#46A364";
-	
-		// Only with First time registration - For Pushbot   878e3aaca8af23571d71081f8c0374b5
-			//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
-			
-		window.plugins.PushbotsPlugin.on("notification:received", function(data){
-			if(app.track){
-				app.uuid = device.uuid;
-				app.pushActivity = app.trackedActivity;
-				let messageActivity = app.trackedActivity;
-				app.timestamp_push.date = moment().format("DD.MM.YY ");
-				app.timestamp_push.time = moment().format("HH:mm:ss");
-				app.calcNowTimestamp = new moment();
-				document.getElementById('q1').classList.add('active');
-				document.getElementById('intro').classList.remove('active');
-				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
-				let highestCount = 0;
-				let highestKey;
-				for (var x in messageActivity) {
-					if(messageActivity[x] >= highestCount){
-						highestCount = messageActivity[x];
-						highestKey = x;
-					}
-				}
-				switch(highestKey){
-					case "STILL":
-						document.getElementById('trackedActivity').innerText = "Das Smartphone war unbewegt.";
-						break;
-					case "WALKING":
-						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
-						break;
-					case "ON_FOOT":
-						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
-						break;
-					case "IN_VEHICLE":
-						document.getElementById('trackedActivity').innerText = "Du warst in einem Fahrzeug unterwegs.";
-						break;
-					case "RUNNING":
-						document.getElementById('trackedActivity').innerText = "Du bist schnell gegangen / wars joggen.";
-						break;
-					case "ON_BICYLE":
-						document.getElementById('trackedActivity').innerText = "Du war auf dem Fahrrad unterwegs.";
-						break;
-					case "TILTING":
-						document.getElementById('trackedActivity').innerText = "Du hattes das Smartphone in der Hand.";
-						break;
-					case "UNKNOWN":
-						document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
-						break;
-					default:
-						document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
-						break;
-				}
-			}
+		console.log("Registration Id:" + token);
 		});
 
-		// Setup Activity Recognition Plugin
-	// 	var bgLocationServices =  window.plugins.backgroundLocationServices;
-	// 	bgLocationServices.configure({
-	// 		//Both
-	// 		desiredAccuracy: 20, // Desired Accuracy of the location updates (lower means more accurate but more battery consumption)
-	// 		distanceFilter: 5, // (Meters) How far you must move from the last point to trigger a location update
-	// 		debug: false, // <-- Enable to show visual indications when you receive a background location update
-	// 		interval: 9000, // (Milliseconds) Requested Interval in between location updates.
-	// 		useActivityDetection: true, // Uses Activitiy detection to shut off gps when you are still (Greatly enhances Battery Life)
-			
-	// 		//Android Only
-	// 		notificationTitle: 'BG Plugin', // customize the title of the notification
-	// 		notificationText: 'Tracking', //customize the text of the notification
-	// 		fastestInterval: 5000 // <-- (Milliseconds) Fastest interval your app / server can handle updates
-			
-	//    });
-	//    bgLocationServices.start();
-	// 	// Wird alle 1000ms ausgeführt / Welche Aktivität machst du?
-	// 	setInterval(function(){
-	// 		bgLocationServices.registerForActivityUpdates(function(activities) {
-	// 			app.trackedActivity = activities
-	// 			// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
-	// 	   }, function(err) {
-	// 			alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
-	// 	   });
-	// 	}, 1000);
+		//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
+		
+		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
+		console.log("user:ids" + JSON.stringify(data));
+		});
+		navigator.geolocation.getCurrentPosition(positionSuccess);
+		navigator.gyroscope.watchGyroscope(gyroscopeSuccess, gyroscopeError, options);
+		navigator.proximity.enableSensor();
+		setInterval(function(){
+			navigator.proximity.getProximityState(proximitySuccess);
+            window.plugin.lightsensor.getReading(lightSuccess);
+		}, 1000);
+		fetchNetworkConnectionInfo();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -142,171 +71,75 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
-//---------------Define antwort vars ----------------//
-//----------------Antwortfunktionen----------------//
-function trackingToggle(){
-	if(app.track){
-		app.track = false;
-		document.getElementById('track').innerText = 'Klicke damit Daten gesendet werden!';
-		document.getElementById('track-btn').style.backgroundColor = "#FF0000";
+//------------Daten des Beschleunigungssensors--------------------//
 
-	}else{
-		app.track = true;
-		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
-		document.getElementById('track-btn').style.backgroundColor = "#46A364";
-	}
-}
-
-function user_answer(answer){
-	app.user_answer = answer;
-	let now = new moment();
-	let diff = moment.duration(now.diff(app.calcNowTimestamp));
-	diff = diff._data.minutes;
-	app.timediff = diff;
-	// alert(diff);
-	// Und Zeitdifferenz
-	if(app.user_answer === "Ja" && diff <= 0 ){
-		document.getElementById('q4').classList.add('active');
-		document.getElementById('q1').classList.remove('active');
-	}else if(app.user_answer === "Ja" && diff >= 5){
-		document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?"
-		document.getElementById('q2').classList.add('active');
-		document.getElementById('q1').classList.remove('active');
-	}else{
-		document.getElementById('falscheAktivitätNachricht').innerHTML = "Wenn die App die Aktivität am "+app.timestamp_push.date+" um "+app.timestamp_push.time+" falsch ermittelt hat, welche der folgenden Aktivitätsbeschreibungen trifft ansonsten am ehesten zu?"
-		document.getElementById('q3').classList.add('big');
-		document.getElementById('q1').classList.remove('active');
-	}
-}
-
-function answer(choice){
-	app.verzögerungsGrund = choice;
-	document.getElementById('q4').classList.add('active');
-	document.getElementById('q2').classList.remove('active');
+function accelerometerSuccess(acceleration) {
+        var node = document.createElement('div');
+        document.getElementById('1').innerHTML = '';
+        node.innerHTML = '<p>X-Achse :</p>'+acceleration.x+'<p>Y-Achse :</p>'+acceleration.y+'<p>Z-Achse :</p>'+acceleration.z+'<p>Time :</p>'+acceleration.timestamp;
+        document.getElementById('1').appendChild(node);
 };
-function acitvityCorrection(rightActivity){
-	switch(rightActivity){
-		case 'STILL':
-			app.userActivity.STILL = 100;
-			break;
-		case 'ON_FOOT':
-			app.userActivity.ON_FOOT = 100;
-			break;
-		case 'IN_VEHICLE':
-			app.userActivity.IN_VEHICLE = 100;
-			break;
-		case 'RUNNING':
-			app.userActivity.RUNNING = 100;
-			break;
-		case 'WALKING':
-			app.userActivity.WALKING = 100;
-			break;
-		case 'ON_BICYLE':
-			app.userActivity.ON_BICYCLE = 100;
-			break;
-		case 'TILTING':
-			app.userActivity.TILTING = 100;
-			break;
-		case 'UNKNOWN':
-			app.userActivity.UNKNOWN = 100;
-			break;
-	}
-	if(app.timediff >= 5){
-		document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?";
-		document.getElementById('q2').classList.add('active');
-		document.getElementById('q3').classList.remove('big');
-	}else{
-		document.getElementById('q4').classList.add('active');
-		document.getElementById('q3').classList.remove('big');
-	}
-	
-}
-
-function shouldSend(choice){
-	if(choice === 'Ja'){
-		sendToServer();
-		document.getElementById("dankeText").innerHTML = "Die Daten wurden an die Hochschule gesendet!";
-		document.getElementById('q5').classList.add('active');
-		document.getElementById('q4').classList.remove('active');
-	}else{
-		document.getElementById("dankeText").innerHTML = "Die Daten werden NICHT an die Hochschule gesendet!";
-		document.getElementById('q5').classList.add('active');
-		document.getElementById('q4').classList.remove('active');
-		resetLocalData();
-		setTimeout(function(){
-			document.getElementById('q5').classList.remove('active');
-			document.getElementById('intro').classList.add('active');
-		}, 1200);
-	}
-}
-//---------------JSON-Call------------------------//
-function showData(){
-	alert("Deine Geräte-ID: "+app.uuid);
-	alert("Die automatisch erkannte Aktivität: "+JSON.stringify(app.trackedActivity));
-	alert("Hat diese gepasst?: "+app.user_answer);
-	alert("Falls Nein -> Deine wahre Aktivität: "+JSON.stringify(app.userActivity));
-}
-function sendToServer(){
-		// alert("Send stuff!");
-		let timestamp_send_date = moment().format("DD.MM.YY");
-		let timestamp_send_time = moment().format("HH:mm:ss");
-		var form = new FormData();
-		form.append("UUID", app.uuid);
-		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.date);
-		form.append("TIMESTAMP_PUSH_TIME", app.timestamp_push.time);
-		form.append("USER_ANSWER", app.user_answer);
-		form.append("USER_DELAY_REASON",app.verzögerungsGrund);
-		// Tracked Variablen
-		form.append("TRACKED_ACTIVITY_ON_FOOT", app.pushActivity.ON_FOOT);
-		form.append("TRACKED_ACTIVITY_IN_VEHICLE", app.pushActivity.IN_VEHICLE);
-		form.append("TRACKED_ACTIVITY_RUNNING", app.pushActivity.RUNNING);
-		form.append("TRACKED_ACTIVITY_WALKING", app.pushActivity.WALKING);
-		form.append("TRACKED_ACTIVITY_ON_BICYCLE", app.pushActivity.ON_BICYLE);
-		form.append("TRACKED_ACTIVITY_STILL", app.pushActivity.STILL);
-		form.append("TRACKED_ACTIVITY_TILTING", app.pushActivity.TILTING);
-		form.append("TRACKED_ACTIVITY_UNKNOWN", app.pushActivity.UNKNOWN);
-		// Usereingabe Variablen
-		form.append("USER_ACTIVITY_ON_FOOT", app.userActivity.ON_FOOT);
-		form.append("USER_ACTIVITY_IN_VEHICLE", app.userActivity.IN_VEHICLE);
-		form.append("USER_ACTIVITY_RUNNING", app.userActivity.RUNNING);
-		form.append("USER_ACTIVITY_WALKING", app.userActivity.WALKING);
-		form.append("USER_ACTIVITY_ON_BICYCLE", app.userActivity.ON_BICYLE);
-		form.append("USER_ACTIVITY_STILL", app.userActivity.STILL);
-		form.append("USER_ACTIVITY_TILTING", app.userActivity.TILTING);
-		form.append("USER_ACTIVITY_UNKNOWN", app.userActivity.UNKNOWN);
-		form.append("TIMESTAMP_SEND_DATE", timestamp_send_date);
-		form.append("TIMESTAMP_SEND_TIME", timestamp_send_time);
-		
-		let settings = {
-			method:"POST",
-			mode:'cors',
-			body: form,
-		}
-		
-		let request = new Request(serverURL,settings);
-
-		fetch(request)
-		.then((res) => {
-			setTimeout(function(){
-				document.getElementById('q5').classList.remove('active');
-				document.getElementById('intro').classList.add('active');
-				resetLocalData();
-			}, 1200);
-		});	
+function onError(error){
+        console.log("---Error--"+error.code+"---MSG---"+error.message);
 };
 
-function resetLocalData(){
-	app.user_answer="";
-	app.calcNowTimestamp="";
-	app.trackedActivity="";
-	app.userActivity={STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYLE:undefined,TILTING:undefined,UNKNOWN:undefined};
-	app.timestamp_push={};
-	app.pushAcitvity="";
-	app.verzögerungsGrund = "";
-	app.timediff = "";
-}
+//------------Art der Netzwerkverbindung--------------------//
 
+function fetchNetworkConnectionInfo(){
+	console.log("-----Netzwerk-----");
+	navigator.vibrate(300);
+    var networkType = navigator.network.connection.type;
+    var networkTypes = {};
+    networkTypes[Connection.NONE] = "Keine Netzwerkverbindung";
+    networkTypes[Connection.UNKNOWN] = "Unbekannte Netzwerkverbindung";
+    networkTypes[Connection.CELL_2G] = "2G Netzwerkverbindung";
+    networkTypes[Connection.CELL_3G] = "3G Netzwerkverbindung";
+    networkTypes[Connection.CELL_4G] = "4G Netzwerkverbindung";
+    networkTypes[Connection.WIFI] = "WiFi Netzwerkverbindung";
+    networkTypes[Connection.ETHERNET] = "Ethernet Netzwerkverbindung";
+    
+    document.getElementById('2').innerHTML = networkTypes[networkType];
+};
 
+//---------GPS-Location----------------------------------//
 
+function positionSuccess(position){
+	navigator.vibrate(300);
+    console.log("-----Location-----");
+    var node = document.createElement('div');
+    node.innerHTML = '<p>Latitude : </p>'+ position.coords.latitude+'<p>Longitude :</p>'+position.coords.longitude+'<p>Höhe :</p>'+position.coords.altitude;
+    document.getElementById('3').appendChild(node);
+};
 
+//---------Gyroscope----------------------------------//
+
+function gyroscopeSuccess(acceleration) {
+	    console.log("-----GYRO-----");
+		document.getElementById('4').innerHTML = '';
+        var node = document.createElement('div');
+      	node.innerHTML = "<p>X-Achse: </p>"+acceleration.x+"<p><Y-Achse: </p>"+acceleration.y+"<p><Z-Achse: </p>"+acceleration.z;
+		document.getElementById('4').appendChild(node);
+};
+function gyroscopeError(msg) {
+	    console.log("-----GYRO-RRor----");
+		alert("-----GYRO-RRor----");
+        var node = document.createElement('div');
+        document.getElementById('4').innerHTML = '';
+        node.innerHTML = "Error"+msg.info+"MSG"+msg.message;
+        document.getElementById('4').appendChild(node);
+};
+//-------------Proximity------------------------//
+function proximitySuccess(state){
+        document.getElementById('5').innerHTML = '';
+        var node = document.createElement('div');
+      	node.innerHTML = "<p>Success: "+state;
+		document.getElementById('5').appendChild(node);
+};
+//---------------Light-------------------------//
+function lightSuccess(reading){
+        document.getElementById('6').innerHTML = '';
+        var node = document.createElement('div');
+      	node.innerHTML = "<p>Success: "+JSON.stringify(reading);
+		document.getElementById('6').appendChild(node);
+	      // Output: {"intensity": 25}
+};
