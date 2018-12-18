@@ -12,6 +12,10 @@ var app = {
 	background:false,
     // Application Constructor
     initialize: function() {
+		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
+		window.plugins.PushbotsPlugin.on("registered", 		function(token){
+			alert("Registration Id:" + token);
+		});
         this.bindEvents();
     },
     // Bind Event Listeners
@@ -39,11 +43,7 @@ var app = {
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
 		app.receivedEvent('deviceready');
 		document.getElementById('rdy-btn').style.backgroundColor = "#46A364";
-		// Only with First time registration - For Pushbot
-		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
-		window.plugins.PushbotsPlugin.on("registered", 		function(token){
-			alert("Registration Id:" + token);
-		});
+		// Only with First time registration - For Pushbot   878e3aaca8af23571d71081f8c0374b5
 	
 			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
 			
