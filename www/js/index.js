@@ -41,7 +41,7 @@ var app = {
 			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
 			
 		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
-			console.log("user:ids" + JSON.stringify(data));
+			alert("user:ids" + JSON.stringify(data));
 		});
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
