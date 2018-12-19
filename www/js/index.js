@@ -113,13 +113,6 @@ var app = {
     alert('[motionchange] -', event.isMoving, event.location);
   });
  
-  bgGeo.onHttp(function(response) {
-    alert(['http] - ', response.success, response.status, response.responseText);
-  });
- 
-  bgGeo.onProviderChange(function(event) {
-    alert('[providerchange] -', event.status, event.enabled, event.gps, event.network);
-  });
  
   // 2. Execute #ready method:
   bgGeo.ready({
@@ -128,7 +121,6 @@ var app = {
     logLevel: bgGeo.LOG_LEVEL_VERBOSE,
     desiredAccuracy: bgGeo.DESIRED_ACCURACY_HIGH,
     distanceFilter: 10,
-    url: 'http://my.server.com/locations',
     autoSync: true,
     stopOnTerminate: false,
     startOnBoot: true
