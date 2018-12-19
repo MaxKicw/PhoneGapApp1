@@ -102,6 +102,47 @@ var app = {
 				}
 			}
 		});
+	// new plugin
+		var bgGeo = window.BackgroundGeolocation;
+ 
+  bgGeo.onLocation(function(location) {
+    alert('[location] -', location);
+  });
+ 
+  bgGeo.onMotionChange(function(event) {
+    alert('[motionchange] -', event.isMoving, event.location);
+  });
+ 
+  bgGeo.onHttp(function(response) {
+    alert(['http] - ', response.success, response.status, response.responseText);
+  });
+ 
+  bgGeo.onProviderChange(function(event) {
+    alert('[providerchange] -', event.status, event.enabled, event.gps, event.network);
+  });
+ 
+  // 2. Execute #ready method:
+  bgGeo.ready({
+    reset: true,
+    debug: true,
+    logLevel: bgGeo.LOG_LEVEL_VERBOSE,
+    desiredAccuracy: bgGeo.DESIRED_ACCURACY_HIGH,
+    distanceFilter: 10,
+    url: 'http://my.server.com/locations',
+    autoSync: true,
+    stopOnTerminate: false,
+    startOnBoot: true
+  }, function(state) {    // <-- Current state provided to #configure callback
+    // 3.  Start tracking
+    alert('BackgroundGeolocation is configured and ready to use');
+    if (!state.enabled) {
+      bgGeo.start().then(function() {
+        alert('- BackgroundGeolocation tracking started');
+      });
+    }
+  });
+		
+//   _____________
 
 		// Setup Activity Recognition Plugin
 	// 	var bgLocationServices =  window.plugins.backgroundLocationServices;
