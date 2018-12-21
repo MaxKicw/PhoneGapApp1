@@ -42,6 +42,30 @@ var app = {
 		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
 			console.log("user:ids" + JSON.stringify(data));
 		});
+		// Loc
+		var bgGeo = window.BackgroundGeolocation;
+		bgGeo.ready({
+			reset: true,
+			debug: true,
+			logLevel: bgGeo.LOG_LEVEL_VERBOSE,
+			desiredAccuracy: bgGeo.DESIRED_ACCURACY_HIGH,
+			distanceFilter: 10,
+			url: 'http://my.server.com/locations',
+			autoSync: true,
+			stopOnTerminate: false,
+			startOnBoot: true
+		  }, function(state) {    // <-- Current state provided to #configure callback
+			// 3.  Start tracking
+			console.log('BackgroundGeolocation is configured and ready to use');
+			if (!state.enabled) {
+			  bgGeo.start().then(function() {
+				console.log('- BackgroundGeolocation tracking started');
+			  });
+			}
+		  });
+		  bgGeo.onActivityChange(activityChangeEvent => {
+			alert('[activitychange] ', activityChangeEvent.activity, activityChangeEvent.confidence);
+		  });
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
