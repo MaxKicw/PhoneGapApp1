@@ -34,16 +34,6 @@ var app = {
     onDeviceReady: function() {
 		alert("Ready");
 		//For JSON Can
-		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
-		window.plugins.PushbotsPlugin.on("registered", 		function(token){
-			alert("Registration Id:" + token);
-		});
-	
-			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
-			
-		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
-			console.log("user:ids" + JSON.stringify(data));
-		});
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
@@ -141,7 +131,19 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
+	},
+	push: function(){
+		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
+		window.plugins.PushbotsPlugin.on("registered", 		function(token){
+			alert("Registration Id:" + token);
+		});
+	
+			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
+			
+		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
+			console.log("user:ids" + JSON.stringify(data));
+		});
+	}
 };
 var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
 //---------------Define antwort vars ----------------//
@@ -180,6 +182,8 @@ function user_answer(answer){
 		document.getElementById('q1').classList.remove('active');
 	}
 }
+
+
 
 function answer(choice){
 	app.verzögerungsGrund = choice;
@@ -307,6 +311,7 @@ function resetLocalData(){
 	app.verzögerungsGrund = "";
 	app.timediff = "";
 }
+
 
 
 
