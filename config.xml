@@ -9,7 +9,7 @@
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
-    <!-- <plugin name="@mauron85/cordova-plugin-background-geolocation" source="npm"/> -->
+    <plugin name="@mauron85/cordova-plugin-background-geolocation" source="npm"/>
     <preference name="android-minSdkVersion" value="14" />
 	<plugin name="pushbots-cordova-plugin" spec="1.5.x" source="npm" />
 	<preference name="android-minSdkVersion" value="15" />
