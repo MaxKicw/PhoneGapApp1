@@ -50,8 +50,6 @@ var app = {
 			logLevel: bgGeo.LOG_LEVEL_VERBOSE,
 			desiredAccuracy: bgGeo.DESIRED_ACCURACY_HIGH,
 			distanceFilter: 10,
-			url: 'http://my.server.com/locations',
-			autoSync: true,
 			stopOnTerminate: false,
 			startOnBoot: true
 		  }, function(state) {    // <-- Current state provided to #configure callback
@@ -62,9 +60,6 @@ var app = {
 				console.log('- BackgroundGeolocation tracking started');
 			  });
 			}
-		  });
-		  bgGeo.onActivityChange(activityChangeEvent => {
-			alert('[activitychange] ', activityChangeEvent.activity, activityChangeEvent.confidence);
 		  });
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
