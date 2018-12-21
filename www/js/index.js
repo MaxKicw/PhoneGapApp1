@@ -41,7 +41,7 @@ var app = {
 			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
 			
 		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
-			alert("user:ids" + JSON.stringify(data));
+			console.log("user:ids" + JSON.stringify(data));
 		});
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
@@ -102,66 +102,33 @@ var app = {
 				}
 			}
 		});
-	// new plugin
-		var bgGeo = window.BackgroundGeolocation;
- 
-  bgGeo.onLocation(function(location) {
-    alert('[location] -', location);
-  });
- 
-  bgGeo.onMotionChange(function(event) {
-    alert('[motionchange] -', event.isMoving, event.location);
-  });
- 
- 
-  // 2. Execute #ready method:
-  bgGeo.ready({
-    reset: true,
-    debug: true,
-    logLevel: bgGeo.LOG_LEVEL_VERBOSE,
-    desiredAccuracy: bgGeo.DESIRED_ACCURACY_HIGH,
-    distanceFilter: 10,
-    autoSync: true,
-    stopOnTerminate: false,
-    startOnBoot: true
-  }, function(state) {    // <-- Current state provided to #configure callback
-    // 3.  Start tracking
-    alert('BackgroundGeolocation is configured and ready to use');
-    if (!state.enabled) {
-      bgGeo.start().then(function() {
-        alert('- BackgroundGeolocation tracking started');
-      });
-    }
-  });
-		
-//   _____________
 
 		// Setup Activity Recognition Plugin
-	// 	var bgLocationServices =  window.plugins.backgroundLocationServices;
-	// 	bgLocationServices.configure({
-	// 		//Both
-	// 		desiredAccuracy: 20, // Desired Accuracy of the location updates (lower means more accurate but more battery consumption)
-	// 		distanceFilter: 5, // (Meters) How far you must move from the last point to trigger a location update
-	// 		debug: false, // <-- Enable to show visual indications when you receive a background location update
-	// 		interval: 9000, // (Milliseconds) Requested Interval in between location updates.
-	// 		useActivityDetection: true, // Uses Activitiy detection to shut off gps when you are still (Greatly enhances Battery Life)
+		var bgLocationServices =  window.plugins.backgroundLocationServices;
+		bgLocationServices.configure({
+			//Both
+			desiredAccuracy: 20, // Desired Accuracy of the location updates (lower means more accurate but more battery consumption)
+			distanceFilter: 5, // (Meters) How far you must move from the last point to trigger a location update
+			debug: false, // <-- Enable to show visual indications when you receive a background location update
+			interval: 9000, // (Milliseconds) Requested Interval in between location updates.
+			useActivityDetection: true, // Uses Activitiy detection to shut off gps when you are still (Greatly enhances Battery Life)
 			
-	// 		//Android Only
-	// 		notificationTitle: 'BG Plugin', // customize the title of the notification
-	// 		notificationText: 'Tracking', //customize the text of the notification
-	// 		fastestInterval: 5000 // <-- (Milliseconds) Fastest interval your app / server can handle updates
+			//Android Only
+			notificationTitle: 'BG Plugin', // customize the title of the notification
+			notificationText: 'Tracking', //customize the text of the notification
+			fastestInterval: 5000 // <-- (Milliseconds) Fastest interval your app / server can handle updates
 			
-	//    });
-	//    bgLocationServices.start();
-	// 	// Wird alle 1000ms ausgeführt / Welche Aktivität machst du?
-	// 	setInterval(function(){
-	// 		bgLocationServices.registerForActivityUpdates(function(activities) {
-	// 			app.trackedActivity = activities
-	// 			// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
-	// 	   }, function(err) {
-	// 			alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
-	// 	   });
-	// 	}, 1000);
+	   });
+	   bgLocationServices.start();
+		// Wird alle 1000ms ausgeführt / Welche Aktivität machst du?
+		setInterval(function(){
+			bgLocationServices.registerForActivityUpdates(function(activities) {
+				app.trackedActivity = activities
+				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
+		   }, function(err) {
+				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
+		   });
+		}, 1000);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
