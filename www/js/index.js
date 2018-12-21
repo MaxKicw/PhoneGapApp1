@@ -43,24 +43,7 @@ var app = {
 			console.log("user:ids" + JSON.stringify(data));
 		});
 		// Loc
-		var bgGeo = window.BackgroundGeolocation;
-		bgGeo.ready({
-			reset: true,
-			debug: true,
-			logLevel: bgGeo.LOG_LEVEL_VERBOSE,
-			desiredAccuracy: bgGeo.DESIRED_ACCURACY_HIGH,
-			distanceFilter: 10,
-			stopOnTerminate: false,
-			startOnBoot: true
-		  }, function(state) {    // <-- Current state provided to #configure callback
-			// 3.  Start tracking
-			console.log('BackgroundGeolocation is configured and ready to use');
-			if (!state.enabled) {
-			  bgGeo.start().then(function() {
-				console.log('- BackgroundGeolocation tracking started');
-			  });
-			}
-		  });
+		
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
