@@ -33,33 +33,33 @@ var app = {
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 
-		BackgroundGeolocation.configure({
-			locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
-			desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
-			stationaryRadius: 50,
-			distanceFilter: 50,
-			notificationTitle: 'Background tracking',
-			notificationText: 'enabled',
-			debug: true,
-			interval: 10000,
-			fastestInterval: 5000,
-			activitiesInterval: 10000,
-			url: 'http://192.168.81.15:3000/location',
-			httpHeaders: {
-			  'X-FOO': 'bar'
-			},
-			// customize post properties
-			postTemplate: {
-			  lat: '@latitude',
-			  lon: '@longitude',
-			  foo: 'bar' // you can also add your own properties
-			}
-		  });
+		// BackgroundGeolocation.configure({
+		// 	locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
+		// 	desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
+		// 	stationaryRadius: 50,
+		// 	distanceFilter: 50,
+		// 	notificationTitle: 'Background tracking',
+		// 	notificationText: 'enabled',
+		// 	debug: true,
+		// 	interval: 10000,
+		// 	fastestInterval: 5000,
+		// 	activitiesInterval: 10000,
+		// 	url: 'http://192.168.81.15:3000/location',
+		// 	httpHeaders: {
+		// 	  'X-FOO': 'bar'
+		// 	},
+		// 	// customize post properties
+		// 	postTemplate: {
+		// 	  lat: '@latitude',
+		// 	  lon: '@longitude',
+		// 	  foo: 'bar' // you can also add your own properties
+		// 	}
+		//   });
 
-		  BackgroundGeolocation.start();
-		  BackgroundGeolocation.on('start', function() {
-			alert("Go");
-		  });
+		//   BackgroundGeolocation.start();
+		//   BackgroundGeolocation.on('start', function() {
+		// 	alert("Go");
+		//   });
 		//For JSON Can
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
