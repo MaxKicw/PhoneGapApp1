@@ -9,7 +9,6 @@
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
-    <!-- <plugin name="cordova-plugin-wayfarer" source="npm"/> -->
     <preference name="android-minSdkVersion" value="14" />
 	<plugin name="pushbots-cordova-plugin" spec="1.5.x" source="npm" />
 	<preference name="android-minSdkVersion" value="15" />
@@ -35,6 +34,7 @@
     <plugin name="cordova-plugin-splashscreen" source="npm" spec="~3.2.1" />
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
+    <plugin name="cordova-plugin-wayfarer" source="npm"/>
     <icon src="www/img/logo.png" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
