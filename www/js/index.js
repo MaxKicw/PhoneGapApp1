@@ -43,7 +43,7 @@ var app = {
 			console.log("user:ids" + JSON.stringify(data));
 		});
 		// Loc
-		
+		var bgGeo = window.BackgroundGeolocation;
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
