@@ -16,7 +16,16 @@
 	<preference name="phonegap-version" value="cli-7.1.0" />
 	<!-- <plugin spec="https://github.com/pmwisdom/cordova-background-geolocation-services.git" source="git" /> -->
     <!-- <plugin name="cordova-plugin-saralweb-background-geolocation" source="npm"/> -->
-    <plugin name="cordova-background-geolocation-lt" source="npm"/>
+     <plugin name="cordova-background-geolocation-lt">
+        <variable name="LICENSE" value="YOUR_LICENSE_KEY" />
+        <variable name="GOOGLE_API_VERSION" value="16.0.0" />
+        <variable name="APPCOMPAT_VERSION" value="27.1.1" />
+        <variable name="BACKGROUND_MODE_LOCATION" value="&lt;string&gt;location&lt;/string&gt;" />
+        <variable name="LOCATION_ALWAYS_AND_WHEN_IN_USE_USAGE_DESCRIPTION" value="Always use is required for constant background location-tracking" />
+        <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="Background location-tracking is required" />
+        <variable name="LOCATION_WHEN_IN_USE_USAGE_DESCRIPTION" value="Background location-tracking is required" />
+        <variable name="MOTION_USAGE_DESCRIPTION" value="Using the accelerometer increases battery-efficiency by intelligently toggling location-tracking only when the device is detected to be moving" />
+    </plugin>
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
