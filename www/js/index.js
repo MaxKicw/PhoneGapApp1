@@ -44,6 +44,19 @@ var app = {
 		});
 		// Loc
 		var bgGeo = window.BackgroundGeolocation;
+		bgGeo.ready({
+			reset: true,
+			debug: true,
+			logLevel: bgGeo.LOG_LEVEL_VERBOSE,
+			desiredAccuracy: bgGeo.DESIRED_ACCURACY_HIGH,
+			distanceFilter: 10,
+			url: 'http://my.server.com/locations',
+			autoSync: false,
+			stopOnTerminate: false,
+			startOnBoot: true
+		  }, function(state) {    // <-- Current state provided to #configure callback
+			alert("Go");
+		  });
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
