@@ -44,6 +44,9 @@ var app = {
 		});
 		// Loc
 		var bgGeo = window.BackgroundGeolocation;
+		bgGeo.onLocation(function(location) {
+			alert('[location] -', location);
+		  });
 		bgGeo.ready({
 			reset: true,
 			debug: true,
