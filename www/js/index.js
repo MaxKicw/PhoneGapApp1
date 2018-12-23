@@ -40,25 +40,25 @@ var app = {
 			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
 			
 		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
-			console.log("user:ids" + JSON.stringify(data));
+			alert("user:ids" + JSON.stringify(data));
 		});
 		// Loc
 		var bgGeo = window.BackgroundGeolocation;
 
 		bgGeo.onLocation(function(location) {
-		  console.log('[location] -', location);
+		  alert('[location] -', location);
 		});
 	  
 		bgGeo.onMotionChange(function(event) {
-		  console.log('[motionchange] -', event.isMoving, event.location);
+		  alert('[motionchange] -', event.isMoving, event.location);
 		});
 	  
 		bgGeo.onHttp(function(response) {
-		  console.log(['http] - ', response.success, response.status, response.responseText);
+		  alert(['http] - ', response.success, response.status, response.responseText);
 		});
 	  
 		bgGeo.onProviderChange(function(event) {
-		  console.log('[providerchange] -', event.status, event.enabled, event.gps, event.network);
+		  alert('[providerchange] -', event.status, event.enabled, event.gps, event.network);
 		});
 	  
 		// 2. Execute #ready method:
@@ -74,10 +74,10 @@ var app = {
 		  startOnBoot: true
 		}, function(state) {    // <-- Current state provided to #configure callback
 		  // 3.  Start tracking
-		  console.log('BackgroundGeolocation is configured and ready to use');
+		  alert('BackgroundGeolocation is configured and ready to use');
 		  if (!state.enabled) {
 			bgGeo.start().then(function() {
-			  console.log('- BackgroundGeolocation tracking started');
+			  alert('- BackgroundGeolocation tracking started');
 			});
 		  }
 		});
@@ -177,7 +177,7 @@ var app = {
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        alert('Received Event: ' + id);
     }
 };
 var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
