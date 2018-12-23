@@ -44,22 +44,43 @@ var app = {
 		});
 		// Loc
 		var bgGeo = window.BackgroundGeolocation;
+
 		bgGeo.onLocation(function(location) {
-			alert('[location] -', location);
-		  });
+		  console.log('[location] -', location);
+		});
+	  
+		bgGeo.onMotionChange(function(event) {
+		  console.log('[motionchange] -', event.isMoving, event.location);
+		});
+	  
+		bgGeo.onHttp(function(response) {
+		  console.log(['http] - ', response.success, response.status, response.responseText);
+		});
+	  
+		bgGeo.onProviderChange(function(event) {
+		  console.log('[providerchange] -', event.status, event.enabled, event.gps, event.network);
+		});
+	  
+		// 2. Execute #ready method:
 		bgGeo.ready({
-			reset: true,
-			debug: true,
-			logLevel: bgGeo.LOG_LEVEL_VERBOSE,
-			desiredAccuracy: bgGeo.DESIRED_ACCURACY_HIGH,
-			distanceFilter: 10,
-			url: 'http://my.server.com/locations',
-			autoSync: false,
-			stopOnTerminate: false,
-			startOnBoot: true
-		  }, function(state) {    // <-- Current state provided to #configure callback
-			alert("Go");
-		  });
+		  reset: true,
+		  debug: true,
+		  logLevel: bgGeo.LOG_LEVEL_VERBOSE,
+		  desiredAccuracy: bgGeo.DESIRED_ACCURACY_HIGH,
+		  distanceFilter: 10,
+		  url: 'http://my.server.com/locations',
+		  autoSync: true,
+		  stopOnTerminate: false,
+		  startOnBoot: true
+		}, function(state) {    // <-- Current state provided to #configure callback
+		  // 3.  Start tracking
+		  console.log('BackgroundGeolocation is configured and ready to use');
+		  if (!state.enabled) {
+			bgGeo.start().then(function() {
+			  console.log('- BackgroundGeolocation tracking started');
+			});
+		  }
+		});
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
