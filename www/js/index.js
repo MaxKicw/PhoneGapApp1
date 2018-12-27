@@ -54,15 +54,14 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
-				alert("Erhalten");
+				document.getElementById('q1').classList.add('active');
+				document.getElementById('intro').classList.remove('active');
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				let messageActivity = app.trackedActivity;
-				app.timestamp_push.date = moment().format("DD.MM.YY ");
+				app.timestamp_push.date = moment().format("DD.MM.YY");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
-				document.getElementById('q1').classList.add('active');
-				document.getElementById('intro').classList.remove('active');
 				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 				let highestCount = 0;
 				let highestKey;
