@@ -7,8 +7,7 @@
     "cordova-plugin-device-gyroscope": "^0.2.2",
     "cordova-plugin-gyroscope": "^0.1.4",
     "cordova-plugin-lightsensor": "^1.0.0",
-    "cordova-plugin-proximity": "^1.1.0",
-    "moment": "^2.23.0"
+    "cordova-plugin-proximity": "^1.1.0"
   },
   "devDependencies": {},
   "scripts": {
