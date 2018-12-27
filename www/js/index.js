@@ -32,9 +32,17 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+		//For JSON Can
+		
+		//
+		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
+		document.getElementById('track-btn').style.backgroundColor = "#46A364";
+		app.receivedEvent('deviceready');
+		document.getElementById('rdy-btn').style.backgroundColor = "#46A364";
+		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
-			alert("Registration Id:" + token);
+			console.log("Registration Id:" + token);
 		});
 	
 			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
@@ -42,15 +50,7 @@ var app = {
 		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
 			console.log("user:ids" + JSON.stringify(data));
 		});
-		// Loc
-		
-		//
-		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
-		document.getElementById('track-btn').style.backgroundColor = "#46A364";
-		app.receivedEvent('deviceready');
-		document.getElementById('rdy-btn').style.backgroundColor = "#46A364";
-	
-		// Only with First time registration - For Pushbot   878e3aaca8af23571d71081f8c0374b5
+			
 			//Diese Funktion wird ausgeführt, wenn die App eine Nachricht erhalten hat
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
@@ -58,7 +58,7 @@ var app = {
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				let messageActivity = app.pushActivity;
-				app.timestamp_push.date = moment().format("DD.MM.YY");
+				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
 				document.getElementById('q1').classList.add('active');
@@ -165,6 +165,7 @@ function user_answer(answer){
 	let diff = moment.duration(now.diff(app.calcNowTimestamp));
 	diff = diff._data.minutes;
 	app.timediff = diff;
+	// alert(diff);
 	// Und Zeitdifferenz
 	if(app.user_answer === "Ja" && diff <= 0 ){
 		document.getElementById('q4').classList.add('active');
@@ -249,8 +250,8 @@ function showData(){
 }
 function sendToServer(){
 		// alert("Send stuff!");
-		// let timestamp_send_date = moment().format("DD.MM.YY");
-		// let timestamp_send_time = moment().format("HH:mm:ss");
+		let timestamp_send_date = moment().format("DD.MM.YY");
+		let timestamp_send_time = moment().format("HH:mm:ss");
 		var form = new FormData();
 		form.append("UUID", app.uuid);
 		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.date);
@@ -302,7 +303,7 @@ function resetLocalData(){
 	app.trackedActivity="";
 	app.userActivity={STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYLE:undefined,TILTING:undefined,UNKNOWN:undefined};
 	app.timestamp_push={};
-	app.pushAcitvity="";
+	app.pushActivity="";
 	app.verzögerungsGrund = "";
 	app.timediff = "";
 }
