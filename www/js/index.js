@@ -58,6 +58,7 @@ var app = {
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				let messageActivity = app.pushActivity;
+				alert("Date: "+moment().format("DD.MM.YY"));
 				app.timestamp_push.date = moment().format("DD.MM.YY");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
