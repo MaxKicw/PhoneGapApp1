@@ -34,13 +34,13 @@ var app = {
     onDeviceReady: function() {
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
-			alert("Registration Id:" + token);
+			console.log("Registration Id:" + token);
 		});
 	
 			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
 			
 		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
-			alert("user:ids" + JSON.stringify(data));
+			console.log("user:ids" + JSON.stringify(data));
 		});
 		// Loc
 		
