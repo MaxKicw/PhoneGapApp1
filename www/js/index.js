@@ -47,7 +47,6 @@ var app = {
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
-		app.receivedEvent('deviceready');
 		document.getElementById('rdy-btn').style.backgroundColor = "#46A364";
 	
 		// Only with First time registration - For Pushbot   878e3aaca8af23571d71081f8c0374b5
