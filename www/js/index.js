@@ -32,9 +32,10 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+		//For JSON Can
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
-			console.log("Registration Id:" + token);
+			alert("Registration Id:" + token);
 		});
 	
 			//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
@@ -42,8 +43,6 @@ var app = {
 		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
 			console.log("user:ids" + JSON.stringify(data));
 		});
-		// Loc
-		
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
@@ -54,14 +53,14 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
-				document.getElementById('q1').classList.add('active');
-				document.getElementById('intro').classList.remove('active');
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				let messageActivity = app.trackedActivity;
-				app.timestamp_push.date = moment().format("DD.MM.YY");
+				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
+				document.getElementById('q1').classList.add('active');
+				document.getElementById('intro').classList.remove('active');
 				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
 				let highestCount = 0;
 				let highestKey;
@@ -139,7 +138,7 @@ var app = {
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        alert('Received Event: ' + id);
+        console.log('Received Event: ' + id);
     }
 };
 var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
