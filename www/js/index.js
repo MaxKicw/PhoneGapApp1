@@ -32,7 +32,6 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-		//For JSON Can
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
 			alert("Registration Id:" + token);
@@ -43,9 +42,12 @@ var app = {
 		window.plugins.PushbotsPlugin.on("user:ids", 	function(data){
 			console.log("user:ids" + JSON.stringify(data));
 		});
+		// Loc
+		
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
+		app.receivedEvent('deviceready');
 		document.getElementById('rdy-btn').style.backgroundColor = "#46A364";
 	
 		// Only with First time registration - For Pushbot   878e3aaca8af23571d71081f8c0374b5
@@ -55,7 +57,7 @@ var app = {
 			if(app.track){
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
-				let messageActivity = app.pushAcitvity;
+				let messageActivity = app.trackedActivity;
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
@@ -72,7 +74,7 @@ var app = {
 				}
 				switch(highestKey){
 					case "STILL":
-						document.getElementById('trackedActivity').innerText = "Das Smartphone lag nicht bei dir.";
+						document.getElementById('trackedActivity').innerText = "Das Smartphone war unbewegt.";
 						break;
 					case "WALKING":
 						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
@@ -90,7 +92,7 @@ var app = {
 						document.getElementById('trackedActivity').innerText = "Du war auf dem Fahrrad unterwegs.";
 						break;
 					case "TILTING":
-						document.getElementById('trackedActivity').innerText = "Du saßst mit dem Handy in der Hand.";
+						document.getElementById('trackedActivity').innerText = "Du hattes das Smartphone in der Hand.";
 						break;
 					case "UNKNOWN":
 						document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
@@ -103,31 +105,31 @@ var app = {
 		});
 
 		// Setup Activity Recognition Plugin
-		var bgLocationServices =  window.plugins.backgroundLocationServices;
-		bgLocationServices.configure({
-			//Both
-			desiredAccuracy: 20, // Desired Accuracy of the location updates (lower means more accurate but more battery consumption)
-			distanceFilter: 5, // (Meters) How far you must move from the last point to trigger a location update
-			debug: false, // <-- Enable to show visual indications when you receive a background location update
-			interval: 9000, // (Milliseconds) Requested Interval in between location updates.
-			useActivityDetection: true, // Uses Activitiy detection to shut off gps when you are still (Greatly enhances Battery Life)
+	// 	var bgLocationServices =  window.plugins.backgroundLocationServices;
+	// 	bgLocationServices.configure({
+	// 		//Both
+	// 		desiredAccuracy: 20, // Desired Accuracy of the location updates (lower means more accurate but more battery consumption)
+	// 		distanceFilter: 5, // (Meters) How far you must move from the last point to trigger a location update
+	// 		debug: false, // <-- Enable to show visual indications when you receive a background location update
+	// 		interval: 9000, // (Milliseconds) Requested Interval in between location updates.
+	// 		useActivityDetection: true, // Uses Activitiy detection to shut off gps when you are still (Greatly enhances Battery Life)
 			
-			//Android Only
-			notificationTitle: 'BG Plugin', // customize the title of the notification
-			notificationText: 'Tracking', //customize the text of the notification
-			fastestInterval: 5000 // <-- (Milliseconds) Fastest interval your app / server can handle updates
+	// 		//Android Only
+	// 		notificationTitle: 'BG Plugin', // customize the title of the notification
+	// 		notificationText: 'Tracking', //customize the text of the notification
+	// 		fastestInterval: 5000 // <-- (Milliseconds) Fastest interval your app / server can handle updates
 			
-	   });
-	   bgLocationServices.start();
-		// Wird alle 1000ms ausgeführt / Welche Aktivität machst du?
-		setInterval(function(){
-			bgLocationServices.registerForActivityUpdates(function(activities) {
-				app.trackedActivity = activities
-				// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
-		   }, function(err) {
-				alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
-		   });
-		}, 1000);
+	//    });
+	//    bgLocationServices.start();
+	// 	// Wird alle 1000ms ausgeführt / Welche Aktivität machst du?
+	// 	setInterval(function(){
+	// 		bgLocationServices.registerForActivityUpdates(function(activities) {
+	// 			app.trackedActivity = activities
+	// 			// document.getElementById('activity').innerHTML = "<p Current Activity: >"+JSON.stringify(currentAcitvity[0])+"</p>";
+	// 	   }, function(err) {
+	// 			alert("Error: Etwas ist falsch gelaufen. Bitte melde das den Testleitern!", JSON.stringify(err));
+	// 	   });
+	// 	}, 1000);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
