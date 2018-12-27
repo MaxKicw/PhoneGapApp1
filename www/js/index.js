@@ -54,6 +54,7 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
+				alert("Erhalten");
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				let messageActivity = app.trackedActivity;
