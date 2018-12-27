@@ -33,9 +33,9 @@ var app = {
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		//For JSON Can
-		alert("Go");
-		var now = DateTime.local();
-		alert(now);
+		alert("go");
+		let kd = new moment();
+		alert(kd);
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
@@ -60,10 +60,9 @@ var app = {
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				let messageActivity = app.pushActivity;
-				app.timestamp_push.date = "12.12.12"
-				app.timestamp_push.time = "16.13 Uhr";
-				alert()
-				// app.calcNowTimestamp = new moment();
+				app.timestamp_push.date = moment().format("DD.MM.YY");
+				app.timestamp_push.time = moment().format("HH:mm:ss");
+				app.calcNowTimestamp = new moment();
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
 				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
