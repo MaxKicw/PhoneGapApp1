@@ -3,7 +3,7 @@ var app = {
 	user_answer:"",
 	calcNowTimestamp:"",
 	trackedActivity:"",
-	pushAcitvity:"",
+	pushActivity:"",
 	userActivity:{STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYLE:undefined,TILTING:undefined,UNKNOWN:undefined},
 	timestamp_push:{},
 	verzögerungsGrund:"",
@@ -57,50 +57,50 @@ var app = {
 			if(app.track){
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
-				let messageActivity = app.pushAcitvity;
+				let messageActivity = app.pushActivity;
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
 				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
-				// let highestCount = 0;
-				// let highestKey;
-				// for (var x in messageActivity) {
-				// 	if(messageActivity[x] >= highestCount){
-				// 		highestCount = messageActivity[x];
-				// 		highestKey = x;
-				// 	}
-				// }
-				// switch(highestKey){
-				// 	case "STILL":
-				// 		document.getElementById('trackedActivity').innerText = "Das Smartphone war unbewegt.";
-				// 		break;
-				// 	case "WALKING":
-				// 		document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
-				// 		break;
-				// 	case "ON_FOOT":
-				// 		document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
-				// 		break;
-				// 	case "IN_VEHICLE":
-				// 		document.getElementById('trackedActivity').innerText = "Du warst in einem Fahrzeug unterwegs.";
-				// 		break;
-				// 	case "RUNNING":
-				// 		document.getElementById('trackedActivity').innerText = "Du bist schnell gegangen / wars joggen.";
-				// 		break;
-				// 	case "ON_BICYLE":
-				// 		document.getElementById('trackedActivity').innerText = "Du war auf dem Fahrrad unterwegs.";
-				// 		break;
-				// 	case "TILTING":
-				// 		document.getElementById('trackedActivity').innerText = "Du hattes das Smartphone in der Hand.";
-				// 		break;
-				// 	case "UNKNOWN":
-				// 		document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
-				// 		break;
-				// 	default:
-				// 		document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
-				// 		break;
-				// }
+				let highestCount = 0;
+				let highestKey;
+				for (var x in messageActivity) {
+					if(messageActivity[x] >= highestCount){
+						highestCount = messageActivity[x];
+						highestKey = x;
+					}
+				}
+				switch(highestKey){
+					case "STILL":
+						document.getElementById('trackedActivity').innerText = "Das Smartphone war unbewegt.";
+						break;
+					case "WALKING":
+						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
+						break;
+					case "ON_FOOT":
+						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
+						break;
+					case "IN_VEHICLE":
+						document.getElementById('trackedActivity').innerText = "Du warst in einem Fahrzeug unterwegs.";
+						break;
+					case "RUNNING":
+						document.getElementById('trackedActivity').innerText = "Du bist schnell gegangen / wars joggen.";
+						break;
+					case "ON_BICYLE":
+						document.getElementById('trackedActivity').innerText = "Du war auf dem Fahrrad unterwegs.";
+						break;
+					case "TILTING":
+						document.getElementById('trackedActivity').innerText = "Du hattes das Smartphone in der Hand.";
+						break;
+					case "UNKNOWN":
+						document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
+						break;
+					default:
+						document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
+						break;
+				}
 			}
 		});
 
