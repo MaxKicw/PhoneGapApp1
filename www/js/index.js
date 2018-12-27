@@ -55,54 +55,53 @@ var app = {
 			
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
-				// app.uuid = device.uuid;
-				// app.pushActivity = app.trackedActivity;
-				// let messageActivity = app.pushActivity;
-				alert("Hier");
-				alert("Date: "+moment().format("DD.MM.YY"));
+				app.uuid = device.uuid;
+				app.pushActivity = app.trackedActivity;
+				let messageActivity = app.pushActivity;
+				// alert("Date: "+moment().format("DD.MM.YY"));
 				// app.timestamp_push.date = moment().format("DD.MM.YY");
 				// app.timestamp_push.time = moment().format("HH:mm:ss");
 				// app.calcNowTimestamp = new moment();
-				// document.getElementById('q1').classList.add('active');
-				// document.getElementById('intro').classList.remove('active');
-				// document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
-				// let highestCount = 0;
-				// let highestKey;
-				// for (var x in messageActivity) {
-				// 	if(messageActivity[x] >= highestCount){
-				// 		highestCount = messageActivity[x];
-				// 		highestKey = x;
-				// 	}
-				// }
-				// switch(highestKey){
-				// 	case "STILL":
-				// 		document.getElementById('trackedActivity').innerText = "Das Smartphone war unbewegt.";
-				// 		break;
-				// 	case "WALKING":
-				// 		document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
-				// 		break;
-				// 	case "ON_FOOT":
-				// 		document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
-				// 		break;
-				// 	case "IN_VEHICLE":
-				// 		document.getElementById('trackedActivity').innerText = "Du warst in einem Fahrzeug unterwegs.";
-				// 		break;
-				// 	case "RUNNING":
-				// 		document.getElementById('trackedActivity').innerText = "Du bist schnell gegangen / wars joggen.";
-				// 		break;
-				// 	case "ON_BICYLE":
-				// 		document.getElementById('trackedActivity').innerText = "Du war auf dem Fahrrad unterwegs.";
-				// 		break;
-				// 	case "TILTING":
-				// 		document.getElementById('trackedActivity').innerText = "Du hattes das Smartphone in der Hand.";
-				// 		break;
-				// 	case "UNKNOWN":
-				// 		document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
-				// 		break;
-				// 	default:
-				// 		document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
-				// 		break;
-				// }
+				document.getElementById('q1').classList.add('active');
+				document.getElementById('intro').classList.remove('active');
+				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
+				let highestCount = 0;
+				let highestKey;
+				for (var x in messageActivity) {
+					if(messageActivity[x] >= highestCount){
+						highestCount = messageActivity[x];
+						highestKey = x;
+					}
+				}
+				switch(highestKey){
+					case "STILL":
+						document.getElementById('trackedActivity').innerText = "Das Smartphone war unbewegt.";
+						break;
+					case "WALKING":
+						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
+						break;
+					case "ON_FOOT":
+						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
+						break;
+					case "IN_VEHICLE":
+						document.getElementById('trackedActivity').innerText = "Du warst in einem Fahrzeug unterwegs.";
+						break;
+					case "RUNNING":
+						document.getElementById('trackedActivity').innerText = "Du bist schnell gegangen / wars joggen.";
+						break;
+					case "ON_BICYLE":
+						document.getElementById('trackedActivity').innerText = "Du war auf dem Fahrrad unterwegs.";
+						break;
+					case "TILTING":
+						document.getElementById('trackedActivity').innerText = "Du hattes das Smartphone in der Hand.";
+						break;
+					case "UNKNOWN":
+						document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
+						break;
+					default:
+						document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
+						break;
+				}
 			}
 		});
 
@@ -163,8 +162,8 @@ function trackingToggle(){
 
 function user_answer(answer){
 	app.user_answer = answer;
-	let now = new moment();
-	let diff = moment.duration(now.diff(app.calcNowTimestamp));
+	// let now = new moment();
+	// let diff = moment.duration(now.diff(app.calcNowTimestamp));
 	diff = diff._data.minutes;
 	app.timediff = diff;
 	// alert(diff);
@@ -252,8 +251,8 @@ function showData(){
 }
 function sendToServer(){
 		// alert("Send stuff!");
-		let timestamp_send_date = moment().format("DD.MM.YY");
-		let timestamp_send_time = moment().format("HH:mm:ss");
+		// let timestamp_send_date = moment().format("DD.MM.YY");
+		// let timestamp_send_time = moment().format("HH:mm:ss");
 		var form = new FormData();
 		form.append("UUID", app.uuid);
 		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.date);
