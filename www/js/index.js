@@ -56,8 +56,8 @@ var app = {
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
 				app.uuid = device.uuid;
-				app.pushActivity = app.trackedActivity;
-				let messageActivity = app.trackedActivity;
+				app.pushActivity = this.trackedActivity;
+				let messageActivity = app.pushAcitvity;
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
