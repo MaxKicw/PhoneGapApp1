@@ -3,7 +3,7 @@ var app = {
 	user_answer:"",
 	calcNowTimestamp:"",
 	trackedActivity:"",
-	pushActivity:"",
+	pushAcitvity:"",
 	userActivity:{STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYLE:undefined,TILTING:undefined,UNKNOWN:undefined},
 	timestamp_push:{},
 	verzögerungsGrund:"",
@@ -33,9 +33,7 @@ var app = {
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		//For JSON Can
-		alert("go");
-		let kd = new moment();
-		alert(kd);
+		
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
@@ -59,8 +57,8 @@ var app = {
 			if(app.track){
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
-				let messageActivity = app.pushActivity;
-				app.timestamp_push.date = moment().format("DD.MM.YY");
+				let messageActivity = app.trackedActivity;
+				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
 				document.getElementById('q1').classList.add('active');
@@ -69,32 +67,32 @@ var app = {
 				let highestCount = 0;
 				let highestKey;
 				for (var x in messageActivity) {
-					if(messageActivity[x] >= highestCount){
+					if(messageActivity[x] > highestCount){
 						highestCount = messageActivity[x];
 						highestKey = x;
 					}
 				}
 				switch(highestKey){
 					case "STILL":
-						document.getElementById('trackedActivity').innerText = "Das Smartphone war unbewegt.";
+						document.getElementById('trackedActivity').innerText = "Das Smartphone lag nicht bei dir.";
 						break;
 					case "WALKING":
 						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
 						break;
 					case "ON_FOOT":
-						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
+						document.getElementById('trackedActivity').innerText = "Du standest aufrecht.";
 						break;
 					case "IN_VEHICLE":
 						document.getElementById('trackedActivity').innerText = "Du warst in einem Fahrzeug unterwegs.";
 						break;
 					case "RUNNING":
-						document.getElementById('trackedActivity').innerText = "Du bist schnell gegangen / wars joggen.";
+						document.getElementById('trackedActivity').innerText = "Du warst Joggen.";
 						break;
 					case "ON_BICYLE":
 						document.getElementById('trackedActivity').innerText = "Du war auf dem Fahrrad unterwegs.";
 						break;
 					case "TILTING":
-						document.getElementById('trackedActivity').innerText = "Du hattes das Smartphone in der Hand.";
+						document.getElementById('trackedActivity').innerText = "Du saßst mit dem Handy in der Hand.";
 						break;
 					case "UNKNOWN":
 						document.getElementById('trackedActivity').innerText = "Es konnte keine Aktivität erfasst werden!";
@@ -167,12 +165,12 @@ function user_answer(answer){
 	let diff = moment.duration(now.diff(app.calcNowTimestamp));
 	diff = diff._data.minutes;
 	app.timediff = diff;
-	alert(diff);
+	// alert(diff);
 	// Und Zeitdifferenz
 	if(app.user_answer === "Ja" && diff <= 0 ){
 		document.getElementById('q4').classList.add('active');
 		document.getElementById('q1').classList.remove('active');
-	}else if(app.user_answer === "Ja" && diff >= 5){
+	}else if(app.user_answer === "Ja" && diff >= 1){
 		document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?"
 		document.getElementById('q2').classList.add('active');
 		document.getElementById('q1').classList.remove('active');
@@ -215,7 +213,7 @@ function acitvityCorrection(rightActivity){
 			app.userActivity.UNKNOWN = 100;
 			break;
 	}
-	if(app.timediff >= 5){
+	if(app.timediff >= 1){
 		document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?";
 		document.getElementById('q2').classList.add('active');
 		document.getElementById('q3').classList.remove('big');
@@ -305,11 +303,8 @@ function resetLocalData(){
 	app.trackedActivity="";
 	app.userActivity={STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYLE:undefined,TILTING:undefined,UNKNOWN:undefined};
 	app.timestamp_push={};
-	app.pushActivity="";
+	app.pushAcitvity="";
 	app.verzögerungsGrund = "";
 	app.timediff = "";
 }
-
-
-
 
