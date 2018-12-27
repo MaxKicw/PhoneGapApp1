@@ -58,10 +58,9 @@ var app = {
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				let messageActivity = app.pushActivity;
-				// alert("Date: "+moment().format("DD.MM.YY"));
-				// app.timestamp_push.date = moment().format("DD.MM.YY");
-				// app.timestamp_push.time = moment().format("HH:mm:ss");
-				// app.calcNowTimestamp = new moment();
+				app.timestamp_push.date = moment().format("DD.MM.YY");
+				app.timestamp_push.time = moment().format("HH:mm:ss");
+				app.calcNowTimestamp = new moment();
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
 				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
@@ -162,11 +161,10 @@ function trackingToggle(){
 
 function user_answer(answer){
 	app.user_answer = answer;
-	// let now = new moment();
-	// let diff = moment.duration(now.diff(app.calcNowTimestamp));
-	// diff = diff._data.minutes;
-	// app.timediff = diff;
-	// alert(diff);
+	let now = new moment();
+	let diff = moment.duration(now.diff(app.calcNowTimestamp));
+	diff = diff._data.minutes;
+	app.timediff = diff;
 	// Und Zeitdifferenz
 	if(app.user_answer === "Ja" && diff <= 0 ){
 		document.getElementById('q4').classList.add('active');
