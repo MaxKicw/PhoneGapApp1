@@ -58,8 +58,11 @@ var app = {
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				let messageActivity = app.pushActivity;
+				var now = DateTime.local();
+				alert(now);
 				app.timestamp_push.date = "12.12.12"
 				app.timestamp_push.time = "16.13 Uhr";
+				alert()
 				// app.calcNowTimestamp = new moment();
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
