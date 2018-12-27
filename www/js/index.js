@@ -33,7 +33,9 @@ var app = {
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		//For JSON Can
-		
+		alert("Go");
+		var now = DateTime.local();
+		alert(now);
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
@@ -58,8 +60,6 @@ var app = {
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				let messageActivity = app.pushActivity;
-				var now = DateTime.local();
-				alert(now);
 				app.timestamp_push.date = "12.12.12"
 				app.timestamp_push.time = "16.13 Uhr";
 				alert()
