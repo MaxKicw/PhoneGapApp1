@@ -164,8 +164,8 @@ function user_answer(answer){
 	app.user_answer = answer;
 	// let now = new moment();
 	// let diff = moment.duration(now.diff(app.calcNowTimestamp));
-	diff = diff._data.minutes;
-	app.timediff = diff;
+	// diff = diff._data.minutes;
+	// app.timediff = diff;
 	// alert(diff);
 	// Und Zeitdifferenz
 	if(app.user_answer === "Ja" && diff <= 0 ){
