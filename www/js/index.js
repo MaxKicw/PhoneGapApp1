@@ -35,7 +35,6 @@ var app = {
 		//For JSON Can
 		
 		//
-		import moment from 'moment';
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
 		app.receivedEvent('deviceready');
@@ -59,9 +58,9 @@ var app = {
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
 				let messageActivity = app.trackedActivity;
-				app.timestamp_push.date = moment().format("DD.MM.YY ");
-				app.timestamp_push.time = moment().format("HH:mm:ss");
-				app.calcNowTimestamp = new moment();
+				// app.timestamp_push.date = moment().format("DD.MM.YY ");
+				// app.timestamp_push.time = moment().format("HH:mm:ss");
+				// app.calcNowTimestamp = new moment();
 				document.getElementById('q1').classList.add('active');
 				document.getElementById('intro').classList.remove('active');
 				document.getElementById('frage').innerText = 'Wir haben dir um '+app.timestamp_push.time+' am '+app.timestamp_push.date+' Uhr eine Push-Nachricht zugestellt! Laut unserer Acitvity-Tracking-App hast Du zu diesem Zeitpunkt folgendes gemacht: ';
@@ -162,10 +161,10 @@ function trackingToggle(){
 
 function user_answer(answer){
 	app.user_answer = answer;
-	let now = new moment();
-	let diff = moment.duration(now.diff(app.calcNowTimestamp));
-	diff = diff._data.minutes;
-	app.timediff = diff;
+	// let now = new moment();
+	// let diff = moment.duration(now.diff(app.calcNowTimestamp));
+	// diff = diff._data.minutes;
+	// app.timediff = diff;
 	// alert(diff);
 	// Und Zeitdifferenz
 	if(app.user_answer === "Ja" && diff <= 0 ){
@@ -251,8 +250,8 @@ function showData(){
 }
 function sendToServer(){
 		// alert("Send stuff!");
-		let timestamp_send_date = moment().format("DD.MM.YY");
-		let timestamp_send_time = moment().format("HH:mm:ss");
+		// let timestamp_send_date = moment().format("DD.MM.YY");
+		// let timestamp_send_time = moment().format("HH:mm:ss");
 		var form = new FormData();
 		form.append("UUID", app.uuid);
 		form.append("TIMESTAMP_PUSH_DATE", app.timestamp_push.date);
