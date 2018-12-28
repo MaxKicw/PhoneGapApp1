@@ -57,7 +57,7 @@ var app = {
 			if(app.track){
 				app.uuid = device.uuid;
 				app.pushActivity = app.trackedActivity;
-				let messageActivity = app.trackedActivity;
+				let messageActivity = app.pushAcitvity;
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
@@ -244,7 +244,7 @@ function shouldSend(choice){
 //---------------JSON-Call------------------------//
 function showData(){
 	alert("Deine Geräte-ID: "+app.uuid);
-	alert("Die automatisch erkannte Aktivität: "+JSON.stringify(app.trackedActivity));
+	alert("Die automatisch erkannte Aktivität: "+JSON.stringify(app.pushAcitvity));
 	alert("Hat diese gepasst?: "+app.user_answer);
 	alert("Falls Nein -> Deine wahre Aktivität: "+JSON.stringify(app.userActivity));
 }
