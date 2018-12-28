@@ -142,7 +142,7 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-var serverURL = 'https://3cb9c293.ngrok.io/response';//ServerURL
+var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
 //---------------Define antwort vars ----------------//
 //----------------Antwortfunktionen----------------//
 function trackingToggle(){
