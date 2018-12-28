@@ -33,9 +33,22 @@ var app = {
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		//For JSON Can
-		//
+
+			// Chaining for more "advanced" handling
+			fetch(' https://3cb9c293.ngrok.io/response',{
+				method:"POST",
+				body:"hahah",
+			}).then(function(response) {
+				alert(JSON.stringify(response));
+			}).then(function(returnedValue) {
+				alert(JSON.stringify(returnedValue));
+			}).catch(function(err) {
+				alert(JSON.stringify(err));
+			});
+
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
+		app.receivedEvent('deviceready');
 		document.getElementById('rdy-btn').style.backgroundColor = "#46A364";
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
@@ -141,7 +154,7 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-var serverURL = 'http://caebus.de/hackathon/testapp/testapp.php';//ServerURL
+var serverURL = 'https://3cb9c293.ngrok.io/response';//ServerURL
 //---------------Define antwort vars ----------------//
 //----------------Antwortfunktionen----------------//
 function trackingToggle(){
@@ -279,12 +292,13 @@ function sendToServer(){
 	
 	let settings = {
 		method:"POST",
+		mode:'cors',
 		body: form,
 	}
 	
+	let request = new Request(serverURL,settings);
 
-
-	fetch(serverURL,settings)
+	fetch(request)
 	.then((res) => {
 		setTimeout(function(){
 			document.getElementById('q5').classList.remove('active');
