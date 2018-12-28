@@ -1,5 +1,4 @@
 // Alles geht außer der Drecks nachrichtengenerator 
-import moment from 'moment';
 var app = {
 	user_answer:"",
 	calcNowTimestamp:"",
@@ -36,6 +35,7 @@ var app = {
 		//For JSON Can
 		
 		//
+		import moment from 'moment';
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
 		app.receivedEvent('deviceready');
