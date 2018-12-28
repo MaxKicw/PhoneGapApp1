@@ -1,4 +1,4 @@
-// Alles geht außer der Drecks nachrichtengenerator 
+// Workssss
 var app = {
 	user_answer:"",
 	calcNowTimestamp:"",
