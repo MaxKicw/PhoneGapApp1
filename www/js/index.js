@@ -3,7 +3,7 @@ var app = {
 	user_answer:"",
 	calcNowTimestamp:"",
 	trackedActivity:"",
-	pushAcitvity:"",
+	pushActivity:"",
 	userActivity:{STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYLE:undefined,TILTING:undefined,UNKNOWN:undefined},
 	timestamp_push:{},
 	verzögerungsGrund:"",
@@ -56,8 +56,8 @@ var app = {
 		window.plugins.PushbotsPlugin.on("notification:received", function(data){
 			if(app.track){
 				app.uuid = device.uuid;
-				app.pushAcitvity = app.trackedActivity;
-				let messageActivity = app.pushAcitvity;
+				app.pushActivity = app.trackedActivity;
+				let messageActivity = app.pushActivity;
 				app.timestamp_push.date = moment().format("DD.MM.YY ");
 				app.timestamp_push.time = moment().format("HH:mm:ss");
 				app.calcNowTimestamp = new moment();
@@ -244,7 +244,7 @@ function shouldSend(choice){
 //---------------JSON-Call------------------------//
 function showData(){
 	alert("Deine Geräte-ID: "+app.uuid);
-	alert("Die automatisch erkannte Aktivität: "+JSON.stringify(app.pushAcitvity));
+	alert("Die automatisch erkannte Aktivität: "+JSON.stringify(app.pushActivity));
 	alert("Hat diese gepasst?: "+app.user_answer);
 	alert("Falls Nein -> Deine wahre Aktivität: "+JSON.stringify(app.userActivity));
 }
@@ -303,7 +303,7 @@ function resetLocalData(){
 	app.trackedActivity="";
 	app.userActivity={STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYLE:undefined,TILTING:undefined,UNKNOWN:undefined};
 	app.timestamp_push={};
-	app.pushAcitvity="";
+	app.pushActivity="";
 	app.verzögerungsGrund = "";
 	app.timediff = "";
 }
