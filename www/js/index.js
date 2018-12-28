@@ -203,7 +203,7 @@ function acitvityCorrection(rightActivity){
 			app.userActivity.WALKING = 100;
 			break;
 		case 'ON_BICYLE':
-			app.userActivity.ON_BICYCLE = 100;
+			app.userActivity.ON_BICYLE = 100;
 			break;
 		case 'TILTING':
 			app.userActivity.TILTING = 100;
@@ -288,6 +288,7 @@ function sendToServer(){
 
 		fetch(request)
 		.then((res) => {
+			alert(JSON.stringify(res));
 			setTimeout(function(){
 				document.getElementById('q5').classList.remove('active');
 				document.getElementById('intro').classList.add('active');
