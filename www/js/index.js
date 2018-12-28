@@ -280,13 +280,12 @@ function sendToServer(){
 	
 	let settings = {
 		method:"POST",
-		mode:'cors',
 		body: form,
 	}
 	
-	let request = new Request(serverURL,settings);
 
-	fetch(request)
+
+	fetch(serverURL,settings)
 	.then((res) => {
 		setTimeout(function(){
 			document.getElementById('q5').classList.remove('active');
