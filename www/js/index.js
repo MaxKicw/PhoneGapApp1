@@ -1,4 +1,5 @@
 // Alles geht außer der Drecks nachrichtengenerator 
+import moment from 'moment';
 var app = {
 	user_answer:"",
 	calcNowTimestamp:"",
