@@ -79,7 +79,7 @@ var app = {
 						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
 						break;
 					case "ON_FOOT":
-						document.getElementById('trackedActivity').innerText = "Du standest aufrecht.";
+						document.getElementById('trackedActivity').innerText = "Du warst zu Fuß unterwegs.";
 						break;
 					case "IN_VEHICLE":
 						document.getElementById('trackedActivity').innerText = "Du warst in einem Fahrzeug unterwegs.";
@@ -164,12 +164,12 @@ function user_answer(answer){
 	let diff = moment.duration(now.diff(app.calcNowTimestamp));
 	diff = diff._data.minutes;
 	app.timediff = diff;
-	alert(diff);
+	// alert(diff);
 	// Und Zeitdifferenz
 	if(app.user_answer === "Ja" && diff <= 0 ){
 		document.getElementById('q4').classList.add('active');
 		document.getElementById('q1').classList.remove('active');
-	}else if(app.user_answer === "Ja" && diff >= 1){
+	}else if(app.user_answer === "Ja" && diff >= 5){
 		document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?"
 		document.getElementById('q2').classList.add('active');
 		document.getElementById('q1').classList.remove('active');
@@ -212,7 +212,7 @@ function acitvityCorrection(rightActivity){
 			app.userActivity.UNKNOWN = 100;
 			break;
 	}
-	if(app.timediff >= 1){
+	if(app.timediff >= 5){
 		document.getElementById('verzugNachricht').innerHTML = "Zwischen dem Versand der Nachricht vom "+app.timestamp_push.date+" um "+app.timestamp_push.time+" und dem Öffnen durch Dich sind mehr als 5 Minuten vergangen. Was war der Grund dafür?";
 		document.getElementById('q2').classList.add('active');
 		document.getElementById('q3').classList.remove('big');
