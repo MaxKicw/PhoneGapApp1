@@ -33,7 +33,7 @@ var app = {
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		//For JSON Can
-		
+		alert(moment().format("DD"));
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
