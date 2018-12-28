@@ -4,7 +4,7 @@ var app = {
 	calcNowTimestamp:"",
 	trackedActivity:"",
 	pushAcitvity:"",
-	userActivity:{STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYLE:undefined,TILTING:undefined,UNKNOWN:undefined},
+	userActivity:{STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYCLE:undefined,TILTING:undefined,UNKNOWN:undefined},
 	timestamp_push:{},
 	verzögerungsGrund:"",
 	uuid:"",
@@ -32,20 +32,7 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-		//For JSON Can
-
-			// Chaining for more "advanced" handling
-			fetch(' https://3cb9c293.ngrok.io/response',{
-				method:"POST",
-				body:"hahah",
-			}).then(function(response) {
-				alert(JSON.stringify(response));
-			}).then(function(returnedValue) {
-				alert(JSON.stringify(returnedValue));
-			}).catch(function(err) {
-				alert(JSON.stringify(err));
-			});
-
+		
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
 		app.receivedEvent('deviceready');
@@ -99,7 +86,7 @@ var app = {
 					case "RUNNING":
 						document.getElementById('trackedActivity').innerText = "Du warst Joggen.";
 						break;
-					case "ON_BICYLE":
+					case "ON_BICYCLE":
 						document.getElementById('trackedActivity').innerText = "Du war auf dem Fahrrad unterwegs.";
 						break;
 					case "TILTING":
@@ -214,8 +201,8 @@ function acitvityCorrection(rightActivity){
 		case 'WALKING':
 			app.userActivity.WALKING = 100;
 			break;
-		case 'ON_BICYLE':
-			app.userActivity.ON_BICYLE = 100;
+		case 'ON_BICYCLE':
+			app.userActivity.ON_BICYCLE = 100;
 			break;
 		case 'TILTING':
 			app.userActivity.TILTING = 100;
@@ -274,7 +261,7 @@ function sendToServer(){
 	form.append("TRACKED_ACTIVITY_IN_VEHICLE", app.pushActivity.IN_VEHICLE);
 	form.append("TRACKED_ACTIVITY_RUNNING", app.pushActivity.RUNNING);
 	form.append("TRACKED_ACTIVITY_WALKING", app.pushActivity.WALKING);
-	form.append("TRACKED_ACTIVITY_ON_BICYCLE", app.pushActivity.ON_BICYLE);
+	form.append("TRACKED_ACTIVITY_ON_BICYCLE", app.pushActivity.ON_BICYCLE);
 	form.append("TRACKED_ACTIVITY_STILL", app.pushActivity.STILL);
 	form.append("TRACKED_ACTIVITY_TILTING", app.pushActivity.TILTING);
 	form.append("TRACKED_ACTIVITY_UNKNOWN", app.pushActivity.UNKNOWN);
@@ -283,7 +270,7 @@ function sendToServer(){
 	form.append("USER_ACTIVITY_IN_VEHICLE", app.userActivity.IN_VEHICLE);
 	form.append("USER_ACTIVITY_RUNNING", app.userActivity.RUNNING);
 	form.append("USER_ACTIVITY_WALKING", app.userActivity.WALKING);
-	form.append("USER_ACTIVITY_ON_BICYCLE", app.userActivity.ON_BICYLE);
+	form.append("USER_ACTIVITY_ON_BICYCLE", app.userActivity.ON_BICYCLE);
 	form.append("USER_ACTIVITY_STILL", app.userActivity.STILL);
 	form.append("USER_ACTIVITY_TILTING", app.userActivity.TILTING);
 	form.append("USER_ACTIVITY_UNKNOWN", app.userActivity.UNKNOWN);
@@ -312,7 +299,7 @@ function resetLocalData(){
 	app.user_answer="";
 	app.calcNowTimestamp="";
 	app.trackedActivity="";
-	app.userActivity={STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYLE:undefined,TILTING:undefined,UNKNOWN:undefined};
+	app.userActivity={STILL:undefined,ON_FOOT:undefined,IN_VEHICLE:undefined,RUNNING:undefined,WALKING:undefined,ON_BICYCLE:undefined,TILTING:undefined,UNKNOWN:undefined};
 	app.timestamp_push={};
 	app.pushAcitvity="";
 	app.verzögerungsGrund = "";
