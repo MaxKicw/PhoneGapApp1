@@ -129,3 +129,30 @@ body{
 .card.active{
 	top: 10vh;
 }
+.status{
+	margin-top: 10px;
+	width: 100%;
+}
+.status p{
+	width: 70%;
+	font-size: 0.9em;
+	text-align: left;
+	float: left;
+	margin-left: 30px;
+}
+#deviceready{
+	float: left;
+	width: 80%
+}
+.status_icon{
+	position: relative;
+	float: right;
+	height: 30px;
+	width: 30px;
+	margin: 10px;
+	background-color: red;
+	border-radius: 20px;
+}
+.status_icon.ready{
+	background-color: #46A364;
+}
