@@ -34,7 +34,18 @@ var app = {
 	// function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		//For JSON Can
-		
+		cordova.plugins.diagnostic.isLocationAuthorized(function(enabled){
+			console.log("Location is " + (enabled ? "enabled" : "disabled"));
+			if(!enabled){
+			  cordova.plugins.diagnostic.requestLocationAuthorization(function(status){
+				  console.log("Authorization status is now: "+status);
+			  }, function(error){
+				  console.error(error);
+			  });
+			}
+		}, function(error){
+			console.error("The following error occurred: "+error);
+		});
 		//
 		document.getElementById('track').innerText = 'Klicke damit keine Daten gesendet werden!';
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
