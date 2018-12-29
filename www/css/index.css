@@ -153,11 +153,11 @@ body{
 	background-color: #ce2c2c;
 	border-radius: 20px;
 	animation-name: example;
-  	animation-duration: 4s;
+  	animation-duration: 2s;
   	animation-iteration-count: infinite;
 }
 @keyframes example {
-  0%   {opacity: 0;}
+  0%   {opacity: 0;transform: scale(0)}
   50%  {opacity: 1;}
   100% {opacity: 0;}
 }
