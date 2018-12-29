@@ -26,6 +26,7 @@ var app = {
 		app.background = true;
 		document.getElementById('background').innerText = 'Die App wurde in den Hintergrund gebracht!';
 		document.getElementById('status_icon_bg').style.backgroundColor = "#46A364";
+		document.getElementById('status_icon_bg').classList.add('ready');
 	},
     // deviceready Event Handler
     //
@@ -39,6 +40,7 @@ var app = {
 		document.getElementById('track-btn').style.backgroundColor = "#46A364";
 		app.receivedEvent('deviceready');
 		document.getElementById('status_icon_app').style.backgroundColor = "#46A364";
+		document.getElementById('status_icon_app').classList.add('ready');
 		// Only with First time registration - For Pushbot
 		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
