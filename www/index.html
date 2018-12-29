@@ -46,14 +46,14 @@
 </head>
 <body>
         <div class="wraper">
-			<div class="card active" id="intro">
+			<div class="card" id="intro">
 				<h1>Herzlich Willkommen</h1>
-				<p>Wenn alle Boxen grün sind, nimmst du an dem Test teil! Die App sammelt dann Daten und sendet Sie für Forschungszwecke an die Hochschule!</p>
+				<p>Wenn alle Boxen und Lampen grün sind, nimmst du an dem Test teil! Die App sammelt dann Daten und sendet Sie für Forschungszwecke an die Hochschule.</p>
 				<div class="button" onclick="trackingToggle()" id="track-btn">
 					<p id="track"></p>
                 </div>
                 <div class="status" id="bg-btn">
-                    <p class="background" id="background">Bringe die App bitte einmal in den Hintergrund!</p>
+                    <p class="background" id="background">Gehe bitte einmal auf deine Homescreen, um das Tracking zu starten!</p>
 					<div class="status_icon" id="status_icon_bg"></div>
                 </div>
                 <div class="status" id="rdy-btn">
@@ -64,16 +64,16 @@
 					<div class="status_icon" id="status_icon_app"></div>
                 </div>
 			</div>
-			<div class="card" id="q1">
+			<div class="card active" id="q1">
 				<p id="frage"></p>
 				<div class="button">
 					<p id="trackedActivity"></p>
 				</div>
 				<p>Trifft das zu bzw. ist das korrekt?</p>
-				<div class="button" onclick="user_answer('Ja')">
+				<div class="button green" onclick="user_answer('Ja')">
 					<p>Ja</p>
 				</div>
-				<div class="button" onclick="user_answer('Nein')">
+				<div class="button red" onclick="user_answer('Nein')">
 					<p>Nein</p>
 				</div>
 			</div>
