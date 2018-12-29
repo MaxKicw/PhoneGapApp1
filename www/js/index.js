@@ -150,7 +150,7 @@ function trackingToggle(){
 	if(app.track){
 		app.track = false;
 		document.getElementById('track').innerText = 'Klicke damit Daten gesendet werden!';
-		document.getElementById('track-btn').style.backgroundColor = "#FF0000";
+		document.getElementById('track-btn').style.backgroundColor = "#ce2c2c";
 
 	}else{
 		app.track = true;
