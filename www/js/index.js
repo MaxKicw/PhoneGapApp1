@@ -53,7 +53,7 @@ var app = {
 		document.getElementById('status_icon_app').style.backgroundColor = "#46A364";
 		document.getElementById('status_icon_app').classList.add('ready');
 		// Only with First time registration - For Pushbot
-		window.plugins.PushbotsPlugin.initialize("5b151b591db2dc70b473dcb0", {"android":{"sender_id":"687741121085"}});
+		window.plugins.PushbotsPlugin.initialize("5d04d0adb7941225fc3993b5", {"android":{"sender_id":"825046589633"}});
 		window.plugins.PushbotsPlugin.on("registered", 		function(token){
 			console.log("Registration Id:" + token);
 		});
